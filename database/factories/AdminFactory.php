@@ -17,6 +17,7 @@ class AdminFactory extends Factory
     public function definition()
     {
         return [
+            // Harusnya 9 digit, tapi karena masih testing, jadi 1 digit aja untuk menyamakan dengan tabel user
             'nip' => fake()->unique()->numberBetween(1,10),
             'nama' => fake()->name(),
             'nomor_hp' => fake()->unique()->phoneNumber(),
