@@ -19,7 +19,8 @@ class UserFactory extends Factory
     {
         return [
             'name'=> fake()->name(),
-            'nip'=> fake()->unique()->numberBetween(1,10),
+            // generate nip number between 1 and 10
+            'nip'=> fake()->unique()->numberBetween(0,20),
             'username' => fake()->userName(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
