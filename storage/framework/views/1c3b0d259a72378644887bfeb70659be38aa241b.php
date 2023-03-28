@@ -1,0 +1,1 @@
+<?php /**PATH C:\Users\ASUS\Documents\Laravel\indeks-kepuasan-masyarakat\resources\views/welcome.blade.php ENDPATH**/ ?>
