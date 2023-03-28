@@ -18,7 +18,7 @@
                     interesting in this post’s contents.
                 </p>
                 <p class="lead mb-0">
-                    <a href="" class="btn btn-primary">Pilih Kuesioner</a>
+                    <a href="/posts" class="btn btn-primary">Pilih Kuesioner</a>
                 </p>
             </div>
         </div>

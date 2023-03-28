@@ -18,7 +18,6 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            // coba comment
             'name'=> fake()->name(),
             // generate nip number between 1 and 10
             'nip'=> fake()->unique()->numberBetween(0,20),
