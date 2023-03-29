@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DashboardQuizController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,9 +28,14 @@ Route::get('/posts', [PostController::class, 'index']);
 Route::get('/posts/{questionnaire:id}', [PostController::class, 'preview']);
 
 
-Route::get('/login', [LoginController::class,'index']);
-Route::post('/login', [LoginController::class,'authenticate']);
+Route::get('/login', [LoginController::class, 'index']);
+Route::post('/login', [LoginController::class, 'authenticate']);
 
-Route::get('/dashboard', function () {
-    return view('dashboard.index');
-})->middleware('auth');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
+
+Route::get('/logout', function () {
+    Auth::logout();
+    return redirect('/login');
+});
+
+Route::resource('/dashboard/Questionnaires', DashboardQuizController::class)->middleware('auth');

@@ -14,6 +14,9 @@ class DashboardQuizController extends Controller
      */
     public function index()
     {
+        return view('dashboard.questionnaire.index',[
+            'questionnaires' => Questionnaire::all(),
+        ]);
     }
 
     /**
