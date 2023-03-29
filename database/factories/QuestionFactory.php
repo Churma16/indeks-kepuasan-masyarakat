@@ -17,7 +17,7 @@ class QuestionFactory extends Factory
     public function definition()
     {
         return [
-            'questionarie_id' => $this->faker->numberBetween(1, 10),
+            'questionnaire_id' => $this->faker->numberBetween(1, 10),
             'nomor'=> $this->faker->numberBetween(1, 10),
             'isi' => $this->faker->sentence(),
             'created_at' => now(),
