@@ -2,7 +2,7 @@
 <!-- Footer -->
 <footer class="text-center text-lg-start text-white bg-dark" >
     <!-- Section: Social media -->
-    <section class="d-flex justify-content-around p-4" style="background-color: #6351ce">
+    <section class="d-flex justify-content-around py-4" style="background-color: #6351ce">
         <!-- Left -->
         <div class="me-5">
             <span>Get connected with us on social networks:</span>
@@ -12,22 +12,7 @@
         <!-- Right -->
         <div>
             <a href="" class="text-white me-4">
-                <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="" class="text-white me-4">
-                <i class="fab fa-twitter"></i>
-            </a>
-            <a href="" class="text-white me-4">
-                <i class="fab fa-google"></i>
-            </a>
-            <a href="" class="text-white me-4">
-                <i class="fab fa-instagram"></i>
-            </a>
-            <a href="" class="text-white me-4">
-                <i class="fab fa-linkedin"></i>
-            </a>
-            <a href="" class="text-white me-4">
-                <i class="fab fa-github"></i>
+                <i class="bi bi-instagram"></i></i>
             </a>
         </div>
         <!-- Right -->
