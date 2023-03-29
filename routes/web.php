@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,3 +23,6 @@ Route::get('/posts', [PostController::class, 'index']);
 
 //penulisan harus sama
 Route::get('/posts/{questionnaire:id}', [PostController::class, 'preview']);
+
+
+Route::get('/login', [LoginController::class,'index']);

@@ -20,7 +20,7 @@
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href=""><i class="bi bi-person-circle"></i> Admin Login</a>
+                        <a class="nav-link active" aria-current="page" href="/login"><i class="bi bi-person-circle"></i> Admin Login</a>
                     </li>
                 </ul>
             </div>
