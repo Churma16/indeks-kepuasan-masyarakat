@@ -11,6 +11,11 @@ class Questionnaire extends Model
 
     protected $guarded = ['id'];
 
+    // public function getJumlahPertanyaanAttribute()
+    // {
+    //     return $this->questions()->count();
+    // }
+
     // satu kuesioner memiliki banyak pertanyaan
     public function question(){
         return $this->hasMany(Question::class);
