@@ -21,10 +21,10 @@
     <!-- Custom styles for this template -->
 </head>
 
-<body>
+<body style="background-color:#F8F9FA">
     @include('partials.navbar')
 
-    <div class="container mt-5">
+    <div class="container mt-5 bg-white">
         @yield('container')
     </div>
 

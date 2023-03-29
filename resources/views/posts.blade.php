@@ -8,8 +8,8 @@
         <h1 class="">{{ $title }}</h1>
 
         <div class="row mt-3 mb-2">
-            @if ($posts->count() > 0)
-                @foreach ($posts as $post)
+            @if ($questionnaires->count() > 0)
+                @foreach ($questionnaires as $post)
                     <div class="col-lg-3 mb-4">
                         <div class="card"
                             style="border-radius: 15px; min-height: 300px;background-color:#F8F9FA; border-color: #d1d1d1;">
@@ -31,7 +31,7 @@
             @endif
 
             <div class="d-flex justify-content-center">
-                {{ $posts->links() }}
+                {{ $questionnaires->links() }}
             </div>
         </div>
 

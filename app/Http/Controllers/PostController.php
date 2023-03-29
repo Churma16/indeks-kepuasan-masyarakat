@@ -12,7 +12,14 @@ class PostController extends Controller
 
         return view('posts', [
             "title" => 'Pilih Kuesioner',
-            "posts" => Questionnaire::latest()->paginate(24),
+            "questionnaires" => Questionnaire::latest()->paginate(24),
+        ]);
+    }
+
+    public function preview(Questionnaire $post){
+        return view('landing-post',[
+            "title" => "Detail Kuesioner",
+            "post" => $post,
         ]);
     }
 }
