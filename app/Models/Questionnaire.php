@@ -10,4 +10,9 @@ class Questionnaire extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    // satu kuesioner memiliki banyak pertanyaan
+    public function question(){
+        return $this->hasMany(Question::class);
+    }
 }
