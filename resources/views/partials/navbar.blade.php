@@ -6,27 +6,21 @@
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="collapse navbar-collapse ms-3" id="navbarCollapse">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link {{ Request::is('/') ?'active' : '' }}" aria-current="page" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
+                        <a class="nav-link {{ Request::is('posts') ?'active' : '' }}" href="/posts">Daftar Kuesioner</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled">Contact</a>
+                        <a class="nav-link " href="/#contact">Contact</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled">Disabled</a>
+                        <a class="nav-link active" aria-current="page" href=""><i class="bi bi-person-circle"></i> Admin Login</a>
                     </li>
                 </ul>
             </div>
