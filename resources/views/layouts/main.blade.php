@@ -13,12 +13,13 @@
     {{-- Bootstrap Icon --}}
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-    @yield('style')
 
     <!-- Custom styles for this template -->
     <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap"
         rel="stylesheet" />
+
     <!-- Custom styles for this template -->
+    @yield('style')
 </head>
 
 <body style="background-color:#F8F9FA">

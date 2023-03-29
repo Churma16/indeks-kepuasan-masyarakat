@@ -19,3 +19,6 @@ Route::get('/', function () {
 });
 
 Route::get('/posts', [PostController::class, 'index']);
+
+//penulisan harus sama
+Route::get('/posts/{questionnaire:id}', [PostController::class, 'preview']);

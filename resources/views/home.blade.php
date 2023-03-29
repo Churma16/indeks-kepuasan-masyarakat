@@ -2,6 +2,8 @@
 
 @section('style')
     <link href="/css/blog.css" rel="stylesheet" />
+
+    <link href="/css/button.css" rel="stylesheet" />
 @endsection
 
 @section('container')
@@ -19,6 +21,13 @@
                 </p>
                 <p class="lead mb-0">
                     <a href="/posts" class="btn btn-primary">Pilih Kuesioner</a>
+                    {{-- <button class="button-2-pushable" role="button">
+                        <span class="button-2-shadow"></span>
+                        <span class="button-2-edge"></span>
+                        <span class="button-2-front text">
+                            Button 1
+                        </span>
+                    </button> --}}
                 </p>
             </div>
         </div>

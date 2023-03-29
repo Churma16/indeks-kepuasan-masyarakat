@@ -1,6 +1,7 @@
 @extends('layouts.main')
 
 
+
 @section('container')
     <br>
     <div class="container col-md-11">
@@ -19,7 +20,7 @@
                                 <div class="mt-auto">
                                     <small class="text-muted mb-2 d-block">Waktu ekspirasi:</small>
                                     <small class="text-muted mb-2 d-block">{{ $post->waktu_ekspirasi }}</small>
-                                    <a href="#" class="btn btn-primary">Mulai</a>
+                                    <a href="/posts/{{ $post->id }}" class="btn btn-primary">Mulai</a>
                                 </div>
                             </div>
                         </div>
