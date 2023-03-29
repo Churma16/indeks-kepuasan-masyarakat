@@ -1,89 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<title>Login V3</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+@extends('layouts.main')
 
-    {{-- include bootstrap --}}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-    {{-- include font-awesome css --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    {{-- include material-design-iconic-font css --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
-
-    {{-- include animate css --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
-
-    {{-- include hamburger css by jonathan suh--}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hamburgers/1.1.3/hamburgers.min.css">
-
-    {{-- include anismition css --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animsition/4.0.2/css/animsition.min.css">
-
-    {{-- include select2 css --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
-
-    {{-- include daterangepicker css --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/3.0.5/daterangepicker.min.css">
-    
+@section('style')
     {{-- include main css --}}
-	<link rel="stylesheet" type="text/css" href="css/login/util.css">
-	<link rel="stylesheet" type="text/css" href="css/login/main.css">
-</head>
-<body>
-	
-	<div class="limiter">
-		<div class="container-login100" style="background-image: url('img/bg-01.jpg');">
-			<div class="wrap-login100">
-				<form class="login100-form validate-form">
-					<span class="login100-form-logo">
-						<i class="zmdi zmdi-landscape"></i>
-					</span>
+    <link rel="stylesheet" type="text/css" href="css/login/util.css">
+    <link rel="stylesheet" type="text/css" href="css/login/main.css">
+@endsection
 
-					<span class="login100-form-title p-b-34 p-t-27">
-						Log in
-					</span>
 
-					<div class="wrap-input100 validate-input" data-validate = "Enter username">
-						<input class="input100" type="text" name="username" placeholder="Username">
-						<span class="focus-input100" data-placeholder="&#xf207;"></span>
-					</div>
+@section('container')
+    <div class="limiter">
+        @if (session()->has('loginError'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('loginError') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+        <br>
+        <div class="container-login100" style="background-image: url('img/bg-01.jpg');">
+            <div class="wrap-login100">
 
-					<div class="wrap-input100 validate-input" data-validate="Enter password">
-						<input class="input100" type="password" name="pass" placeholder="Password">
-						<span class="focus-input100" data-placeholder="&#xf191;"></span>
-					</div>
+                <span class="login100-form-logo">
+                    {{-- <i class="zmdi zmdi-landscape"></i> --}}
+                    <img class="" src='/img/logo-diskom-square.ico' style="max-width: 60% ">
+                </span>
 
-					<div class="contact100-form-checkbox">
-						<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-						<label class="label-checkbox100" for="ckb1">
-							Remember me
-						</label>
-					</div>
+                <span class="login100-form-title p-b-34 p-t-27">
+                    Admin Login
+                </span>
+                <form class="login100-form validate-form" action="/login" method="POST">
+                    @csrf
+                    <div class="wrap-input100 validate-input @error('email') is-invalid @enderror"
+                        data-validate="Enter Email">
+                        <input class="input100" type="email" name="email" id="email" placeholder="JohnDoe@gmail.com"
+                            value="{{ old('email') }}" autofocus required>
+                        <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                    </div>
 
-					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
-							Login
-						</button>
-					</div>
+                    <div class="wrap-input100 validate-input" data-validate="Enter password">
+                        <input class="input100" type="password" name="password" id="password" placeholder="Password"
+                            required>
+                        <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                        @error('email')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
 
-					<div class="text-center p-t-90">
-						<a class="txt1" href="#">
-							Forgot Password?
-						</a>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-	
+                    <div class="container-login100-form-btn">
+                        <button class="login100-form-btn" type="submit">
+                            Login
+                        </button>
+                    </div>
 
-	<div id="dropDownSelect1"></div>
-	
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="dropDownSelect1"></div>
+
     {{-- script for jquery --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -109,7 +86,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/countdowntime/2.6.0/countdowntime.min.js"></script>
 
     {{-- script for main --}}
-	<script src="js/login/main.js"></script>
-
-</body>
-</html>
+    <script src="js/login/main.js"></script>
+@endsection
