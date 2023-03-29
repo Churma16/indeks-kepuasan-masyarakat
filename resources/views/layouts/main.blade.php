@@ -6,6 +6,7 @@
     <meta name="description" content="" />
     <meta />
     <meta name="generator" content="Hugo 0.108.0" />
+    <link rel="icon" type="image/x-icon" href="/img/logo-diskom-square.ico">
     <title>Indeks Kepuasan Masyarakat</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
