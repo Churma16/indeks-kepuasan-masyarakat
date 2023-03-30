@@ -49,7 +49,9 @@ class DashboardQuizController extends Controller
      */
     public function show(Questionnaire $questionnaire)
     {
-        //
+        return view('dashboard.questionnaire.show',[
+            'questionnaire' => $questionnaire,
+        ]);
     }
 
     /**

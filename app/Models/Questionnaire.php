@@ -17,6 +17,12 @@ class Questionnaire extends Model
         return $this->question()->count();
     }
 
+    public function getWaktuEkspirasiBaruAttribute(){
+        $dateold =$this->waktu_ekspirasi;
+        $datenew=date('d F Y',strtotime($dateold));
+        return $datenew;
+    }
+
     // satu kuesioner memiliki banyak pertanyaan
     public function question(){
         return $this->hasMany(Question::class);

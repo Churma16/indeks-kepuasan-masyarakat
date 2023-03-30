@@ -39,4 +39,4 @@ Route::get('/logout', function () {
     return redirect('/login');
 });
 
-Route::resource('/dashboard/Questionnaires', DashboardQuizController::class)->middleware('auth');
+Route::resource('/dashboard/questionnaires', DashboardQuizController::class)->middleware('auth');
