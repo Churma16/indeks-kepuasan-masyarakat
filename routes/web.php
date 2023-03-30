@@ -31,7 +31,8 @@ Route::get('/posts/{questionnaire:id}', [PostController::class, 'preview']);
 Route::get('/login', [LoginController::class, 'index']);
 Route::post('/login', [LoginController::class, 'authenticate']);
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
+Route::get('/dashboard', [DashboardController::class, 'index']);
+// ->middleware('auth');
 
 Route::get('/logout', function () {
     Auth::logout();
