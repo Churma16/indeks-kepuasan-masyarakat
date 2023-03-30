@@ -28,7 +28,7 @@ class PostController extends Controller
 
             // kode dibawah ini akan menghitung jumlah pertanyaan yang ada di kuesioner
             // $questionnaire->question->count() berarti menghitung jumlah data yang ada di tabel pertanyaan
-            $questionnaire->jumlah_pertanyaan=$questionnaire->question->count(),
+            // $questionnaire->jumlah_pertanyaan=$questionnaire->question->count(),
 
             "questionnaire" => $questionnaire,
 

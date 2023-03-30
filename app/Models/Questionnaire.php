@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Questionnaire extends Model
 {
@@ -11,10 +12,10 @@ class Questionnaire extends Model
 
     protected $guarded = ['id'];
 
-    // public function getJumlahPertanyaanAttribute()
-    // {
-    //     return $this->questions()->count();
-    // }
+    public function getJumlahPertanyaanAttribute()
+    {
+        return $this->question()->count();
+    }
 
     // satu kuesioner memiliki banyak pertanyaan
     public function question(){
