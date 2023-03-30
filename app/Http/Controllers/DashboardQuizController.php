@@ -49,8 +49,9 @@ class DashboardQuizController extends Controller
      */
     public function show(Questionnaire $questionnaire)
     {
+        $questionnaire = Questionnaire::all();
         return view('dashboard.questionnaire.show',[
-            'questionnaire' => $questionnaire,
+            'questionnaires' => $questionnaire,
         ]);
     }
 
