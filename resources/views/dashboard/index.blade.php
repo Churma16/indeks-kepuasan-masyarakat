@@ -16,6 +16,7 @@
 
 @section('main')
     <div class="container-fluid py-4">
+        <h3 class="">Welcome Back, {{ auth()->user()->name }}</h3>
         <div class="row">
             <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
                 <div class="card">
@@ -24,10 +25,10 @@
                             <div class="col-8">
                                 <div class="numbers">
                                     <p class="text-sm mb-0 text-capitalize font-weight-bold">
-                                        Today's Money
+                                        Kuesioner Dibuat
                                     </p>
                                     <h5 class="font-weight-bolder mb-0">
-                                        $53,000
+                                        {{ $totalKuesioner }}
                                         <span class="text-success text-sm font-weight-bolder">+55%</span>
                                     </h5>
                                 </div>
@@ -48,10 +49,10 @@
                             <div class="col-8">
                                 <div class="numbers">
                                     <p class="text-sm mb-0 text-capitalize font-weight-bold">
-                                        Today's Users
+                                        Kuesioner Aktif
                                     </p>
                                     <h5 class="font-weight-bolder mb-0">
-                                        2,300
+                                        {{ $totalKuesionerAktif }}
                                         <span class="text-success text-sm font-weight-bolder">+3%</span>
                                     </h5>
                                 </div>
@@ -72,10 +73,10 @@
                             <div class="col-8">
                                 <div class="numbers">
                                     <p class="text-sm mb-0 text-capitalize font-weight-bold">
-                                        New Clients
+                                        Kuesioner Hampir Kadaluarsa
                                     </p>
                                     <h5 class="font-weight-bolder mb-0">
-                                        +3,462
+                                        {{ $totalKuesionerHampirExpired }}
                                         <span class="text-danger text-sm font-weight-bolder">-2%</span>
                                     </h5>
                                 </div>
@@ -96,10 +97,10 @@
                             <div class="col-8">
                                 <div class="numbers">
                                     <p class="text-sm mb-0 text-capitalize font-weight-bold">
-                                        Sales
+                                        Total Responden
                                     </p>
                                     <h5 class="font-weight-bolder mb-0">
-                                        $103,430
+                                        {{-- {{ $totalResponden }} --}}
                                         <span class="text-success text-sm font-weight-bolder">+5%</span>
                                     </h5>
                                 </div>
