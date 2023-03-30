@@ -49,9 +49,10 @@ class DashboardQuizController extends Controller
      */
     public function show(Questionnaire $questionnaire)
     {
-        $questionnaire = Questionnaire::all();
+        $questions = $questionnaire->question()->orderBy('nomor')->get();
         return view('dashboard.questionnaire.show',[
-            'questionnaires' => $questionnaire,
+            'questionnaire' => $questionnaire,
+            'questions' => $questions,
         ]);
     }
 

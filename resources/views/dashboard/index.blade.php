@@ -100,7 +100,7 @@
                                         Total Responden
                                     </p>
                                     <h5 class="font-weight-bolder mb-0">
-                                        {{-- {{ $totalResponden }} --}}
+                                        {{ $totalRespondent }}
                                         <span class="text-success text-sm font-weight-bolder">+5%</span>
                                     </h5>
                                 </div>

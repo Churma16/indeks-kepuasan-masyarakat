@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Questionnaire;
+use App\Models\Respondent;
 
 class DashboardController extends Controller
 {
@@ -13,11 +14,14 @@ class DashboardController extends Controller
         $totalKuesionerAktif = Questionnaire::where('status_aktif','aktif')->count();
         $totalKuesionerHampirExpired = Questionnaire::where('status_aktif','aktif')->where('waktu_ekspirasi','<=',date('Y-m-d', strtotime('+7 days')))->count();
 
+        $totalRespondent = Respondent::count();
+        
         return view('dashboard.index',[
             "title" => "Dashboard",
             "totalKuesioner" => $totalKuesioner,
             "totalKuesionerAktif" => $totalKuesionerAktif,
             "totalKuesionerHampirExpired" => $totalKuesionerHampirExpired,
+            "totalRespondent" => $totalRespondent,
         ]);
     }
 }
