@@ -29,9 +29,22 @@
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <link href="/assets/css/nucleo-svg.css" rel="stylesheet" />
+
+    <!-- Trix Editor -->
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.0/dist/trix.css">
+    <script type="text/javascript" src="https://unpkg.com/trix@2.0.0/dist/trix.umd.min.js"></script>
+
     <!-- CSS Files -->
     <link id="pagestyle" href="/assets/css/soft-ui-dashboard.css?v=1.0.7" rel="stylesheet" />
     <link href="/assets/vendor/nucleo/css/nucleo.css" rel="stylesheet">
+
+    <!-- this is for the trix editor -->
+    <style>
+        .trix-button-group.trix-button-group--file-tools {
+            display: none;
+        }
+    </style>
+
 </head>
 
 <body class="g-sidenav-show bg-gray-100">

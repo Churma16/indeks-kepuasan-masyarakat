@@ -43,9 +43,15 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
 
 
 Route::resource('/dashboard/questionnaires', DashboardQuizController::class)->middleware('auth');
+
+Route::get('/dashboard/create-judul',function () {
+    return view('dashboard.questionnaires.create-judul');
+});
+
 Route::get('/dashboard/redirect', [Controller::class, 'redirectToCreate'])->name('dashboard.redirect');
 
-Route::get('/dashboard/questionnaires/create-question',function () {
-    return view('dashboard.questionnaires.create');
-});
+
+// Route::get('/dashboard/questionnaires/create-question',function () {
+//     return view('dashboard.questionnaires.create');
+// });
 

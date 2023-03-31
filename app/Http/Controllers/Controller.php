@@ -12,13 +12,22 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function redirectToCreate(Request $request){
-        {
+    public function redirectToCreate(Request $request)
+    { {
             // Store the form data in a session variable
             session(['form_data' => $request->all()]);
-        
+
+            // asigning the html literal to a variable
+            $text = session('form_data.deskripsi');
+            $text = html_entity_decode($text);
+            $text = htmlspecialchars($text);
+
+            $session = session();
+
+            $session->put('form_data.deskripsi_literal', $text);
+
             // Redirect the user to the create questionnaire page
-            return redirect('/dashboard/questionnaires/create-question');
+            return redirect('/dashboard/questionnaires/create');
         }
     }
 }

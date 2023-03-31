@@ -27,7 +27,7 @@ class DashboardQuizController extends Controller
      */
     public function create()
     {
-        return view('dashboard.questionnaires.create-judul');
+        return view('dashboard.questionnaires.create-question');
     }
 
     /**

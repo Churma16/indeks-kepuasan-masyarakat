@@ -10,7 +10,7 @@
 
                     <div class="card-header pb-0">
                         <div class="col-3">
-                            <a href="/dashboard/questionnaires/create"><button type="button" class="btn btn-info" ><i class="ni ni-fat-add"></i> Buat Kuesioner</button></a>
+                            <a href="/dashboard/create-judul"><button type="button" class="btn btn-info" ><i class="ni ni-fat-add"></i> Buat Kuesioner</button></a>
                         </div>
                         <h6>Daftar Kuesioner</h6>
                     </div>
