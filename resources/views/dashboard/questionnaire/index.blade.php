@@ -48,9 +48,9 @@
                                                         <h6 class="mb-0 text-sm">
                                                             {{ $questionnaire->judul }}
                                                         </h6>
-                                                        <p class="text-xs text-secondary mb-0">
+                                                        {{-- <p class="text-xs text-secondary mb-0">
                                                             john@creative-tim.com
-                                                        </p>
+                                                        </p> --}}
                                                     </div>
                                                 </div>
                                             </td>

@@ -1,17 +1,3 @@
-<!--
-=========================================================
-* Soft UI Dashboard - v1.0.7
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://www.creative-tim.com/license)
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
 @extends('dashboard.layouts.main')
 
 @section('main')
@@ -116,40 +102,128 @@
             </div>
         </div>
         <div class="row mt-4">
-            <div class="col-lg-7 mb-lg-0 mb-4">
+            <div class="col-lg-3 mb-lg-0 mb-4">
                 <div class="card">
                     <div class="card-body p-3">
                         <div class="row">
-                            <div class="col-lg-6">
+                            <h5 class="font-weight-bolder">
+                                Jenis Kelamin Responden
+                            </h5>
+                            <div class="col-lg-12">
                                 <div class="d-flex flex-column h-100">
-                                    <p class="mb-1 pt-2 text-bold">
-                                        Built by developers
-                                    </p>
-                                    <h5 class="font-weight-bolder">
-                                        Soft UI Dashboard
-                                    </h5>
-                                    <p class="mb-5">
-                                        From colors, cards, typography
-                                        to complex elements, you will
-                                        find the full documentation.
-                                    </p>
-                                    <a class="text-body text-sm font-weight-bold mb-0 icon-move-right mt-auto"
-                                        href="javascript:;">
-                                        Read More
-                                        <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-lg-5 ms-auto text-center mt-5 mt-lg-0">
-                                <div class="bg-gradient-primary border-radius-lg h-100">
-                                    <img src="../assets/img/shapes/waves-white.svg"
-                                        class="position-absolute h-100 w-50 top-0 d-lg-block d-none" alt="waves" />
-                                    <div class="position-relative d-flex align-items-center justify-content-center h-100">
-                                        <img class="w-100 position-relative z-index-2 pt-4"
-                                            src="../assets/img/illustrations/rocket-white.png" alt="rocket" />
+                                    <div class="card mb-3">
+                                        <div class="card-body ">
+                                            <div class="chart">
+                                                <canvas id="pie-chart-gender" class="chart-canvas" height="200px"></canvas>
+                                            </div>
+                                            <div>
+                                                <div class="pb-1"
+                                                    style="background-color: #17c1e8; width: 10px; height: 10px; display: inline-block;">
+                                                </div>
+                                                <small>Pria</small>
+                                            </div>
+                                            <div>
+                                                <div
+                                                    style="background-color: #cb0c9f; width: 10px; height: 10px; display: inline-block;">
+                                                </div>
+                                                <small>Wanita</small>
+                                            </div>
+                                        </div>
                                     </div>
+
                                 </div>
+
                             </div>
+                            {{-- <div class="col-lg-2 ms-auto text-center mt-5 mt-lg-0">
+                                <div class="border-radius-lg h-100">
+                                    <div>
+                                        <div
+                                            style="background-color: #ff0000; width: 20px; height: 20px; display: inline-block;">
+                                        </div>
+                                        <span>Series 1</span>
+                                    </div>
+                                    <div>
+                                        <div
+                                            style="background-color: #00ff00; width: 20px; height: 20px; display: inline-block;">
+                                        </div>
+                                        <span>Series 2</span>
+                                    </div>
+
+                                </div>
+                            </div> --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 mb-lg-0 mb-4">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <h5 class="font-weight-bolder">
+                                Umur Responden
+                            </h5>
+                            <div class="col-lg-12">
+                                <div class="d-flex flex-column h-100">
+                                    <div class="card mb-3">
+                                        <div class="card-body ">
+                                            <div class="chart col-12">
+                                                <canvas id="pie-chart-age" class="chart-canvas" height="200px"></canvas>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="pb-1"
+                                                    style="background-color: #17c1e8; width: 10px; height: 10px; display: inline-block;">
+                                                </div>
+                                                <small>Pria</small>
+                                                <br>
+                                                <div
+                                                    style="background-color: #cb0c9f; width: 10px; height: 10px; display: inline-block;">
+                                                </div>
+                                                <small>Wanita</small>
+                                                <br>
+                                                <div
+                                                    style="background-color: #cb0c9f; width: 10px; height: 10px; display: inline-block;">
+                                                </div>
+                                                <small>Wanita</small>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="pb-1"
+                                                    style="background-color: #17c1e8; width: 10px; height: 10px; display: inline-block;">
+                                                </div>
+                                                <small>Pria</small>
+                                                <br>
+                                                <div
+                                                    style="background-color: #cb0c9f; width: 10px; height: 10px; display: inline-block;">
+                                                </div>
+                                                <small>Wanita</small>
+                                                <br>
+                                                <div
+                                                    style="background-color: #cb0c9f; width: 10px; height: 10px; display: inline-block;">
+                                                </div>
+                                                <small>Wanita</small>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            {{-- <div class="col-lg-2 ms-auto text-center mt-5 mt-lg-0">
+                                <div class="border-radius-lg h-100">
+                                    <div>
+                                        <div
+                                            style="background-color: #ff0000; width: 20px; height: 20px; display: inline-block;">
+                                        </div>
+                                        <span>Series 1</span>
+                                    </div>
+                                    <div>
+                                        <div
+                                            style="background-color: #00ff00; width: 20px; height: 20px; display: inline-block;">
+                                        </div>
+                                        <span>Series 2</span>
+                                    </div>
+
+                                </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -170,7 +244,8 @@
                                 recent positive-sum game. It is all
                                 about who take the opportunity first.
                             </p>
-                            <a class="text-white text-sm font-weight-bold mb-0 icon-move-right mt-auto" href="javascript:;">
+                            <a class="text-white text-sm font-weight-bold mb-0 icon-move-right mt-auto"
+                                href="javascript:;">
                                 Read More
                                 <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
                             </a>
@@ -1043,7 +1118,131 @@
                 },
             },
         });
+
+
+        //pie chart
+        var ctx4 = document.getElementById("pie-chart-gender").getContext("2d");
+
+        new Chart(ctx4, {
+            type: "pie",
+            data: {
+                labels: ['Wanita', 'Pria'],
+                datasets: [{
+                    label: "Projects",
+                    weight: 9,
+                    cutout: 0,
+                    tension: 0.9,
+                    pointRadius: 2,
+                    borderWidth: 2,
+                    backgroundColor: ['#cb0c9f', '#17c1e8'],
+                    data: [{{ $genderWanita }}, {{ $genderPria }}],
+                    fill: false
+                }],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false,
+                    }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index',
+                },
+                scales: {
+                    y: {
+                        grid: {
+                            drawBorder: false,
+                            display: false,
+                            drawOnChartArea: false,
+                            drawTicks: false,
+                        },
+                        ticks: {
+                            display: false
+                        }
+                    },
+                    x: {
+                        grid: {
+                            drawBorder: false,
+                            display: false,
+                            drawOnChartArea: false,
+                            drawTicks: false,
+                        },
+                        ticks: {
+                            display: false,
+                        }
+                    },
+                },
+            },
+        });
+
+        // pie chart age
+        var ctx5 = document.getElementById("pie-chart-age").getContext("2d");
+
+        new Chart(ctx5, {
+            type: "pie",
+            data: {
+                labels: ['18-24', '25-34', '35-44', '45-54', '55-64', '65+'],
+                datasets: [{
+                    label: "Projects",
+                    weight: 9,
+                    cutout: 0,
+                    tension: 0.9,
+                    pointRadius: 2,
+                    borderWidth: 2,
+                    backgroundColor: ['#003f5c', '#444e86', '#955196', '#dd5182', '#ff6e54', '#ffa600'],
+                    data: [
+                        @for ($i = 1; $i <= count($umur['umurKelas']); $i++)
+                            '{{ $umur['umurKelas'][$i] }}',
+                        @endfor
+                    ],
+                    fill: false
+                }],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false,
+                    }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index',
+                },
+                scales: {
+                    y: {
+                        grid: {
+                            drawBorder: false,
+                            display: false,
+                            drawOnChartArea: false,
+                            drawTicks: false,
+                        },
+                        ticks: {
+                            display: false
+                        }
+                    },
+                    x: {
+                        grid: {
+                            drawBorder: false,
+                            display: false,
+                            drawOnChartArea: false,
+                            drawTicks: false,
+                        },
+                        ticks: {
+                            display: false,
+                        }
+                    },
+                },
+            },
+        });
     </script>
+
+
+
     <script>
         var win = navigator.platform.indexOf("Win") > -1;
         if (win && document.querySelector("#sidenav-scrollbar")) {

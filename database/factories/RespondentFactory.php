@@ -21,7 +21,7 @@ class RespondentFactory extends Factory
             'questionnaire_id' => $this->faker->numberBetween(1, 10),
 
             'umur'=>$this->faker->numberBetween(1,5),
-            'gender'=>$this->faker->randomElement(['Laki-laki','Perempuan']),
+            'gender'=>$this->faker->randomElement(['Pria','Wanita']),
             'waktu_pengisian'=>$this->faker->dateTimeBetween('-1 years', 'now', 'Asia/Jakarta'),
         ];
     }

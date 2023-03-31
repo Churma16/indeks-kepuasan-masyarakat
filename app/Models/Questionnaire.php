@@ -12,6 +12,7 @@ class Questionnaire extends Model
 
     protected $guarded = ['id'];
 
+    //  ACCESSOR
     public function getJumlahPertanyaanAttribute()
     {
         return $this->question()->count();
@@ -23,6 +24,7 @@ class Questionnaire extends Model
         return $datenew;
     }
 
+    //  RELATIONSHIP
     // satu kuesioner memiliki banyak pertanyaan
     public function question(){
         return $this->hasMany(Question::class);

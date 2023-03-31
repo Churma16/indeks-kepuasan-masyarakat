@@ -52,6 +52,8 @@
 <body style="background-color:#F8F9FA">
     @include('partials.navbar')
 
+    @yield('login-content')
+    
     <div class="container mt-5 bg-white">
         @yield('container')
     </div>

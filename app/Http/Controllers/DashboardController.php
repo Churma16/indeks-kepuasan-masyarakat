@@ -16,12 +16,26 @@ class DashboardController extends Controller
 
         $totalRespondent = Respondent::count();
         
+        $genderWanita = Respondent::where('gender','wanita')->count();
+        $genderPria = Respondent::where('gender','pria')->count();
+
+        // Get All the Respondent's Age
+        $umur = [];
+        $umur['umurKelas'] = Respondent::selectRaw('umur, count(*) as count')
+        ->groupBy('umur')
+        ->pluck('count', 'umur')
+        ->toArray();
+
         return view('dashboard.index',[
             "title" => "Dashboard",
             "totalKuesioner" => $totalKuesioner,
             "totalKuesionerAktif" => $totalKuesionerAktif,
             "totalKuesionerHampirExpired" => $totalKuesionerHampirExpired,
             "totalRespondent" => $totalRespondent,
+            "genderWanita" => $genderWanita,
+            "genderPria" => $genderPria,
+            // access with $umur['umurKelas'][array_key]
+            'umur' => $umur,
         ]);
     }
 }

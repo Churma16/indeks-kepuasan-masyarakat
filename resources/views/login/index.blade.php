@@ -7,21 +7,22 @@
 @endsection
 
 
-@section('container')
+@section('login-content')
     <div class="limiter">
-        @if (session()->has('loginError'))
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                {{ session('loginError') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @endif
+
         <br>
         <div class="container-login100" style="background-image: url('img/bg-01.jpg');">
+            @if (session()->has('loginError'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ session('loginError') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
             <div class="wrap-login100">
 
                 <span class="login100-form-logo">
                     {{-- <i class="zmdi zmdi-landscape"></i> --}}
-                    <img class="" src='/img/logo-diskom-square.ico' style="max-width: 60% ">
+                    <img class="" src='/img/logo-diskom-sm.png' style="max-width: 50% ">
                 </span>
 
                 <span class="login100-form-title p-b-34 p-t-27">
