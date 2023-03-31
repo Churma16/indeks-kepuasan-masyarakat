@@ -156,8 +156,8 @@
                 </div>
             </div>
             <div class="col-md-3 mb-lg-0 mb-4">
-                <div class="card">
-                    <div class="card-body p-3 ">
+                <div class="card" style="">
+                    <div class="card-body p-3 " style="box-shadow:none">
                         <div class="row">
                             <h5 class="font-weight-bolder">
                                 Umur Responden

@@ -3,8 +3,8 @@
 @section('main')
     <div class="container-fluid py-4">
         <div class="row">
-            <div class="col-12">
-                <div class="card col-lg-10 mb-4">
+            <div class="col-lg-10">
+                <div class="card col-lg-12 mb-4">
                     <div class="card-header pb-0">
                         <h5>{{ $questionnaire->judul }}</h5>
                         <p class="text-gray text-sm">{{ $questionnaire->deskripsi }}</p>

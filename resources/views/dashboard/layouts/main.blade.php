@@ -93,6 +93,10 @@
 
     <!-- Chart JS -->
     <script src="../../assets/js/plugins/chartjs.min.js"></script>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </body>
 
 </html>

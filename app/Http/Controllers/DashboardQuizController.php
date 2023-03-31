@@ -17,6 +17,7 @@ class DashboardQuizController extends Controller
     {
         $questionnaire = Questionnaire::all();
         return view('dashboard.questionnaires.index', [
+            'title' => 'List Kuesioner',
             'questionnaires' => $questionnaire,
         ]);
     }
@@ -28,7 +29,9 @@ class DashboardQuizController extends Controller
      */
     public function create()
     {
-        return view('dashboard.questionnaires.create-question');
+        return view('dashboard.questionnaires.create-question',[
+            'title' => 'Buat Kuesioner',
+        ]);
     }
 
     /**
@@ -76,6 +79,7 @@ class DashboardQuizController extends Controller
     {
         $questions = $questionnaire->question()->orderBy('nomor')->get();
         return view('dashboard.questionnaires.show', [
+            'title' => 'Detail Kuesioner',
             'questionnaire' => $questionnaire,
             'questions' => $questions,
         ]);

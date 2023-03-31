@@ -1,17 +1,23 @@
 @extends('dashboard.layouts.main')
 
 @section('style')
-<style>
-    #myAlert {
-        animation: fadeOut 1s ease 4s forwards;
-    }
+    <style>
+        #alertSuccess {
+            animation: fadeOut 1s ease 4s forwards;
+        }
 
-    @keyframes fadeOut {
-        0% { opacity: 1; }
-        100% { opacity: 0; display: none; }
-    }
-</style>
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
 
+            100% {
+                opacity: 0;
+                display: none;
+            }
+        }
+    </style>
+@endsection
 
 @section('main')
     <div class="container-fluid py-4">
@@ -19,7 +25,7 @@
             <div class="col-5">
                 @if (session()->has('success'))
                     <div id="alertSuccess" class="alert alert-success alert-dismissible" role="alert">
-                        <strong>{{ session('success') }}</strong> 
+                        <strong>{{ session('success') }}</strong>
                     </div>
                 @endif
             </div>
@@ -451,4 +457,9 @@
 
 
 @section('scripts')
+    <script>
+        setTimeout(function() {
+            $('#alertSuccess').alert('close');
+        }, 5000);
+    </script>
 @endsection
