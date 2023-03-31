@@ -1,51 +1,91 @@
 @extends('dashboard.layouts.main')
 
+@section('style')
+<style>
+    #myAlert {
+        animation: fadeOut 1s ease 4s forwards;
+    }
+
+    @keyframes fadeOut {
+        0% { opacity: 1; }
+        100% { opacity: 0; display: none; }
+    }
+</style>
+
 
 @section('main')
     <div class="container-fluid py-4">
+        <div class="row justify-content-start">
+            <div class="col-5">
+                @if (session()->has('success'))
+                    <div id="alertSuccess" class="alert alert-success alert-dismissible" role="alert">
+                        <strong>{{ session('success') }}</strong> 
+                    </div>
+                @endif
+            </div>
+        </div>
         <div class="row">
-
             <div class="col-12">
                 <div class="card mb-4">
 
                     <div class="card-header pb-0">
-                        <div class="col-3">
-                            <a href="/dashboard/create-judul"><button type="button" class="btn btn-info" ><i class="ni ni-fat-add"></i> Buat Kuesioner</button></a>
+                        <h4>Daftar Kuesioner</h4>
+                        <div class="col-lg-2">
+                            <a href="/dashboard/create-judul"><button type="button" class="btn btn-info"><i
+                                        class="ni ni-fat-add"></i> Buat Kuesioner</button></a>
                         </div>
-                        <h6>Daftar Kuesioner</h6>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
                             <table class="table align-items-center mb-0">
                                 <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        <th class="text-uppercase text-secondary text-sm font-weight-bolder opacity-7"
+                                            style="width:10px">
+                                            NO
+                                        </th>
+                                        <th class="text-uppercase text-secondary text-sm font-weight-bolder opacity-7">
                                             Judul
                                         </th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        <th class="text-uppercase text-secondary text-sm font-weight-bolder opacity-7 ps-2">
                                             Jumlah <br> Pertanyaan
                                         </th>
                                         <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            class="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-7">
                                             Status
                                         </th>
                                         <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            class="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-7">
                                             Waktu <br> Ekspirasi
                                         </th>
                                         <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            class="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-7 ps-2">
                                             Aksi
                                         </th>
-                                        <th class="text-secondary opacity-7"></th>
+
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="ps-5">
                                     @foreach ($questionnaires as $questionnaire)
                                         <tr>
                                             <td>
-                                                <div class="d-flex px-2 py-1">
+                                                <div class="d-flex ps-3 py-1">
+                                                    {{-- <div>
+                                                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3"
+                                                            alt="user1" />
+                                                    </div> --}}
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <h6 class="mb-0 text-sm">
+                                                            {{ $loop->iteration }}
+                                                        </h6>
+                                                        {{-- <p class="text-xs text-secondary mb-0">
+                                                            john@creative-tim.com
+                                                        </p> --}}
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex ps-3 py-1">
                                                     {{-- <div>
                                                         <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3"
                                                             alt="user1" />
@@ -72,7 +112,8 @@
                                                 @if ($questionnaire->status_aktif == 'Aktif')
                                                     <span class="badge badge-sm bg-gradient-success">Aktif</span>
                                                 @else
-                                                    <span class="badge badge-sm bg-gradient-secondary">Tidak Aktif</span>
+                                                    <span class="badge badge-sm bg-gradient-secondary">Tidak
+                                                        Aktif</span>
                                                 @endif
                                             </td>
                                             <td class="align-middle text-center">
@@ -86,9 +127,15 @@
                                                 <a href="/dashboard/posts//edit" class="badge bg-warning"><i
                                                         class="bi bi-pencil-square"></i>
                                                 </a>
-                                                <a href="/dashboard/posts//edit" class="badge bg-danger"><i
-                                                        class="bi bi-trash"></i>
-                                                </a>
+
+                                                <form action="/dashboard/questionnaires/{{ $questionnaire->id }}"
+                                                    method="post" class="d-inline">
+                                                    @method('delete')
+                                                    @csrf
+                                                    <button class="badge bg-danger border-0"
+                                                        onclick="return confirm('Are You Sure?')"><i
+                                                            class="bi bi-trash"></i></button>
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach

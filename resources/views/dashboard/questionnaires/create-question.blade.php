@@ -4,7 +4,7 @@
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
-                <div class="card mb-4 col-md-10">
+                <div class="card mb-4 col-lg-10">
                     <div class="card-header pb-0">
                         <h4>{{ session('form_data.judul') }}</h4>
                     </div>
@@ -33,7 +33,10 @@
                                 value="{{ session('form_data.waktu_ekspirasi') }}" required readonly>
                         </div>
                     </div>
-                    <form action="POST" >
+
+
+                    <form method="POST" action="/dashboard/questionnaires">
+                        @csrf
                         <div class="card-header pb-0 border-top">
                             <h4>Buat Soal</h4>
                         </div>
@@ -44,12 +47,13 @@
                                         {{ $i }}</label>
                                     <input id="question{{ $i }}" type="hidden"
                                         name="question{{ $i }}">
-                                    <trix-editor input="question{{ $i }}"
-                                        data-trix-placeholder="Menjelaskan tentang apa kuesioner ini"></trix-editor>
+                                    <trix-editor input="question{{ $i }}"></trix-editor>
                                 </div>
                             @endfor
                         </div>
-                        <button type="submit" class="btn btn-info">Unggah Kuesioner</button>
+                        <div class="ps-4">
+                            <button type="submit" class="btn btn-info">Unggah Kuesioner</button>
+                        </div>
                     </form>
                 </div>
             </div>
