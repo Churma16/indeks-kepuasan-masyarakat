@@ -102,7 +102,7 @@
             </div>
         </div>
         <div class="row mt-4">
-            <div class="col-lg-3 mb-lg-0 mb-4">
+            <div class="col-md-3 mb-lg-0 mb-4">
                 <div class="card">
                     <div class="card-body p-3">
                         <div class="row">
@@ -111,7 +111,7 @@
                             </h5>
                             <div class="col-lg-12">
                                 <div class="d-flex flex-column h-100">
-                                    <div class="card mb-3">
+                                    <div class="overflow-hidden position-relative border-radius-lg bg-cover h-100">
                                         <div class="card-body ">
                                             <div class="chart">
                                                 <canvas id="pie-chart-gender" class="chart-canvas" height="200px"></canvas>
@@ -155,57 +155,57 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 mb-lg-0 mb-4">
+            <div class="col-md-3 mb-lg-0 mb-4">
                 <div class="card">
-                    <div class="card-body p-3">
+                    <div class="card-body p-3 ">
                         <div class="row">
                             <h5 class="font-weight-bolder">
                                 Umur Responden
                             </h5>
                             <div class="col-lg-12">
-                                <div class="d-flex flex-column h-100">
-                                    <div class="card mb-3">
-                                        <div class="card-body ">
-                                            <div class="chart col-12">
-                                                <canvas id="pie-chart-age" class="chart-canvas" height="200px"></canvas>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <div class="pb-1"
-                                                    style="background-color: #17c1e8; width: 10px; height: 10px; display: inline-block;">
+                                <div class="d-flex flex-column h-100 " >
+                                    <div class="card ">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="chart col-sm-12">
+                                                    <canvas id="pie-chart-age" class="chart-canvas" height="200px"></canvas>
                                                 </div>
-                                                <small>Pria</small>
-                                                <br>
-                                                <div
-                                                    style="background-color: #cb0c9f; width: 10px; height: 10px; display: inline-block;">
+                                                <div class="col-sm-6">
+                                                    <div class="pb-1"
+                                                        style="background-color: #003f5c; width: 10px; height: 10px; display: inline-block;">
+                                                    </div>
+                                                    <small>18-24</small>
+                                                    <br>
+                                                    <div
+                                                        style="background-color: #444e86; width: 10px; height: 10px; display: inline-block;">
+                                                    </div>
+                                                    <small>25-34</small>
+                                                    <br>
+                                                    <div
+                                                        style="background-color: #945095; width: 10px; height: 10px; display: inline-block;">
+                                                    </div>
+                                                    <small>35-44</small>
                                                 </div>
-                                                <small>Wanita</small>
-                                                <br>
-                                                <div
-                                                    style="background-color: #cb0c9f; width: 10px; height: 10px; display: inline-block;">
+                                                <div class="col-sm-6">
+                                                    <div class="pb-1"
+                                                        style="background-color: #dd5182; width: 10px; height: 10px; display: inline-block;">
+                                                    </div>
+                                                    <small>45-54</small>
+                                                    <br>
+                                                    <div
+                                                        style="background-color: #ff6e54; width: 10px; height: 10px; display: inline-block;">
+                                                    </div>
+                                                    <small>55-64</small>
+                                                    <br>
+                                                    <div
+                                                        style="background-color: #ffa600; width: 10px; height: 10px; display: inline-block;">
+                                                    </div>
+                                                    <small>65+</small>
                                                 </div>
-                                                <small>Wanita</small>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <div class="pb-1"
-                                                    style="background-color: #17c1e8; width: 10px; height: 10px; display: inline-block;">
-                                                </div>
-                                                <small>Pria</small>
-                                                <br>
-                                                <div
-                                                    style="background-color: #cb0c9f; width: 10px; height: 10px; display: inline-block;">
-                                                </div>
-                                                <small>Wanita</small>
-                                                <br>
-                                                <div
-                                                    style="background-color: #cb0c9f; width: 10px; height: 10px; display: inline-block;">
-                                                </div>
-                                                <small>Wanita</small>
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
-
                             </div>
                             {{-- <div class="col-lg-2 ms-auto text-center mt-5 mt-lg-0">
                                 <div class="border-radius-lg h-100">
@@ -254,6 +254,7 @@
                 </div>
             </div>
         </div>
+        
         <div class="row mt-4">
             <div class="col-lg-5 mb-lg-0 mb-4">
                 <div class="card z-index-2">
