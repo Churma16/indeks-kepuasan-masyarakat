@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\DashboardController;
@@ -30,13 +31,21 @@ Route::get('/posts/{questionnaire:id}', [PostController::class, 'preview']);
 
 Route::get('/login', [LoginController::class, 'index']);
 Route::post('/login', [LoginController::class, 'authenticate']);
-
-Route::get('/dashboard', [DashboardController::class, 'index']);
-// ->middleware('auth');
-
 Route::get('/logout', function () {
     Auth::logout();
     return redirect('/login');
 });
 
+
+Route::get('/dashboard', [DashboardController::class, 'index']);
+// ->middleware('auth');
+
+
+
 Route::resource('/dashboard/questionnaires', DashboardQuizController::class)->middleware('auth');
+Route::get('/dashboard/redirect', [Controller::class, 'redirectToCreate'])->name('dashboard.redirect');
+
+Route::get('/dashboard/questionnaires/create-question',function () {
+    return view('dashboard.questionnaires.create');
+});
+

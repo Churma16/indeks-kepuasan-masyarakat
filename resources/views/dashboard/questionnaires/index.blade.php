@@ -4,9 +4,14 @@
 @section('main')
     <div class="container-fluid py-4">
         <div class="row">
+
             <div class="col-12">
                 <div class="card mb-4">
+
                     <div class="card-header pb-0">
+                        <div class="col-3">
+                            <a href="/dashboard/questionnaires/create"><button type="button" class="btn btn-info" ><i class="ni ni-fat-add"></i> Buat Kuesioner</button></a>
+                        </div>
                         <h6>Daftar Kuesioner</h6>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
@@ -17,8 +22,9 @@
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Judul
                                         </th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Jumlah Pertanyaan
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            Jumlah <br> Pertanyaan
                                         </th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -26,7 +32,7 @@
                                         </th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Waktu Ekspirasi
+                                            Waktu <br> Ekspirasi
                                         </th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
@@ -74,14 +80,15 @@
                                                     class="text-secondary text-xs font-weight-bold">{{ $questionnaire->waktu_ekspirasi_baru }}</span>
                                             </td>
                                             <td class="align-middle text-center">
-                                                <a href="/dashboard/questionnaires/{{ $questionnaire->id }}" class="badge bg-info"><i
-                                                        class="bi bi-eye-fill"></i>
+                                                <a href="/dashboard/questionnaires/{{ $questionnaire->id }}"
+                                                    class="badge bg-info"><i class="bi bi-eye-fill"></i>
                                                 </a>
                                                 <a href="/dashboard/posts//edit" class="badge bg-warning"><i
                                                         class="bi bi-pencil-square"></i>
                                                 </a>
-                                                <a href="/dashboard/posts//edit" class="badge bg-danger"><i class="bi bi-trash"></i>
-                                            </a>
+                                                <a href="/dashboard/posts//edit" class="badge bg-danger"><i
+                                                        class="bi bi-trash"></i>
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -397,5 +404,4 @@
 
 
 @section('scripts')
-
 @endsection
