@@ -8,7 +8,7 @@
                     <div class="card-header pb-0">
                         <h3>{{ $title }}</h3>
                     </div>
-                    <form method="post" class="mb-5" action="/dashboard/posts/{{ $questionnaire->id }}">
+                    <form method="post" class="mb-5" action="/dashboard/questionnaires/{{ $questionnaire->link }}">
                         @method('put')
                         @csrf
                         <div class="card-body px-4 pt-2 pb-2">
