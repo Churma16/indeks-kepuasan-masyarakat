@@ -14,9 +14,9 @@
                     <div class="col-lg-3 mb-4">
                         <div class="card"
                             style="border-radius: 15px; min-height: 300px;background-color:#F8F9FA; border-color: #d1d1d1;">
-                            <div class="card-body d-flex flex-column" style=" ">
-                                <h5 class="card-title">{{ $post->judul }}</h5>
-                                <p class="card-text">{{ $post->deskripsi }}</p>
+                            <div class="card-body d-flex flex-column" >
+                                <h5 class="card-title " style=" min-height: 10vw" >{{ $post->judul }}</h5>
+                                <p class="card-text">{{ $post->deskripsi_singkat }}</p>
                                 <div class="mt-auto">
                                     <small class="text-muted mb-2 d-block">Waktu ekspirasi:</small>
                                     <small class="text-muted mb-2 d-block">{{ $post->waktu_ekspirasi }}</small>

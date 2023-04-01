@@ -12,9 +12,9 @@
             height="57" /> --}}
 
             <h3 class="fw-bold">{{ $questionnaire->judul }}</h3>
-            <div class="col-lg-6 mx-auto">
+            <div class="col-lg-8 mx-auto">
                 <p class=" mb-4">
-                    {{ $questionnaire->deskripsi }}
+                    {!! $questionnaire->deskripsi !!}
                 </p>
                 <p class="mb-4">
                     <i class="bi bi-calendar2-week"></i> Banyak Pertanyaan: {{ $questionnaire->jumlah_pertanyaan }}

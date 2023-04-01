@@ -21,7 +21,7 @@
                         </div>
 
                         <h4>{{ $questionnaire->judul }}</h4>
-                        <p class="text-gray text-sm">{{ $questionnaire->deskripsi }}</p>
+                        <p class="text-gray text-sm">{!! $questionnaire->deskripsi !!}</p>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
@@ -59,7 +59,7 @@
                                                         <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3"
                                                             alt="user1" />
                                                     </div> --}}
-                                                    <div class="d-flex flex-column justify-content-center">
+                                                    <div class="d-flex flex-column justify-content-center ps-3">
                                                         <h6 class="mb-0 text-sm fw-normal">
                                                             {!! $question->isi !!}
                                                         </h6>

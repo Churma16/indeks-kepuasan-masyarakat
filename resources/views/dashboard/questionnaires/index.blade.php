@@ -21,7 +21,7 @@
 
 @section('main')
     <div class="container-fluid py-4">
-        <div class="row justify-content-start">
+        <div class="row justify-content-center">
             <div class="col-5">
                 @if (session()->has('success'))
                     <div id="alertSuccess" class="alert alert-success alert-dismissible" role="alert">
@@ -107,7 +107,7 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0">
+                                                <p class="text-xs font-weight-bold mb-0 text-center">
                                                     {{ $questionnaire->jumlah_pertanyaan }}
                                                 </p>
                                                 {{-- <p class="text-xs text-secondary mb-0">
@@ -130,7 +130,7 @@
                                                 <a href="/dashboard/questionnaires/{{ $questionnaire->link }}"
                                                     class="badge bg-info"><i class="bi bi-eye-fill"></i>
                                                 </a>
-                                                <a href="/dashboard/posts//edit" class="badge bg-warning"><i
+                                                <a href="/dashboard/questionnaires/{{ $questionnaire->link }}/edit" class="badge bg-warning"><i
                                                         class="bi bi-pencil-square"></i>
                                                 </a>
 
