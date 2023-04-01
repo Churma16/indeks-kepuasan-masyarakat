@@ -127,14 +127,14 @@
                                                     class="text-secondary text-xs font-weight-bold">{{ $questionnaire->waktu_ekspirasi_baru }}</span>
                                             </td>
                                             <td class="align-middle text-center">
-                                                <a href="/dashboard/questionnaires/{{ $questionnaire->id }}"
+                                                <a href="/dashboard/questionnaires/{{ $questionnaire->link }}"
                                                     class="badge bg-info"><i class="bi bi-eye-fill"></i>
                                                 </a>
                                                 <a href="/dashboard/posts//edit" class="badge bg-warning"><i
                                                         class="bi bi-pencil-square"></i>
                                                 </a>
 
-                                                <form action="/dashboard/questionnaires/{{ $questionnaire->id }}"
+                                                <form action="/dashboard/questionnaires/{{ $questionnaire->link }}"
                                                     method="post" class="d-inline">
                                                     @method('delete')
                                                     @csrf

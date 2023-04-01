@@ -19,7 +19,9 @@ class QuestionnaireFactory extends Factory
         return [
             'judul' => fake()->sentence(),
             'kategori' => fake()->randomElement(['Umum', 'Kesehatan', 'Pendidikan', 'Lainnya']),
-            'deskripsi' => fake()->paragraph(1),
+            'deskripsi' => fake()->paragraph(5),
+            'deskripsi_singkat' => fake()->sentence(5),
+            'link' => fake()->unique()->lexify('??????????????????????'),
             'waktu_ekspirasi' => fake()->dateTimeBetween('now', '+1 years'),
             'status_aktif' => fake()->randomElement(['Aktif', 'Tidak Aktif']),
             'created_at' => now(),

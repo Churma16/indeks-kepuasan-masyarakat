@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('questionnaire_id');
             $table->integer('nomor');
-            $table->string('isi');
+            $table->text('isi');
             $table->timestamps();
         });
     }

@@ -29,7 +29,7 @@ class DashboardQuizController extends Controller
      */
     public function create()
     {
-        return view('dashboard.questionnaires.create-question',[
+        return view('dashboard.questionnaires.create-question', [
             'title' => 'Buat Kuesioner',
         ]);
     }
@@ -42,10 +42,10 @@ class DashboardQuizController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $questionnaire = Questionnaire::create([
             'judul' => session('form_data.judul'),
-            'deskripsi-singkat' => session('form_data.deskripsi_singkat'),
+            'deskripsi_singkat' => session('form_data.deskripsi_singkat'),
             'deskripsi' => session('form_data.deskripsi'),
             'kategori' => 'kosong',
             'waktu_ekspirasi' => session('form_data.waktu_ekspirasi'),
@@ -65,7 +65,7 @@ class DashboardQuizController extends Controller
             $question = new Question($q);
             $questionnaire->question()->save($question);
         }
-
+        session()->forget('form_data');
         return redirect('dashboard/questionnaires')->with('success', 'New post has been added!');
     }
 
@@ -93,7 +93,17 @@ class DashboardQuizController extends Controller
      */
     public function edit(Questionnaire $questionnaire)
     {
-        //
+        // kode dibawah ini untuk mengurutkan nomor soal secara ascending 
+        // dengan cara mengambil data dari relasi question pada model Questionnaire
+        // load() adalah method dari laravel untuk eager loading yang berfungsi untuk mengambil data dari relasi
+        $questionnaire->load(['question' => function ($query) {
+            $query->orderBy('nomor', 'asc');
+        }]);
+
+        return view('dashboard.questionnaires.edit', [
+            'title' => 'Edit Kuesioner',
+            'questionnaire' => $questionnaire,
+        ]);
     }
 
     /**
@@ -105,7 +115,22 @@ class DashboardQuizController extends Controller
      */
     public function update(Request $request, Questionnaire $questionnaire)
     {
-        //
+        $questionnaire->update([
+            'judul' => $request->input('judul'),
+            'deskripsi_singkat' => $request->input('deskripsi_singkat'),
+            'deskripsi' => $request->input('deskripsi'),
+            'waktu_ekspirasi' => $request->input('waktu_ekspirasi'),
+        ]);
+    
+        foreach ($questionnaire->question as $question) {
+            $questionId = $question->id;
+            $isi = $request->input($questionId);
+            $question->update([
+                'isi' => $isi,
+            ]);
+        }
+    
+        return redirect('dashboard/questionnaires')->with('success', 'Post has been updated!');
     }
 
     /**
@@ -120,6 +145,5 @@ class DashboardQuizController extends Controller
         Question::destroy($questionnaire->question);
 
         return redirect('/dashboard/questionnaires')->with('success', 'Kuesioner berhasil dihapus!');
-
     }
 }

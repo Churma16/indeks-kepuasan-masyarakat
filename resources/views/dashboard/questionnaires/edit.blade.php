@@ -1,23 +1,69 @@
-<form method="post" class="mb-5" action="/dashboard/questionnaire/{{ $questionnaire->id }}">
-    @method('put')
-    @csrf
+@extends('dashboard.layouts.main')
 
+@section('main')
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card mb-4 col-lg-10">
+                    <div class="card-header pb-0">
+                        <h3>{{ $title }}</h3>
+                    </div>
+                    <form method="post" class="mb-5" action="/dashboard/posts/{{ $questionnaire->id }}">
+                        @method('put')
+                        @csrf
+                        <div class="card-body px-4 pt-2 pb-2">
+                            <div class="mb-3">
+                                <label for="judul" class="form-label">Judul</label>
+                                <input type="text" class="form-control" id="judul" name="judul"
+                                    placeholder="Judul Kuesioner" value="{{ old('judul', $questionnaire->judul) }}"
+                                    required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="deskripsi-singkat" class="form-label">Deskripsi Singkat</label>
+                                <input type="text" class="form-control" id="deskripsi_singkat" name="deskripsi_singkat"
+                                    placeholder="Deksripsi Singkat Kuesioner"
+                                    value="{{ old('deskripsi-singkat', $questionnaire->deskripsi_singkat) }}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="deskripsi" class="form-label">Deskripsi</label>
+                                <input id="deskripsi" type="hidden" name="deskripsi"
+                                    value="{{ $questionnaire->deskripsi }}">
+                                <trix-editor input="deskripsi"
+                                    data-trix-placeholder="Menjelaskan tentang apa kuesioner ini">
+                                </trix-editor>
+                            </div>
+                            <div class="mb-3">
+                                <label for="date" class="form-label">Waktu Ekspirasi</label>
+                                <input type="date" class="form-control" id="waktu_ekspirasi" name="waktu_ekspirasi"
+                                    value="{{ $questionnaire->waktu_ekspirasi }}" required>
+                            </div>
+                        </div>
 
-    <div class="mb-3">
-        <label for="question1" class="form-label">question1</label>
-        <input type="text" class="form-control" id="question1" name="question1" value="" required autofocus>
-    </div>
-    <div class="mb-3">
-        <label for="question2" class="form-label">question2</label>
-        <input type="text" class="form-control" id="question2" name="question2" value="" required autofocus>
-    </div>
-    <div class="mb-3">
-        <label for="question3" class="form-label">question3</label>
-        <input type="text" class="form-control" id="question3" name="question3" value="" required autofocus>
-    </div>
-    <div class="mb-3">
-        <label for="question4" class="form-label">question4</label>
-        <input type="text" class="form-control" id="question4" name="question4" value="" required autofocus>
-    </div>
-    <button type="submit" class="btn btn-primary">Create Post</button>
-</form>
+                        <div class="card-header pb-0 border-top">
+                            <h4>Buat Soal</h4>
+                        </div>
+                        <div class="card-body px-4 pt-2 pb-2">
+                            @foreach ($questionnaire->question as $question)
+                                <div class="mb-3 border-top pt-2">
+                                    <label for="" class="form-label">Nomor {{ $question->nomor }}</label>
+                                    <input id="{{ $question->id }}" type="hidden" name="{{ $question->id }}"
+                                        value="{{ old($question->id, $question->isi) }}">
+                                    <trix-editor input="{{ $question->id }}"></trix-editor>
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="ps-4">
+                            <button type="submit" class="btn btn-info">Unggah Kuesioner</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endsection
+</div>
+
+@section('scripts')
+    <script>
+        $('trix-editor').attr('readonly', true);
+    </script>
+@endsection

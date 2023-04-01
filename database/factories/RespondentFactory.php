@@ -19,7 +19,6 @@ class RespondentFactory extends Factory
         return [
             //this code going to factoory the data
             'questionnaire_id' => $this->faker->numberBetween(1, 10),
-
             'umur'=>$this->faker->numberBetween(1,6),
             'gender'=>$this->faker->randomElement(['Pria','Wanita']),
             'waktu_pengisian'=>$this->faker->dateTimeBetween('-1 years', 'now', 'Asia/Jakarta'),

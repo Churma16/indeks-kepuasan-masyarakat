@@ -6,7 +6,21 @@
             <div class="col-lg-10">
                 <div class="card col-lg-12 mb-4">
                     <div class="card-header pb-0">
-                        <h5>{{ $questionnaire->judul }}</h5>
+                        <div class="">
+                            <a href="/dashboard/create-judul"><button type="button" class="btn btn-info"><i
+                                        class="bi bi-plus"></i> Buat Kuesioner</button></a>
+                            <a href="/dashboard/questionnaires/{{ $questionnaire->link }}/edit"><button type="button" class="btn btn-warning"><i
+                                class="bi bi-pencil-square"></i> Edit Kuesioner</button></a>
+                            <form action="/dashboard/questionnaires/{{ $questionnaire->link }}" method="post"
+                                class="d-inline">
+                                @method('delete')
+                                @csrf
+                                <button class="btn btn-danger border-0" onclick="return confirm('Are You Sure?')"><i
+                                        class="bi bi-trash"></i> Hapus Kuesioner</button>
+                            </form>
+                        </div>
+
+                        <h4>{{ $questionnaire->judul }}</h4>
                         <p class="text-gray text-sm">{{ $questionnaire->deskripsi }}</p>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
@@ -14,10 +28,11 @@
                             <table class="table align-items-start mb-0">
                                 <thead>
                                     <tr>
-                                        <th class="text-uppercase text-primary text-dark font-weight-bolder opacity-7" style="width:10px">
+                                        <th class="text-uppercase text-primary text-dark font-weight-bolder opacity-7"
+                                            style="width:10px">
                                             No
                                         </th>
-                                        <th class="text-uppercase text-primary text-dark font-weight-bolder opacity-7" >
+                                        <th class="text-uppercase text-primary text-dark font-weight-bolder opacity-7">
                                             Pertanyaan
                                         </th>
                                     </tr>

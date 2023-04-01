@@ -33,4 +33,10 @@ class Questionnaire extends Model
     public function respondent(){
         return $this->hasMany(Respondent::class);
     }
+
+    //  MUTATOR
+    public function getRouteKeyName()
+    {
+        return 'link';
+    }
 }

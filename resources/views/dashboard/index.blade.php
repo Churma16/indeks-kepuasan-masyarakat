@@ -1,3 +1,4 @@
+{{-- @dd($umur['umurKelas']) --}}
 @extends('dashboard.layouts.main')
 
 @section('main')
@@ -163,7 +164,7 @@
                                 Umur Responden
                             </h5>
                             <div class="col-lg-12">
-                                <div class="d-flex flex-column h-100 " >
+                                <div class="d-flex flex-column h-100 ">
                                     <div class="card ">
                                         <div class="card-body">
                                             <div class="row">
@@ -254,7 +255,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="row mt-4">
             <div class="col-lg-5 mb-lg-0 mb-4">
                 <div class="card z-index-2">
@@ -1195,8 +1196,8 @@
                     borderWidth: 2,
                     backgroundColor: ['#003f5c', '#444e86', '#955196', '#dd5182', '#ff6e54', '#ffa600'],
                     data: [
-                        @for ($i = 1; $i <= count($umur['umurKelas']); $i++)
-                            '{{ $umur['umurKelas'][$i] }}',
+                        @for ($i = 1; $i <= count($umur['umurKelas'])+1; $i++)
+                        '{{ $umur['umurKelas'][$i] ?? 0 }}',
                         @endfor
                     ],
                     fill: false

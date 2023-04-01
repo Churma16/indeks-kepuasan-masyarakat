@@ -12,49 +12,53 @@
 
         <br>
         <div class="container-login100" style="background-image: url('img/bg-01.jpg');">
-            @if (session()->has('loginError'))
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    {{ session('loginError') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+            <div class="row justify-content-center">
+                @if (session()->has('loginError'))
+                    <div class="alert alert-danger alert-dismissible fade show col-6 d-block" role="alert">
+                        {{ session('loginError') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+                <div class="wrap-login100">
+
+
+                    <span class="login100-form-logo">
+                        {{-- <i class="zmdi zmdi-landscape"></i> --}}
+                        <img class="" src='/img/logo-diskom-sm.png' style="max-width: 50% ">
+                    </span>
+
+                    <span class="login100-form-title p-b-34 p-t-27">
+                        Admin Login
+                    </span>
+                    <form class="login100-form validate-form" action="/login" method="POST">
+                        @csrf
+                        <div class="wrap-input100 validate-input @error('email') is-invalid @enderror"
+                            data-validate="Enter Email">
+                            <input class="input100" type="email" name="email" id="email"
+                                placeholder="JohnDoe@gmail.com" value="{{ old('email') }}" autofocus required>
+                            <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                        </div>
+
+                        <div class="wrap-input100 validate-input" data-validate="Enter password">
+                            <input class="input100" type="password" name="password" id="password" placeholder="Password"
+                                required>
+                            <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                            @error('email')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+                        <div class="container-login100-form-btn">
+                            <button class="login100-form-btn" type="submit">
+                                Login
+                            </button>
+                        </div>
+
+                    </form>
                 </div>
-            @endif
-            <div class="wrap-login100">
-
-                <span class="login100-form-logo">
-                    {{-- <i class="zmdi zmdi-landscape"></i> --}}
-                    <img class="" src='/img/logo-diskom-sm.png' style="max-width: 50% ">
-                </span>
-
-                <span class="login100-form-title p-b-34 p-t-27">
-                    Admin Login
-                </span>
-                <form class="login100-form validate-form" action="/login" method="POST">
-                    @csrf
-                    <div class="wrap-input100 validate-input @error('email') is-invalid @enderror"
-                        data-validate="Enter Email">
-                        <input class="input100" type="email" name="email" id="email" placeholder="JohnDoe@gmail.com"
-                            value="{{ old('email') }}" autofocus required>
-                        <span class="focus-input100" data-placeholder="&#xf207;"></span>
-                    </div>
-
-                    <div class="wrap-input100 validate-input" data-validate="Enter password">
-                        <input class="input100" type="password" name="password" id="password" placeholder="Password"
-                            required>
-                        <span class="focus-input100" data-placeholder="&#xf191;"></span>
-                        @error('email')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-
-                    <div class="container-login100-form-btn">
-                        <button class="login100-form-btn" type="submit">
-                            Login
-                        </button>
-                    </div>
-
-                </form>
             </div>
         </div>
     </div>
