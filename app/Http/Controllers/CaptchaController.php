@@ -20,11 +20,12 @@ class CaptchaController extends Controller
             'captcha' => 'required|captcha'
         ]);
 
-        return redirect('/dashboard/questionnaires/create',);
-        
-        return view('questionnaire',[
-            "questionnaire" => $questionnaire,
-            "title"=> "Hai"
-        ]);
+
+        return redirect('/start/'.$questionnaire->link);
+
+        // return view('questionnaire',[
+        //     "questionnaire" => $questionnaire,
+        //     "title"=> "Hai"
+        // ]);
     }
 }

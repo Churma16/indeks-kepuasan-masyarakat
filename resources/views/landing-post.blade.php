@@ -56,6 +56,11 @@
                                         <button type="submit" class="btn btn-info px-4 gap-3">Mulai</button>
                                     </div>
                                 </form>
+
+                                <a href="{{ route('start.show', ['start' => $questionnaire->link]) }}">test</a>
+                                <form action="/start/{{ $questionnaire->link }}">
+                                    <button>test</button>
+                                </form>
                             </div>
                         </div>
                     </div>

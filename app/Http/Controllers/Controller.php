@@ -7,7 +7,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
-
+use App\Models\Questionnaire;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
@@ -29,5 +29,13 @@ class Controller extends BaseController
             // Redirect the user to the create questionnaire page
             return redirect('/dashboard/questionnaires/create',);
         
+    }
+
+    public function show(Questionnaire $questionnaire)
+    {
+        return view('questionnaire', [
+            "questionnaire" => $questionnaire,
+            "title" => "Hai"
+        ]);
     }
 }
