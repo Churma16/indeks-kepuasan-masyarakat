@@ -18,32 +18,40 @@
         data-nav-image="/assets/img/blurred-image-1.jpg">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link {{ Request::is('/') ?'active' : '' }}" href="/"> <i class="feather-16" data-feather="home"></i>
+                <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="/"> <i class="feather-16"
+                        data-feather="home"></i>
                     Home
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ Request::is('posts') ?'active' : '' }}" href="/posts"> <i class="feather-16"data-feather="file-text"></i>
+                <a class="nav-link {{ Request::is('posts') ? 'active' : '' }}" href="/posts"> <i
+                        class="feather-16"data-feather="file-text"></i>
                     List Kuesioner
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0)"> <i class="feather-16" data-feather="user"></i>
+                <a class="nav-link" href="javascript:void(0)"> <i class="feather-16" data-feather="info"></i>
                     About
                 </a>
             </li>
         </ul>
     </div>
     <div class="collapse navbar-collapse justify-content-end" id="navigation"
-    data-nav-image="/assets/img/blurred-image-1.jpg">
-    <ul class="navbar-nav">
-        <li class="nav-item">
-            <a class="nav-link " href="/login"> <i class="feather-16" data-feather="log-in"></i>
-                Login
-            </a>
-        </li>
-    </ul>
-</div>
+        data-nav-image="/assets/img/blurred-image-1.jpg">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                @auth
+                    <a class="nav-link " href="/login"> <i class="feather-16" data-feather="user"></i>
+                        {{ auth()->user()->name }}
+                    </a>
+                @else
+                    <a class="nav-link " href="/login"> <i class="feather-16" data-feather="log-in"></i>
+                        Login
+                    </a>
+                @endauth
+            </li>
+        </ul>
+    </div>
 
 </div>
 </nav>
