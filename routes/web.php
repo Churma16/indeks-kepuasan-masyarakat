@@ -28,7 +28,7 @@ Route::get('/', function () {
 Route::get('/posts', [PostController::class, 'index']);
 
 //penulisan harus sama
-Route::get('/posts/{questionnaire:id}', [PostController::class, 'preview']);
+Route::get('/posts/{questionnaire:link}', [PostController::class, 'preview']);
 
 
 Route::get('/login', [LoginController::class, 'index']);
@@ -53,7 +53,7 @@ Route::get('/dashboard/create-judul',function () {
 Route::get('/dashboard/redirect', [Controller::class, 'redirectToCreate'])->name('dashboard.redirect');
 
 Route::get('/reload-captcha',[CaptchaController::class,'reload_captcha']);
-Route::post('/check-captcha',[CaptchaController::class,'check_captcha']);
+Route::post('/check-captcha/{questionnaire:link}',[CaptchaController::class,'check_captcha']);
 // Route::get('/dashboard/questionnaires/create-question',function () {
 //     return view('dashboard.questionnaires.create');
 // });

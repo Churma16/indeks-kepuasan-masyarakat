@@ -36,6 +36,27 @@
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="/css/now-ui.css" rel="stylesheet" />
 
+    <!-- Bootstrap icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
+    <!--feather icon size-->
+    <style>
+        .feather-16 {
+            width: 16px;
+            height: 16px;
+        }
+
+        .feather-24 {
+            width: 24px;
+            height: 24px;
+        }
+
+        .feather-32 {
+            width: 32px;
+            height: 32px;
+        }
+    </style>
+
     @yield('styles')
 
 </head>
@@ -78,6 +99,11 @@
                 );
             }
         }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script>
+        feather.replace()
     </script>
 </body>
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Questionnaire;
 use Illuminate\Http\Request;
 use Gregwar\Captcha\CaptchaBuilder;
 
@@ -13,11 +14,17 @@ class CaptchaController extends Controller
         return response()->json(['captcha' => captcha_img()]);
     }
 
-    public function check_captcha(Request $request){
+    public function check_captcha(Request $request, Questionnaire $questionnaire){
+
         $request->validate([
             'captcha' => 'required|captcha'
         ]);
 
-        return "Berhasil";
+        return redirect('/dashboard/questionnaires/create',);
+        
+        return view('questionnaire',[
+            "questionnaire" => $questionnaire,
+            "title"=> "Hai"
+        ]);
     }
 }
