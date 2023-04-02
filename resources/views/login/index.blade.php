@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.main-login')
 
 @section('style')
     {{-- include main css --}}
