@@ -33,8 +33,90 @@
 
                         <h4 class="card-title"><b>Kuesioner</b></h4>
                         <form class="border-top" method="POST" action="/start/store/{{ $questionnaire->link }}">
+                            @csrf
+                            <div class="card py-3">
+                                <div class="row px-3">
+                                    <div class="col-lg-6">
+                                        <div class="card-title">
+                                            <b>Jenis Kelamin</b>
+                                        </div>
+                                        <div>
+                                            <div class="form-check form-check-radio">
+                                                <label class="form-check-label">
+                                                    <input class="form-check-input" type="radio" name="jeniskelamin"
+                                                        id="jeniskelamin" value="Pria" />
+                                                    <span class="form-check-sign"></span>
+                                                    Pria
+                                                </label>
+                                            </div>
+                                            <div class="form-check form-check-radio">
+                                                <label class="form-check-label">
+                                                    <input class="form-check-input" type="radio" name="jeniskelamin"
+                                                        id="jeniskelamin" value="Wanita" checked />
+                                                    <span class="form-check-sign"></span>
+                                                    Wanita
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card-title">
+                                            <b>Umur</b>
+                                        </div>
+                                        <div>
+                                            <div class="form-check form-check-radio">
+                                                <label class="form-check-label">
+                                                    <input class="form-check-input" type="radio" name="umur"
+                                                        id="umur" value="1" />
+                                                    <span class="form-check-sign"></span>
+                                                    18-24 Tahun
+                                                </label>
+                                            </div>
+                                            <div class="form-check form-check-radio">
+                                                <label class="form-check-label">
+                                                    <input class="form-check-input" type="radio" name="umur"
+                                                        id="umur" value="2" checked />
+                                                    <span class="form-check-sign"></span>
+                                                    25-34 Tahun
+                                                </label>
+                                            </div>
+                                            <div class="form-check form-check-radio">
+                                                <label class="form-check-label">
+                                                    <input class="form-check-input" type="radio" name="umur"
+                                                        id="umur" value="3" />
+                                                    <span class="form-check-sign"></span>
+                                                    35-44 Tahun
+                                                </label>
+                                            </div>
+                                            <div class="form-check form-check-radio">
+                                                <label class="form-check-label">
+                                                    <input class="form-check-input" type="radio" name="umur"
+                                                        id="umur" value="4" checked />
+                                                    <span class="form-check-sign"></span>
+                                                    45-54 Tahun
+                                                </label>
+                                            </div>
+                                            <div class="form-check form-check-radio">
+                                                <label class="form-check-label">
+                                                    <input class="form-check-input" type="radio" name="umur"
+                                                        id="umur" value="5" />
+                                                    <span class="form-check-sign"></span>
+                                                    55-64 Tahun
+                                                </label>
+                                            </div>
+                                            <div class="form-check form-check-radio">
+                                                <label class="form-check-label">
+                                                    <input class="form-check-input" type="radio" name="umur"
+                                                        id="umur" value="6" checked />
+                                                    <span class="form-check-sign"></span>
+                                                    65 Tahun Keatas
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             @foreach ($questionnaire->question as $question)
-                                
                                 <div class="card py-3">
                                     <div class="col-lg-9">
                                         <div class="card-title">
@@ -45,8 +127,8 @@
                                         <div>
                                             <label for="slider">Tingkat Kepuasan:</label>
                                             <br>
-                                            <input type="range" id="slider" name="jawaban{{ $loop->iteration }}" min="1"
-                                                max="5" step="1" list="labels">
+                                            <input type="range" id="slider" name="jawaban{{ $question->id }}"
+                                                min="1" max="5" step="1" list="labels">
                                             <datalist id="labels">
                                                 <option value="1">Sangat Tidak Puas</option>
                                                 <option value="2">Tidak Puas</option>

@@ -17,6 +17,21 @@
         <div class="section section-basic mt-5" id="basic-elements">
             <div class="container">
                 <h3 class="title">Detail Kuesioner</h3>
+                @if (session()->has('success'))
+                    <div class="alert alert-success" role="alert">
+                        <div class="container">
+                            <div class="alert-icon">
+                                <i class="now-ui-icons ui-2_like"></i>
+                            </div>
+                            {{ session('success') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">
+                                    <i class="now-ui-icons ui-1_simple-remove"></i>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                @endif
                 <div class="card text-center">
                     <div class="card-body">
                         <h4 class="card-title"><b>{{ $questionnaire->judul }}</b></h4>
@@ -33,7 +48,7 @@
                                 </p>
                                 <form action="/check-captcha/{{ $questionnaire->link }}" method="POST">
                                     @csrf
-                                <div class="captcha">
+                                    <div class="captcha">
                                         <span>{!! captcha_img() !!}</span>
                                         {{-- <button type="button" class="btn btn-danger reload"
                                             id="reload">&#x21bb;</button> --}}

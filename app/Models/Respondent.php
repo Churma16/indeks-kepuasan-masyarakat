@@ -10,6 +10,10 @@ class Respondent extends Model
     use HasFactory;
     protected $guarded = ['id'];
 
+    public function getIdTertinggiAttribute(){
+        return static::max('id');
+    }
+
     public function questionnaire(){
         return $this->belongsTo(Questionnaire::class);
     }
@@ -17,4 +21,5 @@ class Respondent extends Model
     public function answer(){
         return $this->hasMany(Answer::class);
     }
+
 }
