@@ -39,12 +39,13 @@
     <div class="collapse navbar-collapse justify-content-end" id="navigation"
         data-nav-image="/assets/img/blurred-image-1.jpg">
         <ul class="navbar-nav">
-            <li class="nav-item">
-                @auth
-                    <a class="nav-link " href="/login"> <i class="feather-16" data-feather="user"></i>
+            @auth
+                <li class="nav-item dropdown">
+                    <a class="nav-link " href="/dashboard"> <i class="feather-16" data-feather="user"></i>
                         {{ auth()->user()->name }}
                     </a>
                 @else
+                <li class="nav-item">
                     <a class="nav-link " href="/login"> <i class="feather-16" data-feather="log-in"></i>
                         Login
                     </a>

@@ -1196,7 +1196,7 @@
                     borderWidth: 2,
                     backgroundColor: ['#003f5c', '#444e86', '#955196', '#dd5182', '#ff6e54', '#ffa600'],
                     data: [
-                        @for ($i = 1; $i <= count($umur['umurKelas'])+1; $i++)
+                        @for ($i = 1; $i <= count($umur['umurKelas']); $i++)
                         '{{ $umur['umurKelas'][$i] ?? 0 }}',
                         @endfor
                     ],
