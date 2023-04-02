@@ -45,20 +45,19 @@
                     <div class="row justify-content-center">
 
                         <div class="form-group my-2 col-4 justify-content-center">
-                            <input type="text" class="form-control" name="captcha">
-    
+                            <input type="text" class="form-control" placeholder="masukan Captcha" name="captcha">
                         </div>
+                        @error('captcha')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-3">
+                        <button type="button" class="btn btn-warning btn-sm px-4 gap-3">
+                            Kembali </button>
                         <button type="submit" class="btn btn-primary btn-sm px-4 gap-3">Mulai</button>
                     </div>
                 </form>
-                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                    <button type="button" class="btn btn-warning btn-sm px-4 gap-3">
-                        Kembali
-                </div>
-
             </div>
         </div>
     </div>
