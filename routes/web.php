@@ -5,6 +5,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashboardQuizController;
+use App\Http\Controllers\CaptchaController;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -50,7 +52,8 @@ Route::get('/dashboard/create-judul',function () {
 
 Route::get('/dashboard/redirect', [Controller::class, 'redirectToCreate'])->name('dashboard.redirect');
 
-
+Route::get('/reload-captcha',[CaptchaController::class,'reload_captcha']);
+Route::post('/check-captcha',[CaptchaController::class,'check_captcha']);
 // Route::get('/dashboard/questionnaires/create-question',function () {
 //     return view('dashboard.questionnaires.create');
 // });
