@@ -20,19 +20,22 @@ class PostController extends Controller
     {
         return view('landing-post', [
             "title" => "Detail Kuesioner",
-
-            // kode dibawah ini akan mengubah format waktu yang ada di database
-            $dateold=$questionnaire->waktu_ekspirasi,
-            $datenew=date('d F Y',strtotime($dateold)),
-            $questionnaire->waktu_ekspirasi=$datenew,
-
-            // kode dibawah ini akan menghitung jumlah pertanyaan yang ada di kuesioner
-            // $questionnaire->question->count() berarti menghitung jumlah data yang ada di tabel pertanyaan
-            // $questionnaire->jumlah_pertanyaan=$questionnaire->question->count(),
-
             "questionnaire" => $questionnaire,
-
-
         ]);
+    }
+
+    public function startQuest(Questionnaire $questionnaire)
+    {
+        $questionnaire->load(['question' => function ($query) {
+            $query->orderBy('nomor', 'asc');
+        }]);
+        return view('questionnaire', [
+            "questionnaire" => $questionnaire,
+            "title" => "Hai"
+        ]);
+    }
+
+    public function store(Questionnaire $questionnaire, Request $request){
+        
     }
 }

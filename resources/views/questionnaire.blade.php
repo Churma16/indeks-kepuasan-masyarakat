@@ -1,4 +1,3 @@
-@dd($questionnaire)
 @extends('layouts.main')
 
 @section('style')
@@ -17,48 +16,50 @@
         <br>
         <div class="section section-basic mt-5" id="basic-elements">
             <div class="container">
-                <h3 class="title">Detail Kuesioner</h3>
-                <div class="card text-center">
+                <h3 class="title">Halaman Kuesioner</h3>
+                <div class="card justify-content-start px-5">
                     <div class="card-body">
                         <h4 class="card-title"><b>{{ $questionnaire->judul }}</b></h4>
-                        <div class="row justify-content-center">
-                            <div class="col-lg-5">
-                                <p class="card-text">{!! $questionnaire->deskripsi !!}</p>
-                                <p>
-                                    <i class="bi bi-card-list"></i> Banyak Pertanyaan:
-                                    {{ $questionnaire->jumlah_pertanyaan }}
-                                </p>
-                                <p>
-                                    <i class="bi bi-calendar2-week"></i> Waktu Ekspirasi:
-                                    {{ $questionnaire->waktu_ekspirasi }}
-                                </p>
-                                <form action="/check-captcha/{{ $questionnaire->link }}" method="POST">
-                                    @csrf
-                                    <div class="captcha">
-                                        <span>{!! captcha_img() !!}</span>
-                                        {{-- <button type="button" class="btn btn-danger reload"
-                                            id="reload">&#x21bb;</button> --}}
-                                    </div>
-                                    <div class="row justify-content-center">
-                                        <div class="form-group my-2 col-6 justify-content-center">
-                                            <input type="text" class="form-control" placeholder="Masukan Captcha"
-                                                name="captcha">
-                                        </div>
-
-                                    </div>
-                                    <div>
-                                        @error('captcha')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-3">
-                                        <a href="/posts"><button type="button" class="btn btn-warning px-4 gap-3">
-                                                Kembali </button></a>
-                                        <button type="submit" class="btn btn-info px-4 gap-3">Mulai</button>
-                                    </div>
-                                </form>
+                        <div class="row mb-2">
+                            <div class="col-lg-9 text-left">
+                                {!! $questionnaire->deskripsi !!}
                             </div>
                         </div>
+
+                        <div class="card-text mb-5">
+                            <b>Petunjuk Pengisian Kuesioner:</b> <br>
+                            1 = Sangat Tidak Puas, 2 = Tidak Puas, 3 = Cukup Puas, 4 = Puas, 5 = Sangat Puas
+                        </div>
+
+                        <h4 class="card-title"><b>Kuesioner</b></h4>
+                        <form class="border-top" method="POST" action="/start/store/{{ $questionnaire->link }}">
+                            @foreach ($questionnaire->question as $question)
+                                
+                                <div class="card py-3">
+                                    <div class="col-lg-9">
+                                        <div class="card-title">
+                                            <b>Nomor {{ $question->nomor }}</b>
+                                            {!! $question->isi !!}
+                                        </div>
+
+                                        <div>
+                                            <label for="slider">Tingkat Kepuasan:</label>
+                                            <br>
+                                            <input type="range" id="slider" name="jawaban{{ $loop->iteration }}" min="1"
+                                                max="5" step="1" list="labels">
+                                            <datalist id="labels">
+                                                <option value="1">Sangat Tidak Puas</option>
+                                                <option value="2">Tidak Puas</option>
+                                                <option value="3">Cukup Puas</option>
+                                                <option value="4">Puas</option>
+                                                <option value="5">Sangat Puas</option>
+                                            </datalist>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                            <button type="submit" class="btn btn-info">Selesai</button>
+                        </form>
                     </div>
                 </div>
             </div>

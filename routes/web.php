@@ -56,9 +56,12 @@ Route::get('/dashboard/redirect', [Controller::class, 'redirectToCreate'])->name
 Route::get('/reload-captcha',[CaptchaController::class,'reload_captcha']);
 Route::post('/check-captcha/{questionnaire:link}',[CaptchaController::class,'check_captcha']);
 
+Route::get('/start/{questionnaire:link}',[PostController::class,'startQuest']);
+
+Route::post('/start/store/{questionnaire:link}',[PostController::class,'store']);
 // Route::get('/start/{questionnaire:link}',[Controller::class,'show']);
 
-Route::resource('/start', QuestionnaireController::class);
+// Route::resource('/start', QuestionnaireController::class);
 
 // Route::get('/dashboard/questionnaires/create-question',function () {
 //     return view('dashboard.questionnaires.create');

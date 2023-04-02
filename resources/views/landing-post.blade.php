@@ -33,7 +33,7 @@
                                 </p>
                                 <form action="/check-captcha/{{ $questionnaire->link }}" method="POST">
                                     @csrf
-                                    <div class="captcha">
+                                <div class="captcha">
                                         <span>{!! captcha_img() !!}</span>
                                         {{-- <button type="button" class="btn btn-danger reload"
                                             id="reload">&#x21bb;</button> --}}
@@ -55,11 +55,6 @@
                                                 Kembali </button></a>
                                         <button type="submit" class="btn btn-info px-4 gap-3">Mulai</button>
                                     </div>
-                                </form>
-
-                                <a href="{{ route('start.show', ['start' => $questionnaire->link]) }}">test</a>
-                                <form action="/start/{{ $questionnaire->link }}">
-                                    <button>test</button>
                                 </form>
                             </div>
                         </div>
