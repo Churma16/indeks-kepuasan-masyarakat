@@ -53,7 +53,7 @@
                                         <th class="text-uppercase text-secondary text-sm font-weight-bolder opacity-7">
                                             Judul
                                         </th>
-                                        <th class="text-uppercase text-secondary text-sm font-weight-bolder opacity-7 ps-2">
+                                        <th class="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-7 ps-2">
                                             Jumlah <br> Pertanyaan
                                         </th>
                                         <th

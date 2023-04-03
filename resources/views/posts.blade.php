@@ -5,7 +5,7 @@
         <br>
         <div class="section section-basic mt-5" id="basic-elements">
             <div class="container">
-                <h3 class="title">Pilih Kuesioner</h3>
+                <h3 class="title">Daftar Kuesioner</h3>
                 <div class="row">
                     @if ($questionnaires->count() > 0)
                         @foreach ($questionnaires as $post)

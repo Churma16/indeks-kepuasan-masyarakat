@@ -13,17 +13,7 @@
                 <h3>Mari Isi Kuesioner untuk meningkatkan pelayanan kami.</h3>
                 <a href="/posts"><button type="button" class="btn btn-primary">Pilih Kuesioner</button></a>
             </div>
-            <h6 class="category category-absolute">
-                Designed by
-                <a href="http://invisionapp.com/" target="_blank">
-                    <img src="/assets/img/invision-white-slim.png" class="invision-logo" /> </a>. Coded by
-                    <a href="https://www.creative-tim.com" target="_blank">
-                        <img src="/assets/img/creative-tim-white-slim2.png" class="creative-tim-logo" /> </a>.
-                    </h6>
-                </div>
     </div>
-
-
 </div>
 @endsection
 

@@ -3,13 +3,13 @@
         <nav>
             <ul>
                 <li>
-                    <a href="https://www.creative-tim.com">
-                        Creative Tim
+                    <a href="https://diskominfo.semarangkota.go.id/">
+                        kota Semarang
                     </a>
                 </li>
                 <li>
-                    <a href="http://presentation.creative-tim.com">
-                        About Us
+                    <a href="https://semarangkota.go.id/">
+                        Diskominfo Kota Semarang
                     </a>
                 </li>
                 <li>
@@ -30,9 +30,6 @@
                         )
                     );
             </script>
-            , Designed by
-            <a href="https://www.invisionapp.com" target="_blank">Invision</a>. Coded by
-            <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a>.
         </div>
     </div>
 </footer>

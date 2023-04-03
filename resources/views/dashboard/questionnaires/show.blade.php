@@ -7,8 +7,6 @@
                 <div class="card col-lg-12 mb-4">
                     <div class="card-header pb-0">
                         <div class="">
-                            <a href="/dashboard/create-judul"><button type="button" class="btn btn-info"><i
-                                        class="bi bi-plus"></i> Buat Kuesioner</button></a>
                             <a href="/dashboard/questionnaires/{{ $questionnaire->link }}/edit"><button type="button" class="btn btn-warning"><i
                                 class="bi bi-pencil-square"></i> Edit Kuesioner</button></a>
                             <form action="/dashboard/questionnaires/{{ $questionnaire->link }}" method="post"
