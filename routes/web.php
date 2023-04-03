@@ -59,6 +59,8 @@ Route::post('/check-captcha/{questionnaire:link}',[CaptchaController::class,'che
 Route::get('/start/{questionnaire:link}',[PostController::class,'startQuest']);
 
 Route::post('/start/store/{questionnaire:link}',[PostController::class,'store']);
+
+Route::get('/dashboard/print/{questionnaire:link}',[Controller::class,'showPrintPreview']);
 // Route::get('/start/{questionnaire:link}',[Controller::class,'show']);
 
 // Route::resource('/start', QuestionnaireController::class);

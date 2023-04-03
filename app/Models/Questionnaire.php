@@ -32,7 +32,10 @@ class Questionnaire extends Model
         return Carbon::parse($this->waktu_ekspirasi)->format('d-m-Y');
     }
 
-
+    public function getWaktuPembuatanNewAttribute()
+    {
+        return Carbon::parse($this->created_at)->format('d F Y');
+    }
 
     //  RELATIONSHIP
     // satu kuesioner memiliki banyak pertanyaan

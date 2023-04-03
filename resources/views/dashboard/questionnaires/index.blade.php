@@ -130,6 +130,9 @@
                                                 <a href="/dashboard/questionnaires/{{ $questionnaire->link }}"
                                                     class="badge bg-info"><i class="bi bi-eye-fill"></i>
                                                 </a>
+                                                <a href="/dashboard/print/{{ $questionnaire->link }}"
+                                                    class="badge bg-success"><i class="bi bi-printer"></i>
+                                                </a>
                                                 <a href="/dashboard/questionnaires/{{ $questionnaire->link }}/edit" class="badge bg-warning"><i
                                                         class="bi bi-pencil-square"></i>
                                                 </a>
