@@ -15,11 +15,11 @@
             <div class="col-lg-6">
                 <ul class="nav nav-footer justify-content-center justify-content-lg-end">
                     <li class="nav-item">
-                        <a href="https://www.creative-tim.com" class="nav-link text-muted"
+                        <a href="https://semarangkota.go.id/" class="nav-link text-muted"
                             target="_blank">Kota Semarang</a>
                     </li>
                     <li class="nav-item">
-                        <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted"
+                        <a href="https://diskominfo.semarangkota.go.id/" class="nav-link text-muted"
                             target="_blank">Diskominfo Kota Semarang</a>
                     </li>
                     <li class="nav-item">
