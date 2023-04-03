@@ -45,6 +45,9 @@
         }
     </style>
 
+    <script src="https://unpkg.com/feather-icons"></script>
+
+
 </head>
 
 <body class="g-sidenav-show bg-gray-100">
@@ -97,6 +100,9 @@
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+    <script>
+        feather.replace()
+    </script>
 </body>
 
 </html>
