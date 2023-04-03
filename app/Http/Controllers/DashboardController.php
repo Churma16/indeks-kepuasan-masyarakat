@@ -14,7 +14,6 @@ class DashboardController extends Controller
         $totalKuesioner = Questionnaire::count();
         $totalKuesionerAktif = Questionnaire::where('status_aktif','aktif')->count();
         $totalKuesionerHampirExpired = Questionnaire::where('status_aktif','aktif')->where('waktu_ekspirasi','<=',date('Y-m-d', strtotime('+7 days')))->count();
-
         $totalRespondent = Respondent::count();
         
         $genderWanita = Respondent::where('gender','wanita')->count();

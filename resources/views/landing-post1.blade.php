@@ -21,7 +21,7 @@
 
         <div class="px-4 py-5 my-5 text-center border col-lg-10"
             style="border-radius: 15px;background-color:#F8F9FA; border-color: #d1d1d1;">
-            {{-- <img class="d-block mx-auto mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72"
+            {{-- <img class="d-block mx-auto mb-4" src="/assets/brand/bootstrap-logo.svg" alt="" width="72"
             height="57" /> --}}
 
             <h3 class="fw-bold">{{ $questionnaire->judul }}</h3>

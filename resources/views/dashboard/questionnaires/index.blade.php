@@ -53,7 +53,8 @@
                                         <th class="text-uppercase text-secondary text-sm font-weight-bolder opacity-7">
                                             Judul
                                         </th>
-                                        <th class="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-7 ps-2">
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-7 ps-2">
                                             Jumlah <br> Pertanyaan
                                         </th>
                                         <th
@@ -77,7 +78,7 @@
                                             <td>
                                                 <div class="d-flex ps-3 py-1">
                                                     {{-- <div>
-                                                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3"
+                                                        <img src="/assets/img/team-2.jpg" class="avatar avatar-sm me-3"
                                                             alt="user1" />
                                                     </div> --}}
                                                     <div class="d-flex flex-column justify-content-center">
@@ -93,7 +94,7 @@
                                             <td>
                                                 <div class="d-flex ps-3 py-1">
                                                     {{-- <div>
-                                                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3"
+                                                        <img src="/assets/img/team-2.jpg" class="avatar avatar-sm me-3"
                                                             alt="user1" />
                                                     </div> --}}
                                                     <div class="d-flex flex-column justify-content-center">
@@ -131,10 +132,10 @@
                                                     class="badge bg-info"><i class="bi bi-eye-fill"></i>
                                                 </a>
                                                 <a href="/dashboard/print/{{ $questionnaire->link }}"
-                                                    class="badge bg-success"><i class="bi bi-printer"></i>
+                                                    class="badge bg-dark"><i class="bi bi-printer"></i>
                                                 </a>
-                                                <a href="/dashboard/questionnaires/{{ $questionnaire->link }}/edit" class="badge bg-warning"><i
-                                                        class="bi bi-pencil-square"></i>
+                                                <a href="/dashboard/questionnaires/{{ $questionnaire->link }}/edit"
+                                                    class="badge bg-warning"><i class="bi bi-pencil-square"></i>
                                                 </a>
 
                                                 <form action="/dashboard/questionnaires/{{ $questionnaire->link }}"
@@ -189,7 +190,7 @@
                                         <td>
                                             <div class="d-flex px-2">
                                                 <div>
-                                                    <img src="../assets/img/small-logos/logo-spotify.svg"
+                                                    <img src="/assets/img/small-logos/logo-spotify.svg"
                                                         class="avatar avatar-sm rounded-circle me-2" alt="spotify" />
                                                 </div>
                                                 <div class="my-auto">
@@ -232,7 +233,7 @@
                                         <td>
                                             <div class="d-flex px-2">
                                                 <div>
-                                                    <img src="../assets/img/small-logos/logo-invision.svg"
+                                                    <img src="/assets/img/small-logos/logo-invision.svg"
                                                         class="avatar avatar-sm rounded-circle me-2" alt="invision" />
                                                 </div>
                                                 <div class="my-auto">
@@ -276,7 +277,7 @@
                                         <td>
                                             <div class="d-flex px-2">
                                                 <div>
-                                                    <img src="../assets/img/small-logos/logo-jira.svg"
+                                                    <img src="/assets/img/small-logos/logo-jira.svg"
                                                         class="avatar avatar-sm rounded-circle me-2" alt="jira" />
                                                 </div>
                                                 <div class="my-auto">
@@ -320,7 +321,7 @@
                                         <td>
                                             <div class="d-flex px-2">
                                                 <div>
-                                                    <img src="../assets/img/small-logos/logo-slack.svg"
+                                                    <img src="/assets/img/small-logos/logo-slack.svg"
                                                         class="avatar avatar-sm rounded-circle me-2" alt="slack" />
                                                 </div>
                                                 <div class="my-auto">
@@ -364,7 +365,7 @@
                                         <td>
                                             <div class="d-flex px-2">
                                                 <div>
-                                                    <img src="../assets/img/small-logos/logo-webdev.svg"
+                                                    <img src="/assets/img/small-logos/logo-webdev.svg"
                                                         class="avatar avatar-sm rounded-circle me-2" alt="webdev" />
                                                 </div>
                                                 <div class="my-auto">
@@ -408,7 +409,7 @@
                                         <td>
                                             <div class="d-flex px-2">
                                                 <div>
-                                                    <img src="../assets/img/small-logos/logo-xd.svg"
+                                                    <img src="/assets/img/small-logos/logo-xd.svg"
                                                         class="avatar avatar-sm rounded-circle me-2" alt="xd" />
                                                 </div>
                                                 <div class="my-auto">

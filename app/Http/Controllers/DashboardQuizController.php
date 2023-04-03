@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Question;
 use App\Models\Questionnaire;
 use Illuminate\Http\Request;
+use App\Models\Answer;
+use App\Models\Respondent;
 
 class DashboardQuizController extends Controller
 {
@@ -77,11 +79,58 @@ class DashboardQuizController extends Controller
      */
     public function show(Questionnaire $questionnaire)
     {
+        $totalRespondent = Respondent::where('questionnaire_id',$questionnaire->id)->count();
+
+        $genderWanita = Respondent::where('questionnaire_id',$questionnaire->id)->where('gender', 'wanita')->count();
+        $genderPria = Respondent::where('questionnaire_id',$questionnaire->id)->where('gender', 'pria')->count();
+        
+
+        // Get All the Respondent's Age
+        $umur = [];
+        $umur['umurKelas'] = Respondent::where('questionnaire_id',$questionnaire->id)->selectRaw('umur, count(*) as count')
+            ->groupBy('umur')
+            ->pluck('count', 'umur')
+            ->toArray();
+
+        
+        // Get All the Respondent's IKM
+        $idSoal= $questionnaire->question->pluck('id')->toArray();
+        $ikm = [];
+        $ikm['ikmKelas'] = Answer::whereIn('question_id',$idSoal)->selectRaw('jawaban, count(*) as count')
+            ->groupBy('jawaban')
+            ->pluck('count', 'jawaban')
+            ->toArray();
+
+
+        //get the date of the last 14 day
+        $date = [];
+        for ($i = 0; $i < 14; $i++) {
+            $date[] = date('d/m', strtotime('-' . $i . ' days'));
+        }
+        $date = array_reverse($date);
+
+
+        //get the respondent for the last 14 day
+        $respondentCount = [];
+        for ($i = 0; $i < 14; $i++) {
+            $respondentCount[] = Respondent::where('questionnaire_id',$questionnaire->id)->whereDate('created_at', date('Y-m-d', strtotime('-' . $i . ' days')))->count();
+        }
+        $respondentCount = array_reverse($respondentCount);
+
         $questions = $questionnaire->question()->orderBy('nomor')->get();
         return view('dashboard.questionnaires.show', [
             'title' => 'Detail Kuesioner',
             'questionnaire' => $questionnaire,
             'questions' => $questions,
+            "genderWanita" => $genderWanita,
+            "genderPria" => $genderPria,
+            // access with $umur['umurKelas'][array_key]
+            'umur' => $umur,
+            'ikm' => $ikm,
+            'date' => $date,
+            'respondentCount' => $respondentCount,
+            "totalRespondent" => $totalRespondent,
+
         ]);
     }
 
@@ -121,7 +170,7 @@ class DashboardQuizController extends Controller
             'deskripsi' => $request->input('deskripsi'),
             'waktu_ekspirasi' => $request->input('waktu_ekspirasi'),
         ]);
-    
+
         foreach ($questionnaire->question as $question) {
             $questionId = $question->id;
             $isi = $request->input($questionId);
@@ -129,7 +178,7 @@ class DashboardQuizController extends Controller
                 'isi' => $isi,
             ]);
         }
-    
+
         return redirect('dashboard/questionnaires')->with('success', 'Post has been updated!');
     }
 

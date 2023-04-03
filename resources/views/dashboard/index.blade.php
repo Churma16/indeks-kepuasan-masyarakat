@@ -270,11 +270,11 @@
 
     @section('scripts')
         <!--   Core JS Files   -->
-        <script src="../assets/js/core/popper.min.js"></script>
-        <script src="../assets/js/core/bootstrap.min.js"></script>
-        <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-        <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
-        <script src="../assets/js/plugins/chartjs.min.js"></script>
+        <script src="/assets/js/core/popper.min.js"></script>
+        <script src="/assets/js/core/bootstrap.min.js"></script>
+        <script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
+        <script src="/assets/js/plugins/smooth-scrollbar.min.js"></script>
+        <script src="/assets/js/plugins/chartjs.min.js"></script>
         <script>
             //Line Chart Banyak Responden
             var ctx2 = document.getElementById("chart-line").getContext("2d");
@@ -457,7 +457,7 @@
                         borderWidth: 2,
                         backgroundColor: ['#003f5c', '#444e86', '#955196', '#dd5182', '#ff6e54', '#ffa600'],
                         data: [
-                            @for ($i = 1; $i <= count($umur['umurKelas']); $i++)
+                            @for ($i = 1; $i <= 6; $i++)
                                 '{{ $umur['umurKelas'][$i] ?? 0 }}',
                             @endfor
                         ],
@@ -565,23 +565,4 @@
                 },
             });
         </script>
-
-
-
-        <script>
-            var win = navigator.platform.indexOf("Win") > -1;
-            if (win && document.querySelector("#sidenav-scrollbar")) {
-                var options = {
-                    damping: "0.5",
-                };
-                Scrollbar.init(
-                    document.querySelector("#sidenav-scrollbar"),
-                    options
-                );
-            }
-        </script>
-        <!-- Github buttons -->
-        <script async defer src="https://buttons.github.io/buttons.js"></script>
-        <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-        <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
     @endsection
