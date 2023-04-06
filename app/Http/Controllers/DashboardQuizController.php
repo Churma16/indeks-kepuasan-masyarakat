@@ -7,6 +7,7 @@ use App\Models\Questionnaire;
 use Illuminate\Http\Request;
 use App\Models\Answer;
 use App\Models\Respondent;
+use Illuminate\Support\Str;
 
 class DashboardQuizController extends Controller
 {
@@ -49,6 +50,7 @@ class DashboardQuizController extends Controller
             'judul' => session('form_data.judul'),
             'deskripsi_singkat' => session('form_data.deskripsi_singkat'),
             'deskripsi' => session('form_data.deskripsi'),
+            'link'=>Str::random(7),
             'kategori' => 'kosong',
             'waktu_ekspirasi' => session('form_data.waktu_ekspirasi'),
             'status_aktif' => 'Aktif'
