@@ -52,7 +52,7 @@
                                             <div class="form-check form-check-radio">
                                                 <label class="form-check-label">
                                                     <input class="form-check-input" type="radio" name="jeniskelamin"
-                                                        id="jeniskelamin" value="Wanita" checked />
+                                                        id="jeniskelamin" value="Wanita" />
                                                     <span class="form-check-sign"></span>
                                                     Wanita
                                                 </label>
@@ -75,7 +75,7 @@
                                             <div class="form-check form-check-radio">
                                                 <label class="form-check-label">
                                                     <input class="form-check-input" type="radio" name="umur"
-                                                        id="umur" value="2" checked />
+                                                        id="umur" value="2"  />
                                                     <span class="form-check-sign"></span>
                                                     25-34 Tahun
                                                 </label>
@@ -91,7 +91,7 @@
                                             <div class="form-check form-check-radio">
                                                 <label class="form-check-label">
                                                     <input class="form-check-input" type="radio" name="umur"
-                                                        id="umur" value="4" checked />
+                                                        id="umur" value="4"  />
                                                     <span class="form-check-sign"></span>
                                                     45-54 Tahun
                                                 </label>
@@ -107,7 +107,7 @@
                                             <div class="form-check form-check-radio">
                                                 <label class="form-check-label">
                                                     <input class="form-check-input" type="radio" name="umur"
-                                                        id="umur" value="6" checked />
+                                                        id="umur" value="6"  />
                                                     <span class="form-check-sign"></span>
                                                     65 Tahun Keatas
                                                 </label>
