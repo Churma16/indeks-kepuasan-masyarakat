@@ -8,11 +8,11 @@ use Gregwar\Captcha\CaptchaBuilder;
 
 class CaptchaController extends Controller
 {
-    public function reload_captcha()
-    {
-        dd('Function reached.');
-        return response()->json(['captcha' => captcha_img()]);
-    }
+    // public function reload_captcha()
+    // {
+        // dd('Function reached.');
+    //     return response()->json(['captcha' => captcha_img()]);
+    // }
 
     public function check_captcha(Request $request, Questionnaire $questionnaire){
 
