@@ -49,7 +49,7 @@
                                 <form action="/check-captcha/{{ $questionnaire->link }}" method="POST">
                                     @csrf
                                     <div class="captcha">
-                                        <span>{!! captcha_img() !!}</span>
+                                        <span>{!! captcha_img('math') !!}</span>
                                         {{-- <button type="button" class="btn btn-danger reload"
                                             id="reload">&#x21bb;</button> --}}
                                     </div>
