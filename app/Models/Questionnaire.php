@@ -18,6 +18,8 @@ class Questionnaire extends Model
      */
     protected $guarded = ['id'];
 
+
+    // MUTATOR
     /**
      * Get the number of questions in the questionnaire.
      *
@@ -26,6 +28,16 @@ class Questionnaire extends Model
     public function getJumlahPertanyaanAttribute()
     {
         return $this->question()->count();
+    }
+
+    /**
+     * Get the number of questions in the questionnaire.
+     *
+     * @return int
+     */
+    public function getJumlahRespondenAttribute()
+    {
+        return $this->respondent()->count();
     }
 
     /**
@@ -60,6 +72,8 @@ class Questionnaire extends Model
         return Carbon::parse($this->created_at)->format('d F Y');
     }
 
+
+    // ACCESSOR
     /**
      * Get the questions for the questionnaire.
      *
@@ -80,6 +94,8 @@ class Questionnaire extends Model
         return $this->hasMany(Respondent::class);
     }
 
+
+    // RELATIONSHIP
     /**
      * Get the route key for the model.
      *
