@@ -55,6 +55,10 @@
                                         </th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-7 ps-2">
+                                            Banyak <br> Responden
+                                        </th>
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-7 ps-2">
                                             Jumlah <br> Pertanyaan
                                         </th>
                                         <th
@@ -106,6 +110,14 @@
                                                         </p> --}}
                                                     </div>
                                                 </div>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0 text-center">
+                                                    {{ $questionnaire->jumlah_responden }}
+                                                </p>
+                                                {{-- <p class="text-xs text-secondary mb-0">
+                                                    Organization
+                                                </p> --}}
                                             </td>
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0 text-center">
