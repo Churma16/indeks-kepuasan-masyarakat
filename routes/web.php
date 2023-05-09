@@ -47,20 +47,20 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
 
 Route::resource('/dashboard/questionnaires', DashboardQuizController::class)->middleware('auth');
 
-Route::get('/dashboard/create-judul',function () {
+Route::get('/dashboard/create-judul', function () {
     return view('dashboard.questionnaires.create-judul');
 });
 
 Route::get('/dashboard/redirect', [Controller::class, 'redirectToCreate'])->name('dashboard.redirect');
 
-Route::get('/reload-captcha',[CaptchaController::class,'reload_captcha']);
-Route::post('/check-captcha/{questionnaire:link}',[CaptchaController::class,'check_captcha']);
+Route::get('/reload-captcha', [CaptchaController::class, 'reload_captcha']);
+Route::post('/check-captcha/{questionnaire:link}', [CaptchaController::class, 'check_captcha']);
 
-Route::get('/start/{questionnaire:link}',[PostController::class,'startQuest']);
+Route::get('/start/{questionnaire:link}', [PostController::class, 'startQuest']);
 
-Route::post('/start/store/{questionnaire:link}',[PostController::class,'store']);
+Route::post('/start/store/{questionnaire:link}', [PostController::class, 'store']);
 
-Route::get('/dashboard/print/{questionnaire:link}',[Controller::class,'showPrintPreview']);
+Route::get('/dashboard/print/{questionnaire:link}', [Controller::class, 'showPrintPreview']);
 // Route::get('/start/{questionnaire:link}',[Controller::class,'show']);
 
 // Route::resource('/start', QuestionnaireController::class);
@@ -68,4 +68,3 @@ Route::get('/dashboard/print/{questionnaire:link}',[Controller::class,'showPrint
 // Route::get('/dashboard/questionnaires/create-question',function () {
 //     return view('dashboard.questionnaires.create');
 // });
-
