@@ -75,9 +75,9 @@ class Controller extends BaseController
                 5 => Answer::where('question_id', $q->id)->where('jawaban', 5)->count(),
                 // choose which answer is the most chosen
                 6 => Answer::where('question_id', $q->id)
-                    ->select('jawaban')
+                    ->select('jawaban') 
                     ->groupBy('jawaban', 'respondent_id')
-                    ->orderByRaw('COUNT(*) DESC')
+                    ->orderByRaw('COUNT(*) ASC')
                     ->first()->jawaban,
             ];
         }
