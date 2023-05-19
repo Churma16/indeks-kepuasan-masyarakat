@@ -1,0 +1,31 @@
+@startuml
+
+left to right direction
+skinparam packageStyle rect
+
+actor Admin
+actor Guest
+
+rectangle Indeks-Kepuasan-Masyarakat{
+    ' Admin -- (Login)
+    ' (Login)--(Melihat Dashboard)
+    ' (Login)--(Melihat List Kuesioner)
+    Admin -- (Melihat Dashboard)
+    Admin -- (Melihat List Kuesioner)
+    (Melihat Dashboard)..>(Login): << include >>
+    (Melihat List Kuesioner)..>(Login): << include >>
+    (Melihat List Kuesioner)--(Melihat Detail Kuesioner)
+    (Melihat List Kuesioner)--(Membuat Kuesioner Baru)
+    (Melihat List Kuesioner)--(Mengedit Kuesioner)
+    (Melihat List Kuesioner)--(Menghapus Kuesioner)
+    (Melihat List Kuesioner)--(Mencetak Hasil Kuesioner)
+
+    Guest << Warga >>
+    Guest -- (Melihat Daftar Kuesioner)
+    Guest -- (Mengisi Kuesioner)
+    (Melihat Daftar Kuesioner) <.. (Memilih Kuesioner): << extends >>
+    (Memilih Kuesioner) -- (Mengisi Kuesioner)
+    (Mengisi Kuesioner) ..> (Mengisi Captcha): << include >>
+
+}
+@enduml

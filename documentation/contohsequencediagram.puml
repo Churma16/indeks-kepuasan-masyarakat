@@ -1,0 +1,27 @@
+@startuml
+actor User
+participant "Web Browser" as Browser
+participant "Web Server" as Server
+participant "Database Server" as Database
+
+User -> Browser: Open webpage
+Browser -> Server: Send HTTP request
+activate Server
+Server -> Database: Query data
+activate Database
+Database --> Server: Return data
+deactivate Database
+Server --> Browser: Return webpage
+deactivate Server
+Browser -> User: Display webpage
+User -> Browser: Interact with webpage
+Browser -> Server: Send HTTP request
+activate Server
+Server -> Database: Update data
+activate Database
+Database --> Server: Data updated
+deactivate Database
+Server --> Browser: Return response
+deactivate Server
+Browser -> User: Display response
+@enduml

@@ -1,0 +1,36 @@
+@startuml
+left to right direction
+actor Customer as Cust
+actor Admin as Adm
+
+rectangle "RestaurantSystem" {
+    Cust -- (Browse Menu)
+    (Browse Menu) -- (Select Items)
+    (Select Items) -- (Confirm Order)
+    (Confirm Order) -- (Provide Delivery Details)
+    (Provide Delivery Details) -- (Place Order)
+
+    Cust -- (Make Payment)
+    (Make Payment) -- (Redirect to Payment Gateway)
+    (Redirect to Payment Gateway) -- (Process Payment)
+
+    Cust -- (View Order History)
+    
+    Cust -- (View Restaurant Information)
+    
+    Cust -- (Leave Feedback)
+
+    Cust -- (Register Account)
+    (Register Account) -- (Login)
+
+    Cust -down-> (Receive Order Notification)
+    (Place Order) -down-> (Receive Order Notification)
+
+    (Place Order) -down-> (Handle Payment)
+
+    (Handle Payment) -down-> (Notify Payment Status)
+    
+    Cust <|-- (Manage Profile)
+    Adm <|-- (Manage Profile)
+}
+@enduml
