@@ -1,0 +1,92 @@
+@startuml "ERD"
+
+skinparam linetype ortho
+
+!define primary_key(x) <b><color:#b8861b><&key></color> x</b>
+!define foreign_key(x) <color:#aaaaaa><&key></color> x
+!define column(x) <color:#efefef><&media-record></color> x
+
+entity admin {
+    primary_key(nip): bigint(20)unsigned
+    --
+    column(nama): varchar(255)
+    column(nomor_hp): varchar(255)
+    column(image): varchar(255)
+    column(created_at): timestamp
+    column(updated_at): timestamp
+}
+
+
+entity answer {
+    primary_key(id):id
+    --
+    column(name): varchar(255)
+    column(jawaban): bigint(20)unsigned
+    column(created_at): timestamp
+    column(updated_at): timestamp
+    --
+    foreign_key( respondent_id ): integer <<FK>>
+    foreign_key( question_id ): integer <<FK>>
+}
+
+entity question {
+    primary_key(id):bigint(20)unsigned
+    --
+    column(nomor): bigint(20)unsigned
+    column(isi): text
+    column(created_at): timestamp
+    column(updated_at): timestamp
+    --
+    foreign_key( questionnaire_id ): bigint(20)unsigned <<FK>>
+}
+
+entity questionnaire {
+    primary_key(id):bigint(20)unsigned
+    --
+    column(judul): varchar(255)
+    column(kategori): varchar(255)
+    column(deskripsi): varchar(255)
+    column(deskripsi_singkat): varchar(255)
+    column(link): varchar(255)
+    column(waktu_ekspirasi): date
+    column(status_aktif): varchar(255)
+    column(created_at): timestamp
+    column(updated_at): timestamp
+    --
+    foreign_key( nip ): integer <<FK>>
+}
+
+
+entity respondent {
+    primary_key(id):bigint(20)unsigned
+    --
+    column(umur): bigint(20)unsigned
+    column(gender): varchar(255)
+    column(waktu_pengisian): datetime
+    column(created_at): timestamp
+    column(updated_at): timestamp
+    --
+    foreign_key( questionnaire_id ): bigint(20)unsigned <<FK>>
+}
+
+entity user {
+    primary_key(id):bigint(20)unsigned
+    --
+    column(name):varchar(255)
+    column(username):varchar(255)
+    column(email):varchar(255)
+    column(password):varchar(255)
+    --
+    foreign_key( nip ): bigint(20)unsigned <<FK>>
+
+}
+
+' Relationship
+admin ---- user
+admin --|{ questionnaire
+questionnaire --|{ question
+questionnaire --|{ respondent
+respondent --|{ answer
+question --|{ answer
+
+@enduml

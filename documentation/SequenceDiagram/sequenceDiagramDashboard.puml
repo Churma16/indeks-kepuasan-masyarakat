@@ -1,4 +1,4 @@
-@startuml
+@startuml Interaction Dashboard
 autonumber
 group Interaction Dashboard
 
@@ -33,7 +33,7 @@ group Interaction Dashboard
                 deactivate admin
                     answer --> dashboard_cont:Hasil Jawaban
                     deactivate answer
-        dashboard_cont -> dashboard:Tampilkan Data
+        dashboard_cont --> dashboard:Tampilkan Data
         deactivate dashboard_cont
     deactivate dashboard
 
