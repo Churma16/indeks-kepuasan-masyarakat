@@ -2,6 +2,7 @@
 
 left to right direction
 skinparam packageStyle rect
+skinparam linetype ortho
 
 actor Admin
 actor Guest
@@ -22,7 +23,7 @@ rectangle Indeks-Kepuasan-Masyarakat{
 
     Guest << Warga >>
     Guest -- (Melihat Daftar Kuesioner)
-    Guest -- (Mengisi Kuesioner)
+    Guest -down- (Mengisi Kuesioner)
     (Melihat Daftar Kuesioner) <.. (Memilih Kuesioner): << extends >>
     (Memilih Kuesioner) -- (Mengisi Kuesioner)
     (Mengisi Kuesioner) ..> (Mengisi Captcha): << include >>

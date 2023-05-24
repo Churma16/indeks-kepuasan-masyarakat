@@ -1,0 +1,99 @@
+@startuml "ERD"
+
+skinparam linetype ortho
+
+!define primary_key(x) <b><color:#b8861b>-</color> x</b>
+!define foreign_key(x) <color:#aaaaaa>-</color> x
+!define column(x) <color:#aaaaaa>-</color> x
+
+class admin {
+    primary_key(nip): bigint
+    --
+    column(nama): string
+    column(nomor_hp): string
+    column(image): string
+    column(created_at): timestamp
+    column(updated_at): timestamp
+}
+
+
+class answer {
+    primary_key(id):id
+    --
+    column(name): string
+    column(jawaban): bigint
+    column(created_at): timestamp
+    column(updated_at): timestamp
+    --
+    column(create())
+    column(edit())
+    column(delete())
+}
+
+class question {
+    primary_key(id):bigint
+    --
+    column(nomor): bigint
+    column(isi): text
+    column(created_at): timestamp
+    column(updated_at): timestamp
+    --
+    column(create())
+    column(edit())
+    column(delete())
+
+}
+
+class questionnaire {
+    primary_key(id):bigint
+    --
+    column(judul): string
+    column(kategori): string
+    column(deskripsi): string
+    column(deskripsi_singkat): string
+    column(link): string
+    column(waktu_ekspirasi): date
+    column(status_aktif): string
+    column(created_at): timestamp
+    column(updated_at): timestamp
+    --
+    column(create())
+    column(edit())
+    column(delete())
+}
+
+
+class respondent {
+    primary_key(id):bigint
+    --
+    column(umur): bigint
+    column(gender): string
+    column(waktu_pengisian): datetime
+    column(created_at): timestamp
+    column(updated_at): timestamp
+    --
+    column(create())
+    column(delete())
+}
+
+class user {
+    primary_key(id):bigint(20)
+    --
+    column(name):string
+    column(username):string
+    column(email):string
+    column(password):string
+    --
+    column(login())
+    column(logout())
+}
+
+' Relationship
+admin ---- user
+admin --|{ questionnaire
+questionnaire --|{ question
+questionnaire --|{ respondent
+respondent --|{ answer
+question --|{ answer
+
+@enduml
