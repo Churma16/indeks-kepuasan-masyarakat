@@ -15,11 +15,8 @@ group Interaction Dashboard
             dashboard -> dashboard_cont:Hitung data responden
         activate dashboard_cont
             dashboard -> dashboard_cont:Hitung data kuesioner
-        activate dashboard_cont
             dashboard -> dashboard_cont:Tampil data admin
-        activate dashboard_cont
             dashboard -> dashboard_cont:Hitung data jawaban
-        activate dashboard_cont
         dashboard_cont -> respondent:Hitung data responden
         activate respondent
             dashboard_cont -> questioner:Hitung data kuesioner
@@ -30,13 +27,10 @@ group Interaction Dashboard
                     activate answer
                     respondent --> dashboard_cont:Hasil responden
         deactivate respondent
-        deactivate dashboard_cont
                     questioner --> dashboard_cont:Hasil questioner
             deactivate questioner
-            deactivate dashboard_cont
                 admin --> dashboard_cont:Tampil data admin
                 deactivate admin
-                deactivate dashboard_cont
                     answer --> dashboard_cont:Hasil Jawaban
                     deactivate answer
         dashboard_cont --> dashboard:Tampilkan Data
