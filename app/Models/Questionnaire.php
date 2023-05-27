@@ -48,9 +48,10 @@ class Questionnaire extends Model
     public function getWaktuEkspirasiBaruAttribute()
     {
         $dateold = $this->waktu_ekspirasi;
-        $datenew = date('d F Y', strtotime($dateold));
+        $datenew = date('d M y', strtotime($dateold));
         return $datenew;
     }
+    
 
     /**
      * Get the expiration date of the questionnaire in a new format using Carbon.
@@ -69,7 +70,7 @@ class Questionnaire extends Model
      */
     public function getWaktuPembuatanNewAttribute()
     {
-        return Carbon::parse($this->created_at)->format('d F Y');
+        return Carbon::parse($this->created_at)->format('d M Y');
     }
 
 

@@ -50,7 +50,7 @@ class DashboardQuizController extends Controller
             'judul' => session('form_data.judul'),
             'deskripsi_singkat' => session('form_data.deskripsi_singkat'),
             'deskripsi' => session('form_data.deskripsi'),
-            'link'=>Str::random(7),
+            'link' => Str::random(7),
             'kategori' => 'kosong',
             'waktu_ekspirasi' => session('form_data.waktu_ekspirasi'),
             'status_aktif' => 'Aktif'
@@ -81,24 +81,25 @@ class DashboardQuizController extends Controller
      */
     public function show(Questionnaire $questionnaire)
     {
-        $totalRespondent = Respondent::where('questionnaire_id',$questionnaire->id)->count();
+        $totalRespondent = Respondent::where('questionnaire_id', $questionnaire->id)->count();
 
-        $genderWanita = Respondent::where('questionnaire_id',$questionnaire->id)->where('gender', 'wanita')->count();
-        $genderPria = Respondent::where('questionnaire_id',$questionnaire->id)->where('gender', 'pria')->count();
-        
+        $genderWanita = Respondent::where('questionnaire_id', $questionnaire->id)->where('gender', 'wanita')->count();
+        $genderPria = Respondent::where('questionnaire_id', $questionnaire->id)->where('gender', 'pria')->count();
+
 
         // Get All the Respondent's Age
         $umur = [];
-        $umur['umurKelas'] = Respondent::where('questionnaire_id',$questionnaire->id)->selectRaw('umur, count(*) as count')
+        $umur['umurKelas'] = Respondent::where('questionnaire_id', $questionnaire->id)->selectRaw('umur, count(*) as count')
             ->groupBy('umur')
             ->pluck('count', 'umur')
             ->toArray();
 
-        
+
         // Get All the Respondent's IKM
-        $idSoal= $questionnaire->question->pluck('id')->toArray();
+        $idSoal = $questionnaire->question->pluck('id')->toArray();
         $ikm = [];
-        $ikm['ikmKelas'] = Answer::whereIn('question_id',$idSoal)->selectRaw('jawaban, count(*) as count')
+        $ikm['ikmKelas'] = Answer::whereIn('question_id', $idSoal)
+            ->selectRaw('jawaban, count(*) as count')
             ->groupBy('jawaban')
             ->pluck('count', 'jawaban')
             ->toArray();
@@ -115,10 +116,74 @@ class DashboardQuizController extends Controller
         //get the respondent for the last 14 day
         $respondentCount = [];
         for ($i = 0; $i < 14; $i++) {
-            $respondentCount[] = Respondent::where('questionnaire_id',$questionnaire->id)->whereDate('created_at', date('Y-m-d', strtotime('-' . $i . ' days')))->count();
+            $respondentCount[] = Respondent::where('questionnaire_id', $questionnaire->id)
+                ->whereDate('created_at', date('Y-m-d', strtotime('-' . $i . ' days')))
+                ->count();
         }
         $respondentCount = array_reverse($respondentCount);
 
+
+        //Persen Pemilih
+        $ansCountAll = [];
+        for ($i = 1; $i < 6; $i++) {
+            $ansCountAll[$i] = Respondent::where('questionnaire_id', $questionnaire->id)->where('umur', $i)->count();
+        }
+
+        $highestAgeCount = max($ansCountAll);
+        $highestAgeArray = array_keys($ansCountAll, $highestAgeCount);
+        $highestAgeArray = reset($highestAgeArray);
+
+        $ansCount = Respondent::where('questionnaire_id', $questionnaire->id)->where('umur', $highestAgeArray)->count();
+        $percentCount = ($ansCount / $totalRespondent) * 100;
+
+        //Banyak Jawaban
+        $kumpJwban = [];
+        $kumpJwban = Respondent::where('questionnaire_id', $questionnaire->id)
+            ->where('umur', $highestAgeArray)
+            ->pluck('id')
+            ->toArray();
+
+        $mapping = [
+            1 => -1,
+            2 => -0.5,
+            3 => 0,
+            4 => 0.5,
+            5 => 1
+        ];
+        // $mapping = [
+        //     1 => 1,
+        //     2 => 2,
+        //     3 => 3,
+        //     4 => 4,
+        //     5 => 5
+        // ];
+
+        // jmlresponden
+        $sum = 0;
+
+        $jumlahPertanyaan = $questionnaire->getJumlahPertanyaanAttribute();
+        $jwbindvi = [];
+        foreach ($kumpJwban as $k) {
+            $jwbindvi[] = Answer::where('respondent_id', $k)
+                ->pluck('jawaban')
+                ->map(function ($value) use ($mapping) {
+                    return $mapping[$value] ?? $value;
+                })
+                ->toArray();
+
+            $fullArray = $jwbindvi;
+            // Transform each subarray by dividing the sum by $jumlahPertanyaan
+            foreach ($fullArray as &$subArray) {
+                $subArray = array_sum($subArray) / $jumlahPertanyaan;
+                unset($subArray);
+            }
+        }
+
+        $avgScore= array_sum($fullArray) / count($fullArray);
+
+
+
+        //
         $questions = $questionnaire->question()->orderBy('nomor')->get();
         return view('dashboard.questionnaires.show', [
             'title' => 'Detail Kuesioner',
@@ -132,7 +197,8 @@ class DashboardQuizController extends Controller
             'date' => $date,
             'respondentCount' => $respondentCount,
             "totalRespondent" => $totalRespondent,
-
+            'ansCount' => $percentCount . '%',
+            'testcoba' => $avgScore,
         ]);
     }
 
