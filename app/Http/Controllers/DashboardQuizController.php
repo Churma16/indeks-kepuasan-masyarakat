@@ -136,55 +136,72 @@ class DashboardQuizController extends Controller
         $ansCount = Respondent::where('questionnaire_id', $questionnaire->id)->where('umur', $highestAgeArray)->count();
         $percentCount = ($ansCount / $totalRespondent) * 100;
 
-        //Banyak Jawaban
-        $kumpJwban = [];
-        $kumpJwban = Respondent::where('questionnaire_id', $questionnaire->id)
-            ->where('umur', $highestAgeArray)
+
+        //Jawaban Tertinggi
+        // $respondentsIds = [];
+        // $respondentsIds = Respondent::where('questionnaire_id', $questionnaire->id)
+        //     ->where('umur', $highestAgeArray)
+        //     ->pluck('id')
+        //     ->toArray();
+
+        // $mapping = [
+        //     1 => -1,
+        //     2 => -0.5,
+        //     3 => 0,
+        //     4 => 0.5,
+        //     5 => 1
+        // ];
+
+        // $jumlahPertanyaan = $questionnaire->getJumlahPertanyaanAttribute();
+        // $jwbindvi = [];
+        // foreach ($respondentsIds as $k) {
+        //     $jwbindvi[] = Answer::where('respondent_id', $k)
+        //         ->pluck('jawaban')
+        //         ->map(function ($value) use ($mapping) {
+        //             return $mapping[$value] ?? $value;
+        //         })
+        //         ->toArray();
+
+        //     $fullArray = $jwbindvi;
+        //     // Transform each subarray by dividing the sum by $jumlahPertanyaan
+        //     foreach ($fullArray as &$subArray) {
+        //         $subArray = array_sum($subArray) / $jumlahPertanyaan;
+        //         unset($subArray);
+        //     }
+        // }
+
+        // $avgScore= array_sum($fullArray) / count($fullArray);
+
+        //Mengambil Nilai Bobot Hasil Keppuasan pada Respondent Kategori Terbanyak
+        // Mengambil ID responden dari database berdasarkan kuesioner dan umur
+        $respondentIds = Respondent::where('questionnaire_id', $questionnaire->id)
+            ->where('umur', '3')
             ->pluck('id')
             ->toArray();
 
-        $mapping = [
+        // Pemetaan nilai jawaban ke bobot yang sesuai
+        $answerMapping = [
             1 => -1,
             2 => -0.5,
             3 => 0,
             4 => 0.5,
             5 => 1
         ];
-        // $mapping = [
-        //     1 => 1,
-        //     2 => 2,
-        //     3 => 3,
-        //     4 => 4,
-        //     5 => 5
-        // ];
 
-        // jmlresponden
-        $sum = 0;
+        // Mengambil jawaban dari database dan melakukan transformasi menggunakan pemetaan bobot
+        $transformedAnswers = Answer::whereIn('respondent_id', $respondentIds)
+            ->pluck('jawaban')
+            ->map(function ($value) use ($answerMapping) {
+                return $answerMapping[$value] ?? $value;
+            });
 
-        $jumlahPertanyaan = $questionnaire->getJumlahPertanyaanAttribute();
-        $jwbindvi = [];
-        foreach ($kumpJwban as $k) {
-            $jwbindvi[] = Answer::where('respondent_id', $k)
-                ->pluck('jawaban')
-                ->map(function ($value) use ($mapping) {
-                    return $mapping[$value] ?? $value;
-                })
-                ->toArray();
-
-            $fullArray = $jwbindvi;
-            // Transform each subarray by dividing the sum by $jumlahPertanyaan
-            foreach ($fullArray as &$subArray) {
-                $subArray = array_sum($subArray) / $jumlahPertanyaan;
-                unset($subArray);
-            }
-        }
-
-        $avgScore= array_sum($fullArray) / count($fullArray);
-
-
+        // Menghitung nilai rata-rata dari jawaban yang telah diubah
+        $averageScore = $transformedAnswers->average();
 
         //
         $questions = $questionnaire->question()->orderBy('nomor')->get();
+
+
         return view('dashboard.questionnaires.show', [
             'title' => 'Detail Kuesioner',
             'questionnaire' => $questionnaire,
@@ -198,7 +215,7 @@ class DashboardQuizController extends Controller
             'respondentCount' => $respondentCount,
             "totalRespondent" => $totalRespondent,
             'ansCount' => $percentCount . '%',
-            'testcoba' => $avgScore,
+            'testcoba' => $averageScore,
         ]);
     }
 
