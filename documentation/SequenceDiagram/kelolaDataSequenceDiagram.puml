@@ -1,0 +1,49 @@
+@startuml Interaction Kelola Data
+autonumber
+' skinparam style strictuml
+' skinparam SequenceMessageAlignment center
+group Interaction Kelola Kuesioner
+
+    actor Admin 
+    participant "<<boundary>>\nList_Kuesioner" as list
+    participant "<<boundary>>\nDetail_List_Kuesioner" as dlist
+    participant "<<control>>\nDashboardQuiz\nController" as dqcontrol
+    participant "<<control>>\nController" as control
+    participant "<<entity>>\nquestionnaire" as questioner
+    participant "<<entity>>\nquestion" as question
+    participant "<<entity>>\nrespondent" as respondent
+    participant "<<entity>>\nuser" as admin
+    participant "<<entity>>\nanswer" as answer
+
+    group Seq Menampilkan List Kuesioner
+        Admin->list:Membuka halaman list kuesioner
+        activate list
+            list-> dqcontrol: tampilQuestionnaire()
+            activate dqcontrol
+                list-> dqcontrol: hitungRespondent()
+                list-> dqcontrol: hitungQuestion()
+
+                dqcontrol-> questioner: getQuestionnaire()
+                activate questioner
+                    dqcontrol-> question:   countQuestion()
+                activate question
+                    dqcontrol-> respondent: countRespondent()
+                activate respondent
+
+                    questioner--> dqcontrol: tampilQuestionnaire()
+                deactivate questioner
+                    question--> dqcontrol: tampilHasilQuestion() 
+                deactivate question
+                    respondent--> dqcontrol: tampilHasilRespondent() 
+                deactivate respondent
+                dqcontrol--> list: Tampilkan List Kuesioner
+            deactivate dqcontrol
+        deactivate list
+    end
+
+    group Seq Melihat Detail Kuesioner
+        Admin->dlist: Klik Tombol detail kuesioner
+        
+    end
+end
+@enduml

@@ -1,54 +1,27 @@
-@startuml
-actor Admin
-participant "<<boundary>>\nhalaman_login" as login
-participant "<<control>>\nauth" as auth
-participant "<<boundary>>\ndashboard" as dashboard
+@startuml Interaction Dashboard
+autonumber
+group Interaction Melihat Daftar Kuesioner
 
+    actor guest 
+    participant "<<boundary>>\nHome" as home
+    participant "<<boundary>>\nDaftar_Kuesioner" as daftar
+    participant "<<control>>\nPostController" as pcontrol
+    participant "<<entity>>\nquestionnaire" as questioner
 
-
-group Login
-    Admin -> login: Input email dan password
-    activate login
-    login -> auth: Verifikasi email dan password
-    activate auth
-    auth -> dashboard: Menampilkan halaman dashboard
-    activate dashboard
-    group Alternative
-        auth --> login: Email atau password salah
-        login --> Admin: Menampilkan pesan error
-        deactivate auth
-        deactivate login
-    end
+    guest-> home: Berhasil Membuka Website
+    activate home
+        home-> daftar: Klik Pilih Kuesioner
+    deactivate home
+    
+    activate daftar
+        daftar-> pcontrol: tampilQuestionnaire()
+            activate pcontrol
+                pcontrol-> questioner: getQuestionnaire()
+                activate questioner
+                    questioner-> pcontrol: Data Questionnaire()
+                deactivate questioner
+                pcontrol-> daftar: tampilDaftarQuestionnaire()
+            deactivate pcontrol
+    deactivate daftar
 end
-
-group Logout
-    Admin -> dashboard: Klik tombol logout
-    dashboard -> auth: Hapus session
-    activate auth
-    deactivate dashboard
-    auth -> login: Redirect ke halaman login
-    activate login
-    deactivate login
-    deactivate auth
-end
-
-' Customer -> Website: Browse menu
-' Website -> Customer: Display menu
-' Customer -> Website: Select items
-' Website -> Customer: Confirm order
-' Customer -> Website: Provide delivery details
-' Website -> OMS: Place order
-' OMS -> KitchenSystem: Send order details
-' KitchenSystem --> OMS: Acknowledge order
-' OMS --> PaymentGateway: Request payment
-' PaymentGateway --> OMS: Payment response
-' OMS --> Customer: Order confirmation
-' Customer -> Website: Make payment
-' Website -> PaymentGateway: Redirect to payment page
-' PaymentGateway -> Website: Payment response
-' Website -> OMS: Update payment status
-' OMS -> KitchenSystem: Prepare order
-' KitchenSystem --> OMS: Order prepared
-' OMS -> Website: Notify order status
-' Website -> Customer: Notify order status
 @enduml
