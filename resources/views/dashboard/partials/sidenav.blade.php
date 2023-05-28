@@ -5,7 +5,7 @@
             aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0" href="/dashboard" target="_blank">
             <img src="/img/logo-diskom-sm.png" class="navbar-brand-img h-100" alt="main_logo" />
-            <span class="ms-1 font-weight-bold fs-6 ">Diskominfo</span>
+            <span class="ms-1 font-weight-bold fs-6 ">DISKOMINFO</span>
         </a>
     </div>
     <hr class="horizontal dark mt-0" />

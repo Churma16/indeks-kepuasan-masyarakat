@@ -1,5 +1,5 @@
 {{-- @dd($ikm['ikmKelas']) --}}
-@dd($testcoba)
+{{-- @dd($testcoba) --}}
 @extends('dashboard.layouts.main')
 
 @section('main')
@@ -97,6 +97,107 @@
                             <div class="col-4 text-end">
                                 <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
                                     <i class="ni ni-single-02 text-lg opacity-10" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h5 class="ms-2 mt-3">Data Pengisi Terbanyak</h5>
+        <div class="row mt-2">
+            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">
+                                        Pengisi Terbanyak
+                                    </p>
+                                    <h5 class="font-weight-bolder mb-0">
+                                        {{ $literalHighestAge}}
+                                        {{-- <span class="text-success text-sm font-weight-bolder">+55%</span> --}}
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                    <i class="fas fa-users fa-lg opacity-10 pt-1" aria-hidden="true"></i>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">
+                                        Presentase Umur {{ $literalHighestAge }}
+                                    </p>
+                                    <h5 class="font-weight-bolder mb-0">
+                                        {{ $percentCount}}
+                                        {{-- <span class="text-success text-sm font-weight-bolder">+3%</span> --}}
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                    <i class="fas fa-chart-pie fa-lg opacity-10 pt-1" aria-hidden="true"></i>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">
+                                        Hasil Pengguna
+                                    </p>
+                                    <h5 class="font-weight-bolder mb-0">
+                                        {{ $score }}
+                                        {{-- <span class="text-danger text-sm font-weight-bolder">-2%</span> --}}
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                    <i class="fas fa-check-circle fa-lg opacity-10 pt-1" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">
+                                        Respondent {{ $literalHighestAge }}
+                                    </p>
+                                    <h5 class="font-weight-bolder mb-0">
+                                        {{ $pengisiTerbanyak }}
+                                        {{-- <span class="text-success text-sm font-weight-bolder">+5%</span> --}}
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                    <i class="fas fa-user fa-lg opacity-10 pt-1" aria-hidden="true"></i>
                                 </div>
                             </div>
                         </div>
@@ -322,7 +423,7 @@
             </div>
 
             <div class="row mt-4">
-                <div class="col-lg-7">
+                <div class="col-lg-12">
                     <div class="card z-index-2">
                         <div class="card-header pb-0">
                             <h5 style="font-weight: bolder">Banyak Responden 14 Hari Terakhir</h5>

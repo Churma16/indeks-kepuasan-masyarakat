@@ -130,6 +130,7 @@
                                                 </div>
                                                 <small>Wanita</small>
                                             </div>
+                                            <br>
                                         </div>
                                     </div>
 
@@ -246,7 +247,7 @@
             </div>
 
             <div class="row mt-4">
-                <div class="col-lg-7">
+                <div class="col-lg-12">
                     <div class="card z-index-2">
                         <div class="card-header pb-0">
                             <h5 style="font-weight: bolder">Banyak Responden 14 Hari Terakhir</h5>

@@ -133,6 +133,17 @@ class DashboardQuizController extends Controller
         $highestAgeArray = array_keys($ansCountAll, $highestAgeCount);
         $highestAgeArray = reset($highestAgeArray);
 
+        $umurMapping=[
+            1=> '18-24',
+            2=> '25-34',
+            3=> '35-44',
+            4=> '45-54',
+            5=> '55-64',
+            6=> '65++'
+        ];
+
+        $literalHighestAge= $umurMapping[$highestAgeArray] ?? null;
+
         $ansCount = Respondent::where('questionnaire_id', $questionnaire->id)->where('umur', $highestAgeArray)->count();
         $percentCount = ($ansCount / $totalRespondent) * 100;
 
@@ -175,7 +186,7 @@ class DashboardQuizController extends Controller
         //Mengambil Nilai Bobot Hasil Keppuasan pada Respondent Kategori Terbanyak
         // Mengambil ID responden dari database berdasarkan kuesioner dan umur
         $respondentIds = Respondent::where('questionnaire_id', $questionnaire->id)
-            ->where('umur', '3')
+            ->where('umur', $highestAgeArray)
             ->pluck('id')
             ->toArray();
 
@@ -198,6 +209,22 @@ class DashboardQuizController extends Controller
         // Menghitung nilai rata-rata dari jawaban yang telah diubah
         $averageScore = $transformedAnswers->average();
 
+        // Mencari Kemanakah nilai tersebut lebih dekat
+        $scoreMapping=[
+            [-1, "Sangat Tidak Puas"],
+            [-0.5, "Tidak Puas"],
+            [0, "Cukup Puas"],
+            [0.5, "Puas"],
+            [1, "Sangat Puas"],
+        ];
+
+        usort($scoreMapping, function ($a, $b) use ($averageScore) {
+            return abs($a[0] - $averageScore) <=> abs($b[0] - $averageScore);
+        });
+
+        $score=$scoreMapping[0][1];
+
+
         //
         $questions = $questionnaire->question()->orderBy('nomor')->get();
 
@@ -214,8 +241,11 @@ class DashboardQuizController extends Controller
             'date' => $date,
             'respondentCount' => $respondentCount,
             "totalRespondent" => $totalRespondent,
-            'ansCount' => $percentCount . '%',
-            'testcoba' => $averageScore,
+            'percentCount' => $percentCount . '%',
+            'averageScore' => $averageScore,
+            'literalHighestAge'=>$literalHighestAge,
+            'score'=>$score,
+            'pengisiTerbanyak'=>$highestAgeCount,
         ]);
     }
 
