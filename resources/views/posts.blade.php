@@ -9,7 +9,7 @@
                 <div class="row">
                     @if ($questionnaires->count() > 0)
                         @foreach ($questionnaires as $post)
-                            <div class="col-md-4">
+                            <div class="col-lg-4 col-md-6 ">
                                 <div class="card" style="width: 20rem;">
                                     <div class="card-body">
                                         <h4 class="card-title">{{ $post->judul }}</h4>

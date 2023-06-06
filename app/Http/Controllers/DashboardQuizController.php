@@ -45,7 +45,7 @@ class DashboardQuizController extends Controller
      */
     public function store(Request $request)
     {
-
+        // menginput questionnaire
         $questionnaire = Questionnaire::create([
             'judul' => session('form_data.judul'),
             'deskripsi_singkat' => session('form_data.deskripsi_singkat'),
@@ -56,6 +56,7 @@ class DashboardQuizController extends Controller
             'status_aktif' => 'Aktif'
         ]);
 
+        // menginput question
         $questions = [];
         for ($i = 1; $i <= session('form_data.jumlah_soal'); $i++) {
             $question = [
