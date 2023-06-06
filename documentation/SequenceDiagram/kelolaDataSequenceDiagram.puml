@@ -56,7 +56,7 @@ group Interaction Kelola Kuesioner
                 
                 dqcontrol-> questioner: getQuestionnaire()
                 activate questioner
-                dqcontrol-> question: getQuestionn()
+                dqcontrol-> question: getQuestion()
                 activate question
                 dqcontrol-> respondent: countRespondent()
                 activate respondent

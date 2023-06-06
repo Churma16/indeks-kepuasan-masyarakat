@@ -89,8 +89,8 @@ class user {
 }
 
 ' Relationship
-admin ---- user
-admin --|{ questionnaire
+admin --left-- user
+admin --right|{ questionnaire
 questionnaire --|{ question
 questionnaire --|{ respondent
 respondent --|{ answer

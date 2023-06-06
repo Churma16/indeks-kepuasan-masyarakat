@@ -1,4 +1,5 @@
-@startuml
+@startuml Login
+autonumber
 actor Admin
 participant "<<boundary>>\nhalaman_login" as login
 participant "<<control>>\nauth" as auth
@@ -12,8 +13,8 @@ group Login
     activate dashboard
     group Alternative
         auth --> login: Email atau password salah
-        login --> Admin: Menampilkan pesan error
         deactivate auth
+        login --> Admin: Menampilkan pesan error
         deactivate login
     end
 end

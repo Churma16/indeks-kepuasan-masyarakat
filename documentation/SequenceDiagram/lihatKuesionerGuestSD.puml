@@ -3,51 +3,25 @@ autonumber
 
 actor "Guest" as A
 boundary "Daftar_Kuesioner" as daftar
-boundary "Detail_Kuesioner" as detail    
+' boundary "Detail_Kuesioner" as detail    
 control "PostController" as pcontrol
 control "CaptchaController" as ccontrol
 entity "Questionnaire" as q
-entity "Question" as qn
-entity "Answer" as a
-entity "Respondent" as r
+' entity "Question" as qn
 
-group Seq Melihat Daftar Kuesioner
-    A -> daftar: Menekan tombol Pilih Kuesioner \npada landing page
-    activate daftar
-            daftar -> pcontrol: Tampil Data Kuesioner
-            activate pcontrol
-            pcontrol -> q: Get Data Kuesioner
-            activate q
-            q --> pcontrol: Tampil Data Kuesioner
-            deactivate q
-            pcontrol--> daftar: Tampil Daftar Kuesioner
-        deactivate pcontrol
-
-    group Seq Melihat Detail Kuesioner
-        daftar -> detail: Menekan tombol Pilih Kuesioner
-        deactivate daftar
-        activate detail
-            detail -> pcontrol: Tampil Data Kuesioner
-            activate pcontrol
-            pcontrol -> q: Get Data Kuesioner
-            activate q
-            pcontrol -> qn: Get Data Pertanyaan
-            activate qn
-            q --> pcontrol: Tampil Data Kuesioner
-            deactivate q
-            qn --> pcontrol: Tampil Data Pertanyaan
-            deactivate qn
-            pcontrol--> detail: Tampil Detail Kuesioner
+group Mengisi Kuesioner
+    group Seq Melihat Daftar Kuesioner
+        A -> daftar: Menekan tombol Pilih Kuesioner \npada landing page
+        activate daftar
+                daftar -> pcontrol: Tampil Data Kuesioner
+                activate pcontrol
+                pcontrol -> q: Get Data Kuesioner
+                activate q
+                q --> pcontrol: Tampil Data Kuesioner
+                deactivate q
+                pcontrol--> daftar: Tampil Daftar Kuesioner
             deactivate pcontrol
-            deactivate detail
-    
+        deactivate daftar
     end
 end
-
-
-
-
-
-
-
 @enduml
