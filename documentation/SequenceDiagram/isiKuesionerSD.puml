@@ -1,0 +1,88 @@
+@startuml Interaction Mengisi Kuesioner
+autonumber
+skinparam SequenceMessageAlignment center
+
+actor "Guest" as A
+boundary "Detail_Kuesioner" as detail
+boundary "Halaman_Kuesioner" as halaman    
+control "PostController" as pcontrol
+control "CaptchaController" as ccontrol
+entity "Questionnaire" as q
+entity "Question" as qn
+entity "Answer" as a
+entity "Respondent" as r
+
+group Seq Mengisi Kuesioner
+        group Seq Melihat Detail Kuesioner
+            A -> detail: Menekan tombol Pilih Kuesioner
+            activate detail
+                detail -> pcontrol: tampilQuestionnaire()
+                activate pcontrol
+                detail -> pcontrol: tampilQuestion()
+                pcontrol -> q: getQuestionnaire()
+                activate q
+                pcontrol -> qn: getQuestion()
+                activate qn
+                q --> pcontrol: Tampil Data Kuesioner
+                deactivate q
+                qn --> pcontrol: Tampil Data Pertanyaan
+                deactivate qn
+                pcontrol--> detail: Tampil Detail Kuesioner
+                deactivate pcontrol
+                deactivate detail
+        end
+
+    group Melihat Halaman Kuesioner
+        A->detail: Mengisi Captcha dan menekan \ntombol mulai pada halaman detail
+        activate detail
+        detail -> ccontrol : Verifikasi Captcha
+        deactivate detail
+        activate ccontrol
+        ccontrol -> halaman : Captcha Benar
+        activate halaman
+        group alternative 
+            ccontrol --> detail: Captcha Salah
+            deactivate ccontrol
+            activate detail
+            detail --> A: Tampilan Tulisan Captcha Salah
+            deactivate detail
+        end
+        halaman-> pcontrol: tampilQuestionnaire()
+        activate pcontrol
+        halaman-> pcontrol: tampilQuestion()
+
+        pcontrol->q: getQuestionnaire()
+        activate q
+        pcontrol->qn: getQuestionnaire()
+        deactivate pcontrol
+        activate qn
+        q-->halaman: Tampil Data Questionnaire
+        deactivate q
+        qn-->halaman: Tampil Data Question
+        deactivate qn
+
+    end
+
+    halaman -> pcontrol: Mengsubmit jawaban
+        deactivate halaman
+    activate pcontrol
+    pcontrol -> r: createRespondent()
+    activate r
+    pcontrol -> a: createAnswer()
+    activate a
+
+    r-->pcontrol: Responden berhasil ditambah
+    deactivate r
+    a-->pcontrol: Jawaban berhasil ditambah
+    deactivate a
+
+    pcontrol-->halaman: Tampilan Notifikasi berhasil mengisi kuesioner
+    activate halaman
+    deactivate halaman
+    deactivate pcontrol
+    
+
+end
+
+
+@enduml
