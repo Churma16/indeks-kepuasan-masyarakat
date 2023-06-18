@@ -55,6 +55,10 @@
                                             Judul
                                         </th>
                                         <th
+                                            class=" text-uppercase text-secondary text-sm font-weight-bolder opacity-7 ps-2">
+                                            Kategori
+                                        </th>
+                                        <th
                                             class="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-7 ps-2">
                                             Banyak <br> Responden
                                         </th>
@@ -111,6 +115,14 @@
                                                         </p> --}}
                                                     </div>
                                                 </div>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0 ">
+                                                    {{ $questionnaire->kategori }}
+                                                </p>
+                                                {{-- <p class="text-xs text-secondary mb-0">
+                                                    Organization
+                                                </p> --}}
                                             </td>
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0 text-center">

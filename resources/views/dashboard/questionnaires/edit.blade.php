@@ -18,6 +18,24 @@
                                     placeholder="Judul Kuesioner" value="{{ old('judul', $questionnaire->judul) }}"
                                     required>
                             </div>
+
+                            <div class="mb-3">
+                                <label for="kategori" class="form-label">Kategori</label>
+                                    <select class="form-control" id="kategori" name="kategori" onchange="toggleInput()">
+                                        <option value="{{ $questionnaire->kategori }}" selected>{{ $questionnaire->kategori }}</option>
+                                        <option value="text">---- Masukan Kategori Baru ----</option>
+                                        @foreach ($cat as $c)
+                                            <option value="{{ $c }}">{{ $c }}</option>
+                                        @endforeach
+                                    </select>
+
+                                <div class="mt-1" id="textInputContainer" style="display: none;">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="kategori" name="kategori" placeholder="Masukan Kategori Baru">
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="mb-3">
                                 <label for="deskripsi-singkat" class="form-label">Deskripsi Singkat</label>
                                 <input type="text" class="form-control" id="deskripsi_singkat" name="deskripsi_singkat"

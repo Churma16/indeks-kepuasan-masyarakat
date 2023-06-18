@@ -38,15 +38,15 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-5">
                                 <p class="card-text">{!! $questionnaire->deskripsi !!}</p>
-                                <p>
+                                <div>
                                     <i class="bi bi-card-list"></i> Banyak Pertanyaan:
-                                    {{ $questionnaire->jumlah_pertanyaan }}
-                                </p>
-                                <p>
+                                    {{ $questionnaire->jumlah_pertanyaan }} Soal
+                                </div>
+                                <div class="fw-bold mt-1">
                                     <i class="bi bi-calendar2-week"></i> Waktu Ekspirasi:
                                     {{ $questionnaire->waktu_ekspirasi }}
-                                </p>
-                                <form action="/check-captcha/{{ $questionnaire->link }}" method="POST">
+                                </div>
+                                <form class="mt-2" action="/check-captcha/{{ $questionnaire->link }}" method="POST">
                                     @csrf
                                     <div class="captcha">
                                         <span>{!! captcha_img('math') !!}</span>

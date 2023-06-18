@@ -52,7 +52,7 @@ class DashboardQuizController extends Controller
             'deskripsi_singkat' => session('form_data.deskripsi_singkat'),
             'deskripsi' => session('form_data.deskripsi'),
             'link' => Str::random(7),
-            'kategori' => ('form_data.kategori'),
+            'kategori' => Str::sentence(session('form_data.kategori')),
             'waktu_ekspirasi' => session('form_data.waktu_ekspirasi'),
             'status_aktif' => 'Aktif'
         ]);
@@ -131,31 +131,31 @@ class DashboardQuizController extends Controller
             $ansCountAll[$i] = Respondent::where('questionnaire_id', $questionnaire->id)->where('umur', $i)->count();
         }
 
-        if($respondentCount==0){
-            $highestAgeCount = 'Kosong';
-        }
-        else{
-            $highestAgeCount = max($ansCountAll);
-        }
+
+        $highestAgeCount = max($ansCountAll);
         $highestAgeArray = array_keys($ansCountAll, $highestAgeCount);
         $highestAgeArray = reset($highestAgeArray);
 
-        $umurMapping=[
-            1=> '18-24',
-            2=> '25-34',
-            3=> '35-44',
-            4=> '45-54',
-            5=> '55-64',
-            6=> '65++'
+        $umurMapping = [
+            1 => '18-24',
+            2 => '25-34',
+            3 => '35-44',
+            4 => '45-54',
+            5 => '55-64',
+            6 => '65++'
         ];
 
-        $literalHighestAge= $umurMapping[$highestAgeArray] ?? null;
+        //menampilkan literal tertinggi
+        if ($totalRespondent == 0) {
+            $literalHighestAge = "-";
+        } else {
+            $literalHighestAge = $umurMapping[$highestAgeArray] ?? null;
+        }
 
         $ansCount = Respondent::where('questionnaire_id', $questionnaire->id)->where('umur', $highestAgeArray)->count();
-        if($ansCount == 0){
+        if ($ansCount == 0) {
             $percentCount = 0;
-        }
-        else{
+        } else {
             $percentCount = ($ansCount / $totalRespondent) * 100;
         }
 
@@ -222,7 +222,7 @@ class DashboardQuizController extends Controller
         $averageScore = $transformedAnswers->average();
 
         // Mencari Kemanakah nilai tersebut lebih dekat
-        $scoreMapping=[
+        $scoreMapping = [
             [-1, "Sangat Tidak Puas"],
             [-0.5, "Tidak Puas"],
             [0, "Cukup Puas"],
@@ -234,7 +234,11 @@ class DashboardQuizController extends Controller
             return abs($a[0] - $averageScore) <=> abs($b[0] - $averageScore);
         });
 
-        $score=$scoreMapping[0][1];
+        if ($totalRespondent == 0) {
+            $score = "-";
+        } else {
+            $score = $scoreMapping[0][1];
+        }
 
 
         //
@@ -255,9 +259,9 @@ class DashboardQuizController extends Controller
             "totalRespondent" => $totalRespondent,
             'percentCount' => $percentCount . '%',
             'averageScore' => $averageScore,
-            'literalHighestAge'=>$literalHighestAge,
-            'score'=>$score,
-            'pengisiTerbanyak'=>$highestAgeCount,
+            'literalHighestAge' => $literalHighestAge,
+            'score' => $score,
+            'pengisiTerbanyak' => $highestAgeCount,
         ]);
     }
 
@@ -276,9 +280,12 @@ class DashboardQuizController extends Controller
             $query->orderBy('nomor', 'asc');
         }]);
 
+        $cat = Questionnaire::distinct()->orderBy('kategori')->pluck('kategori');
+
         return view('dashboard.questionnaires.edit', [
             'title' => 'Edit Kuesioner',
             'questionnaire' => $questionnaire,
+            'cat' => $cat,
         ]);
     }
 
