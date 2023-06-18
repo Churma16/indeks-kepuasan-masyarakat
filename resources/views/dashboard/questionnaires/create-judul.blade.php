@@ -25,24 +25,32 @@
 
                             <div class="mb-3">
                                 <label for="kategori" class="form-label">Kategori</label>
-                                    <select class="form-control" id="kategoriSelect" name="kategoriSelect" onchange="toggleInput()">
-                                        <option value="" selected disabled>Pilih Kategori</option>
-                                        <option value="text">---- Masukan Kategori Baru ----</option>
-                                        @foreach ($cat as $c)
-                                            <option value="{{ $c }}">{{ $c }}</option>
-                                        @endforeach
-                                    </select>
+                                <select class="form-control" id="kategoriSelect" name="kategoriSelect"
+                                    onchange="toggleInput()">
+                                    <option value="" selected disabled>Pilih Kategori</option>
+                                    <option value="text">---- Masukan Kategori Baru ----</option>
+                                    @foreach ($cat as $c)
+                                        <option value="{{ $c }}">{{ $c }}</option>
+                                    @endforeach
+                                </select>
                                 <div class="mt-1" id="textInputContainer" style="display: none;">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="kategori" name="kategori" placeholder="Masukan Kategori Baru">
+                                        <input type="text" class="form-control" id="kategori" name="kategori"
+                                            placeholder="Masukan Kategori Baru">
                                     </div>
                                 </div>
                             </div>
 
                             <div class="mb-3">
                                 <label for="deskripsi-singkat" class="form-label">Deskripsi Singkat</label>
-                                <input type="text" class="form-control" id="deskripsi_singkat" name="deskripsi_singkat"
-                                    placeholder="Deksripsi Singkat Kuesioner" value="" required>
+                                <div class="input-group">
+                                    <input type="text" class="form-control border-right-0 rounded rounded-left"
+                                        id="deskripsi_singkat" name="deskripsi_singkat"
+                                        placeholder="Deksripsi Singkat Kuesioner" value="" required>
+                                    <div class="border border-left-0 rounded pt-1">
+                                        <span id="charCount">0</span>/50
+                                    </div>
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label for="deskripsi" class="form-label">Deskripsi</label>
@@ -78,5 +86,17 @@
                 textInputContainer.style.display = "none";
             }
         }
+    </script>
+
+    <script>
+        var textInput = document.getElementById('deskripsi_singkat');
+        var charCount = document.getElementById('charCount');
+
+        textInput.addEventListener('input', function(event) {
+            var inputValue = event.target.value;
+            var filteredValue = inputValue.replace(/[^A-Za-z0-9 ]/g, '').slice(0, 50);
+            event.target.value = filteredValue;
+            charCount.textContent = filteredValue.length;
+        });
     </script>
 @endsection
