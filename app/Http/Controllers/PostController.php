@@ -13,9 +13,17 @@ class PostController extends Controller
 {
     public function index()
     {
+        // dd(request('search'));
+        $posts = Questionnaire::latest();
+
+        if(request('search')){
+            $posts->where('judul', 'like', '%' . request('search') . '%');
+        }
+
+        $questionnaires = $posts->paginate(24)->withQueryString();
         return view('posts', [
             "title" => 'Daftar Kuesioner',
-            "questionnaires" => Questionnaire::latest()->paginate(24),
+            "questionnaires" => $questionnaires,
         ]);
     }
 

@@ -36,8 +36,8 @@
                     <div class="card-body">
                         <h4 class="card-title"><b>{{ $questionnaire->judul }}</b></h4>
                         <div class="row justify-content-center">
-                            <div class="col-lg-5">
-                                <p class="card-text">{!! $questionnaire->deskripsi !!}</p>
+                            <div class="col-lg-5 col-md-9">
+                                <p class="card-text" style="text-align: justify; font-size: 1em; font-weight">{!! $questionnaire->deskripsi !!}</p>
                                 <div>
                                     <i class="bi bi-card-list"></i> Banyak Pertanyaan:
                                     {{ $questionnaire->jumlah_pertanyaan }} Soal
