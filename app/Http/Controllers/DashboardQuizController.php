@@ -52,7 +52,7 @@ class DashboardQuizController extends Controller
             'deskripsi_singkat' => session('form_data.deskripsi_singkat'),
             'deskripsi' => session('form_data.deskripsi'),
             'link' => Str::random(7),
-            'kategori' => Str::sentence(session('form_data.kategori')),
+            'kategori' => ucfirst(strtolower(session('form_data.kategori'))),
             'waktu_ekspirasi' => session('form_data.waktu_ekspirasi'),
             'status_aktif' => 'Aktif'
         ]);

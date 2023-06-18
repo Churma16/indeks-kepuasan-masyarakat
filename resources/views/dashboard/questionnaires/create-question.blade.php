@@ -1,3 +1,4 @@
+{{-- @dd(session('form_data')) --}}
 @extends('dashboard.layouts.main')
 
 @section('main')
@@ -15,14 +16,17 @@
                                 placeholder="Deksripsi Singkat Kuesioner"
                                 value="{{ session('form_data.deskripsi_singkat') }}" required readonly>
                         </div>
+
                         <div class="mb-3">
-                            <label for="deskripsi" class="form-label">Kategori</label>
-                            <div class="card border-1 rounded-2 p-2" style="box-shadow: none">
-                                {!! session('form_data.kategori') !!}
+                            <label for="kategori" class="form-label">Kategori</label>
+                            <div class="card border-1 rounded-2 p-2" style="box-shadow: none"
+                                >{{ session('form_data.kategori') }}
+
                             </div>
                         </div>
+
                         <div class="mb-3">
-                            <label for="deskripsi" class="form-label">Deskripsi Singkat</label>
+                            <label for="deskripsi" class="form-label">Deskripsi</label>
                             <div class="card border-1 rounded-2 p-2" style="box-shadow: none">
                                 {!! session('form_data.deskripsi') !!}
                             </div>

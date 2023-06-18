@@ -38,6 +38,17 @@ class Controller extends BaseController
         $session = session();
         $session->put('form_data.deskripsi_literal', $text);
 
+
+        //taking only one category
+        if(session('form_data.kategoriSelect') == 'text'){
+            $session->forget('form_data.kategoriSelect');
+        }
+        elseif(session('form_data.kategoriSelect')){
+            $session->put('form_data.kategori', session('form_data.kategoriSelect'));
+            $session->forget('form_data.kategoriSelect');
+        }
+
+
         // Redirect the user to the create questionnaire page
         return redirect('/dashboard/questionnaires/create',);
     }

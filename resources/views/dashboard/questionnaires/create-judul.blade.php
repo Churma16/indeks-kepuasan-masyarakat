@@ -25,14 +25,13 @@
 
                             <div class="mb-3">
                                 <label for="kategori" class="form-label">Kategori</label>
-                                    <select class="form-control" id="kategori" name="kategori" onchange="toggleInput()">
+                                    <select class="form-control" id="kategoriSelect" name="kategoriSelect" onchange="toggleInput()">
                                         <option value="" selected disabled>Pilih Kategori</option>
                                         <option value="text">---- Masukan Kategori Baru ----</option>
                                         @foreach ($cat as $c)
                                             <option value="{{ $c }}">{{ $c }}</option>
                                         @endforeach
                                     </select>
-
                                 <div class="mt-1" id="textInputContainer" style="display: none;">
                                     <div class="form-group">
                                         <input type="text" class="form-control" id="kategori" name="kategori" placeholder="Masukan Kategori Baru">
@@ -69,7 +68,7 @@
 @section('scripts')
     <script>
         function toggleInput() {
-            var kategori = document.getElementById("kategori").value;
+            var kategori = document.getElementById("kategoriSelect").value;
             var textInputContainer = document.getElementById("textInputContainer");
 
             if (kategori === "text") {
