@@ -1,15 +1,16 @@
 <?php
 
+use App\Models\Questionnaire;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\DashboardQuizController;
-use App\Http\Controllers\CaptchaController;
-use App\Http\Controllers\QuestionnaireController;
-
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\CaptchaController;
+
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DashboardQuizController;
+use App\Http\Controllers\QuestionnaireController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,7 +50,11 @@ Route::resource('/dashboard/questionnaires', DashboardQuizController::class)->mi
 
 Route::get('/dashboard/create-judul', function () {
     $title = "Buat Detail Kuesioner";
-    return view('dashboard.questionnaires.create-judul', compact('title'));
+
+    $questionnaire = new Questionnaire();
+    $cat = Questionnaire::distinct()->orderBy('kategori')->pluck('kategori');
+
+    return view('dashboard.questionnaires.create-judul', compact('title', 'cat'));
 });
 
 

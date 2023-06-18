@@ -22,6 +22,7 @@ class DashboardQuizController extends Controller
         return view('dashboard.questionnaires.index', [
             'title' => ' ',
             'questionnaires' => $questionnaire,
+            // 'cat'=> $cat,
         ]);
     }
 
@@ -51,7 +52,7 @@ class DashboardQuizController extends Controller
             'deskripsi_singkat' => session('form_data.deskripsi_singkat'),
             'deskripsi' => session('form_data.deskripsi'),
             'link' => Str::random(7),
-            'kategori' => 'kosong',
+            'kategori' => ('form_data.kategori'),
             'waktu_ekspirasi' => session('form_data.waktu_ekspirasi'),
             'status_aktif' => 'Aktif'
         ]);
@@ -130,7 +131,12 @@ class DashboardQuizController extends Controller
             $ansCountAll[$i] = Respondent::where('questionnaire_id', $questionnaire->id)->where('umur', $i)->count();
         }
 
-        $highestAgeCount = max($ansCountAll);
+        if($respondentCount==0){
+            $highestAgeCount = 'Kosong';
+        }
+        else{
+            $highestAgeCount = max($ansCountAll);
+        }
         $highestAgeArray = array_keys($ansCountAll, $highestAgeCount);
         $highestAgeArray = reset($highestAgeArray);
 
@@ -146,7 +152,12 @@ class DashboardQuizController extends Controller
         $literalHighestAge= $umurMapping[$highestAgeArray] ?? null;
 
         $ansCount = Respondent::where('questionnaire_id', $questionnaire->id)->where('umur', $highestAgeArray)->count();
-        $percentCount = ($ansCount / $totalRespondent) * 100;
+        if($ansCount == 0){
+            $percentCount = 0;
+        }
+        else{
+            $percentCount = ($ansCount / $totalRespondent) * 100;
+        }
 
 
         //Jawaban Tertinggi

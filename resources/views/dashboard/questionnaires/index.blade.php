@@ -1,3 +1,4 @@
+{{-- @dd($cat) --}}
 @extends('dashboard.layouts.main')
 
 @section('style')

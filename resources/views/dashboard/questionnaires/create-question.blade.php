@@ -16,6 +16,12 @@
                                 value="{{ session('form_data.deskripsi_singkat') }}" required readonly>
                         </div>
                         <div class="mb-3">
+                            <label for="deskripsi" class="form-label">Kategori</label>
+                            <div class="card border-1 rounded-2 p-2" style="box-shadow: none">
+                                {!! session('form_data.kategori') !!}
+                            </div>
+                        </div>
+                        <div class="mb-3">
                             <label for="deskripsi" class="form-label">Deskripsi Singkat</label>
                             <div class="card border-1 rounded-2 p-2" style="box-shadow: none">
                                 {!! session('form_data.deskripsi') !!}

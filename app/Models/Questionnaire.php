@@ -73,6 +73,9 @@ class Questionnaire extends Model
         return Carbon::parse($this->created_at)->format('d M Y');
     }
 
+    // public function getKategoriAttribute(){
+    //     return $$this->pluck('kategori')->unique();
+    // }
 
     // ACCESSOR
     /**

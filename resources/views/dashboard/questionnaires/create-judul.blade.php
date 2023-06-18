@@ -1,5 +1,5 @@
+{{-- @dd($cat) --}}
 @extends('dashboard.layouts.main')
-
 
 @section('main')
     <div class="container-fluid py-4">
@@ -16,11 +16,30 @@
                                 <input type="text" class="form-control" id="judul" name="judul" value=""
                                     placeholder="Judul Kuesioner" required>
                             </div>
+
                             <div class="mb-3">
                                 <label for="jumlah_soal" class="form-label">Jumlah Soal</label>
-                                <input type="text" class="form-control" id="jumlah_soal" name="jumlah_soal" value=""
-                                    placeholder="*max 50 soal" required>
+                                <input type="text" class="form-control" id="jumlah_soal" name="jumlah_soal"
+                                    value="" placeholder="Masukan angka diantara 1 sampai 50" required>
                             </div>
+
+                            <div class="mb-3">
+                                <label for="kategori" class="form-label">Kategori</label>
+                                    <select class="form-control" id="kategori" name="kategori" onchange="toggleInput()">
+                                        <option value="" selected disabled>Pilih Kategori</option>
+                                        <option value="text">---- Masukan Kategori Baru ----</option>
+                                        @foreach ($cat as $c)
+                                            <option value="{{ $c }}">{{ $c }}</option>
+                                        @endforeach
+                                    </select>
+
+                                <div class="mt-1" id="textInputContainer" style="display: none;">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="kategori" name="kategori" placeholder="Masukan Kategori Baru">
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="mb-3">
                                 <label for="deskripsi-singkat" class="form-label">Deskripsi Singkat</label>
                                 <input type="text" class="form-control" id="deskripsi_singkat" name="deskripsi_singkat"
@@ -48,4 +67,17 @@
 </div>
 
 @section('scripts')
+    <script>
+        function toggleInput() {
+            var kategori = document.getElementById("kategori").value;
+            var textInputContainer = document.getElementById("textInputContainer");
+
+            if (kategori === "text") {
+                textInputContainer.style.display = "block";
+                document.getElementById("textInput").value = "";
+            } else {
+                textInputContainer.style.display = "none";
+            }
+        }
+    </script>
 @endsection
