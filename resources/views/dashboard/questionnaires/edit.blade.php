@@ -4,7 +4,7 @@
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
-                <div class="card mb-4 col-lg-10">
+                <div class="card mb-4 col-md-12 col-lg-12 px-lg-3">
                     <div class="card-header pb-0">
                         <h3>{{ $title }}</h3>
                     </div>

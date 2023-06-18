@@ -20,7 +20,7 @@ class DashboardQuizController extends Controller
     {
         $questionnaire = Questionnaire::all();
         return view('dashboard.questionnaires.index', [
-            'title' => 'List Kuesioner',
+            'title' => ' ',
             'questionnaires' => $questionnaire,
         ]);
     }
@@ -33,7 +33,7 @@ class DashboardQuizController extends Controller
     public function create()
     {
         return view('dashboard.questionnaires.create-question', [
-            'title' => 'Buat Kuesioner',
+            'title' => 'Buat Pertanyaan',
         ]);
     }
 

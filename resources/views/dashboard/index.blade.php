@@ -104,7 +104,7 @@
             </div>
         </div>
         <div class="row mt-4 justify-content-center">
-            <div class="col-md-3 mb-lg-0 mb-4">
+            <div class="col-md-6 col-lg-3 mb-lg-0 mb-4">
                 <div class="card">
                     <div class="card-body p-3">
                         <div class="row">
@@ -158,7 +158,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 mb-lg-0 mb-4">
+            <div class="col-md-6 col-lg-3 mb-lg-0 mb-4">
                 <div class="card" style="">
                     <div class="card-body p-3 " style="box-shadow:none">
                         <div class="row">
