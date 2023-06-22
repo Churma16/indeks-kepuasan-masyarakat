@@ -13,24 +13,7 @@ entity "Answer" as a
 entity "Respondent" as r
 
 group Seq Mengisi Kuesioner
-        group Seq Melihat Detail Kuesioner
-            A -> detail: Menekan tombol Pilih Kuesioner
-            activate detail
-                detail -> pcontrol: tampilQuestionnaire()
-                activate pcontrol
-                detail -> pcontrol: tampilQuestion()
-                pcontrol -> q: getQuestionnaire()
-                activate q
-                pcontrol -> qn: getQuestion()
-                activate qn
-                q --> pcontrol: Tampil Data Kuesioner
-                deactivate q
-                qn --> pcontrol: Tampil Data Pertanyaan
-                deactivate qn
-                pcontrol--> detail: Tampil Detail Kuesioner
-                deactivate pcontrol
-                deactivate detail
-        end
+
 
     group Melihat Halaman Kuesioner
         A->detail: Mengisi Captcha dan menekan \ntombol mulai pada halaman detail
