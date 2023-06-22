@@ -5,9 +5,9 @@
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
-                <div class="card mb-4 col-lg-10">
+                <div class="card mb-4 col-lg-12 px-3">
                     <div class="card-header pb-0">
-                        <h4>Buat Judul Kuesioner</h4>
+                        <h4>Buat Detail Kuesioner</h4>
                     </div>
                     <div class="card-body px-4 pt-2 pb-2">
                         <form method="GET" action="{{ route('dashboard.redirect') }}">
@@ -47,7 +47,7 @@
                                     <input type="text" class="form-control border-right-0 rounded rounded-left"
                                         id="deskripsi_singkat" name="deskripsi_singkat"
                                         placeholder="Deksripsi Singkat Kuesioner" value="" required>
-                                    <div class="border border-left-0 rounded pt-1">
+                                    <div class="border border-left-0 rounded pt-1 px-1">
                                         <span id="charCount">0</span>/50
                                     </div>
                                 </div>
@@ -64,7 +64,7 @@
                                 <input type="date" class="form-control" id="waktu_ekspirasi" name="waktu_ekspirasi"
                                     value="" required>
                             </div>
-                            <button type="submit" class="btn btn-info">Create Post</button>
+                            <button type="submit" class="btn btn-info">Simpan Detail</button>
                         </form>
                     </div>
                 </div>

@@ -5,7 +5,7 @@
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
-                <div class="card mb-4 col-lg-10">
+                <div class="card mb-4 col-lg-12 px-3">
                     <div class="card-header pb-0">
                         <h4>{{ session('form_data.judul') }}</h4>
                     </div>

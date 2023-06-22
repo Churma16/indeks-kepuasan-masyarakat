@@ -44,7 +44,7 @@
                                             <div class="form-check form-check-radio">
                                                 <label class="form-check-label">
                                                     <input class="form-check-input" type="radio" name="jeniskelamin"
-                                                        id="jeniskelamin" value="Pria" />
+                                                        id="jeniskelamin" value="Pria" required/>
                                                     <span class="form-check-sign"></span>
                                                     Pria
                                                 </label>
@@ -52,7 +52,7 @@
                                             <div class="form-check form-check-radio">
                                                 <label class="form-check-label">
                                                     <input class="form-check-input" type="radio" name="jeniskelamin"
-                                                        id="jeniskelamin" value="Wanita" />
+                                                        id="jeniskelamin" value="Wanita" required/>
                                                     <span class="form-check-sign"></span>
                                                     Wanita
                                                 </label>
@@ -67,7 +67,7 @@
                                             <div class="form-check form-check-radio">
                                                 <label class="form-check-label">
                                                     <input class="form-check-input" type="radio" name="umur"
-                                                        id="umur" value="1" />
+                                                        id="umur" value="1" required/>
                                                     <span class="form-check-sign"></span>
                                                     18-24 Tahun
                                                 </label>
@@ -75,7 +75,7 @@
                                             <div class="form-check form-check-radio">
                                                 <label class="form-check-label">
                                                     <input class="form-check-input" type="radio" name="umur"
-                                                        id="umur" value="2"  />
+                                                        id="umur" value="2"  required/>
                                                     <span class="form-check-sign"></span>
                                                     25-34 Tahun
                                                 </label>
@@ -83,7 +83,7 @@
                                             <div class="form-check form-check-radio">
                                                 <label class="form-check-label">
                                                     <input class="form-check-input" type="radio" name="umur"
-                                                        id="umur" value="3" />
+                                                        id="umur" value="3" required/>
                                                     <span class="form-check-sign"></span>
                                                     35-44 Tahun
                                                 </label>
@@ -91,7 +91,7 @@
                                             <div class="form-check form-check-radio">
                                                 <label class="form-check-label">
                                                     <input class="form-check-input" type="radio" name="umur"
-                                                        id="umur" value="4"  />
+                                                        id="umur" value="4"  required/>
                                                     <span class="form-check-sign"></span>
                                                     45-54 Tahun
                                                 </label>
@@ -99,7 +99,7 @@
                                             <div class="form-check form-check-radio">
                                                 <label class="form-check-label">
                                                     <input class="form-check-input" type="radio" name="umur"
-                                                        id="umur" value="5" />
+                                                        id="umur" value="5" required/>
                                                     <span class="form-check-sign"></span>
                                                     55-64 Tahun
                                                 </label>
@@ -107,7 +107,7 @@
                                             <div class="form-check form-check-radio">
                                                 <label class="form-check-label">
                                                     <input class="form-check-input" type="radio" name="umur"
-                                                        id="umur" value="6"  />
+                                                        id="umur" value="6" required/>
                                                     <span class="form-check-sign"></span>
                                                     65 Tahun Keatas
                                                 </label>
@@ -125,6 +125,7 @@
                                         </div>
 
                                         <div>
+                                            
                                             <label for="slider">Tingkat Kepuasan:</label>
                                             <br>
                                             <input type="range" id="slider" name="jawaban{{ $question->id }}"
