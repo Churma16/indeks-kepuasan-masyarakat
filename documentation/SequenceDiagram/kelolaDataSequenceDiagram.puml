@@ -5,54 +5,20 @@ skinparam SequenceMessageAlignment center
 group Interaction Kelola Kuesioner
 
     actor Admin 
-    boundary "<<boundary>>\nList_Kuesioner" as list
-    boundary "<<boundary>>\nDetail_List_Kuesioner" as dlist
-    boundary "<<boundary>>\nCreate_questionnaire" as tquestionnaire
-    boundary "<<boundary>>\nTambah_question" as tquestion
-    boundary "<<boundary>>\nedit_questionnaire" as equestionnaire
-    control "<<control>>\nDashboardQuiz\nController" as dqcontrol
-    control "<<control>>\nController" as control
-    entity "<<entity>>\nquestionnaire" as questioner
-    entity "<<entity>>\nquestion" as question
-    entity "<<entity>>\nrespondent" as respondent
-    entity "<<entity>>\nuser" as admin
-    entity "<<entity>>\nanswer" as answer
+    participant "<<boundary>>\nList_Kuesioner" as list
+    participant "<<boundary>>\nDetail_List_Kuesioner" as dlist
+    participant "<<boundary>>\nCreate_Questionnaire" as tquestionnaire
+    participant "<<boundary>>\nTambah_Question" as tquestion
+    participant "<<boundary>>\nEdit_Questionnaire" as equestionnaire
+    participant "<<boundary>>\nCetak_Questionnaire" as cetak
+    participant "<<control>>\nDashboardQuiz\nController" as dqcontrol
+    participant "<<control>>\nController" as control
+    participant "<<entity>>\nquestionnaire" as questioner
+    participant "<<entity>>\nquestion" as question
+    participant "<<entity>>\nrespondent" as respondent
+    participant "<<entity>>\nanswer" as answer
 
 
-
-    group Seq Melihat Detail Kuesioner
-        Admin-> dlist: Membuka halaman detail list kuesioner
-        activate dlist
-            dlist-> dqcontrol: tampilQuestionnaire()
-                activate dqcontrol
-                dlist-> dqcontrol: tampilQuestion()
-                dlist-> dqcontrol: hitungRespondent()
-                dlist-> dqcontrol: hitungAnswer()
-                
-                
-                dqcontrol-> questioner: getQuestionnaire()
-                activate questioner
-                dqcontrol-> question: getQuestion()
-                activate question
-                dqcontrol-> respondent: countRespondent()
-                activate respondent
-                dqcontrol-> answer: getAnswer()
-                activate answer
-
-                questioner--> dqcontrol: tampilQuestionnaire()
-                deactivate questioner
-                question--> dqcontrol: tampilQuestion()
-                deactivate question
-                respondent--> dqcontrol: tampilHasilRespondent()
-                deactivate respondent
-                answer--> dqcontrol: tamnpilHasilAnswer()
-                deactivate answer
-
-                dqcontrol--> dlist: Tampilkan Detail Kuesioner
-                deactivate dqcontrol
-        deactivate dlist
-        
-    end
 
     group Seq Membuat Kuesioner
         Admin-> list: Membuka halaman list kuesioner
@@ -135,6 +101,40 @@ group Interaction Kelola Kuesioner
                 dqcontrol--> dlist: Notifikasi berhasil menghapus
             deactivate dqcontrol
         deactivate dlist
+    end
+
+    group Seq Mencetak Kuesioner
+        Admin-> dlist: Membuka halaman detail list kuesioner
+        activate dlist
+            dlist-> cetak: Mengklik tombol Cetak Kuesioner
+        deactivate dlist
+        activate cetak
+            cetak-> control: tampilQuestionnaire()
+            cetak-> control: tampilQuestion()
+            cetak-> control: hitungRespondent()
+            cetak-> control: hitungAnswer()
+            activate control
+                control -> questioner: getQuestionnaire()
+                activate questioner
+                control -> question: getQuestion()
+                activate question
+                control -> respondent: countRespondent()
+                activate respondent
+                control -> answer: countAnswer()
+                activate answer
+
+                questioner--> control: tampilQuestionnaire()
+                deactivate questioner
+                question--> control: tampilQuestion()
+                deactivate question
+                respondent--> control: tampilHasilRespondent()
+                deactivate respondent
+                answer--> control: tampilHasilAnswer()
+                deactivate answer
+
+
+                control--> cetak: Tampilkan tampilan cetak kuesioner
+            deactivate control
     end
 end
 @enduml

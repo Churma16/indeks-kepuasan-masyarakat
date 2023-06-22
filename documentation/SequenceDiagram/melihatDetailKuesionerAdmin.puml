@@ -1,0 +1,51 @@
+@startuml Interaction Kelola Data
+autonumber
+' skinparam style strictuml
+' skinparam SequenceMessageAlignment center
+    actor Admin 
+    participant "<<boundary>>\nDetail_List_Kuesioner" as dlist
+    participant "<<control>>\nDashboardQuiz\nController" as dqcontrol
+    participant "<<entity>>\nquestionnaire" as questioner
+    participant "<<entity>>\nquestion" as question
+    participant "<<entity>>\nrespondent" as respondent
+    participant "<<entity>>\nadmin" as admin
+    participant "<<entity>>\nanswer" as answer
+    group Interaction Melihat Detail Kuesioner
+        Admin-> dlist: Membuka halaman detail list kuesioner\n dengan menekan salah satu kuesioner
+        activate dlist
+            dlist-> dqcontrol: tampilQuestionnaire()
+                activate dqcontrol
+                dlist-> dqcontrol: tampilQuestion()
+                dlist-> dqcontrol: hitungRespondent()
+                dlist-> dqcontrol: hitungAnswer()
+                dlist-> dqcontrol: tampilDataAdmin()
+                
+                dqcontrol-> questioner: getQuestionnaire()
+                activate questioner
+                dqcontrol-> question: getQuestion()
+                activate question
+                dqcontrol-> respondent: countRespondent()
+                activate respondent
+                dqcontrol-> admin: getAdmin()
+                activate admin
+                dqcontrol-> answer: countAnswer()
+                activate answer
+
+                questioner--> dqcontrol: tampilQuestionnaire()
+                deactivate questioner
+                question--> dqcontrol: tampilQuestion()
+                deactivate question
+                respondent--> dqcontrol: tampilHasilRespondent()
+                deactivate respondent
+                admin--> dqcontrol: tampilAdmin()
+                deactivate admin
+                answer--> dqcontrol: tampilHasilAnswer()
+                deactivate answer
+
+                dqcontrol--> dlist: Tampilkan Detail Kuesioner
+                deactivate dqcontrol
+        deactivate dlist
+        
+    end
+
+@enduml
