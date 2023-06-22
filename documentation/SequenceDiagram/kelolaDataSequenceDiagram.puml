@@ -18,31 +18,7 @@ group Interaction Kelola Kuesioner
     entity "<<entity>>\nuser" as admin
     entity "<<entity>>\nanswer" as answer
 
-    ' group Seq Menampilkan List Kuesioner
-    '     Admin->list:Membuka halaman list kuesioner
-    '     activate list
-    '         list-> dqcontrol: tampilQuestionnaire()
-    '         activate dqcontrol
-    '             list-> dqcontrol: hitungRespondent()
-    '             list-> dqcontrol: hitungQuestion()
 
-    '             dqcontrol-> questioner: getQuestionnaire()
-    '             activate questioner
-    '                 dqcontrol-> question:   countQuestion()
-    '             activate question
-    '                 dqcontrol-> respondent: countRespondent()
-    '             activate respondent
-
-    '                 questioner--> dqcontrol: tampilListQuestionnaire()
-    '             deactivate questioner
-    '                 question--> dqcontrol: tampilHasilQuestion() 
-    '             deactivate question
-    '                 respondent--> dqcontrol: tampilHasilRespondent() 
-    '             deactivate respondent
-    '             dqcontrol--> list: Tampilkan List Kuesioner
-    '         deactivate dqcontrol
-    '     deactivate list
-    ' end
 
     group Seq Melihat Detail Kuesioner
         Admin-> dlist: Membuka halaman detail list kuesioner
