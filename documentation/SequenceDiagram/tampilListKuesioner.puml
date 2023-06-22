@@ -1,0 +1,37 @@
+@startuml tampilListKuesioner
+autonumber
+    actor Admin 
+    participant "<<boundary>>\nList_Kuesioner" as list
+    participant "<<control>>\nDashboardQuiz\nController" as dqcontrol
+    participant "<<entity>>\nquestionnaire" as questioner
+    participant "<<entity>>\nquestion" as question
+    participant "<<entity>>\nrespondent" as respondent
+
+
+    group Seq Menampilkan List Kuesioner
+        Admin->list:Membuka halaman list kuesioner
+        activate list
+            list-> dqcontrol: tampilQuestionnaire()
+            activate dqcontrol
+                list-> dqcontrol: hitungRespondent()
+                list-> dqcontrol: hitungQuestion()
+
+                dqcontrol-> questioner: getQuestionnaire()
+                activate questioner
+                    dqcontrol-> question:   countQuestion()
+                activate question
+                    dqcontrol-> respondent: countRespondent()
+                activate respondent
+
+                    questioner--> dqcontrol: tampilListQuestionnaire()
+                deactivate questioner
+                    question--> dqcontrol: tampilHasilQuestion() 
+                deactivate question
+                    respondent--> dqcontrol: tampilHasilRespondent() 
+                deactivate respondent
+                dqcontrol--> list: Tampilkan List Kuesioner
+            deactivate dqcontrol
+        deactivate list
+    end
+@enduml
+```

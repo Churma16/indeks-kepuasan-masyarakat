@@ -58,7 +58,7 @@
                         </div>
 
                         <div class="card-header pb-0 border-top">
-                            <h4>Buat Soal</h4>
+                            <h4>Edit Pertanyaan</h4>
                         </div>
                         <div class="card-body px-4 pt-2 pb-2">
                             @foreach ($questionnaire->question as $question)
@@ -71,7 +71,7 @@
                             @endforeach
                         </div>
                         <div class="ps-4">
-                            <button type="submit" class="btn btn-info">Unggah Kuesioner</button>
+                            <button type="submit" class="btn btn-info">Simpan Kuesioner</button>
                         </div>
                     </form>
                 </div>

@@ -12,26 +12,26 @@ group Interaction Dashboard
 
     Admin -> dashboard:Berhasil login
     activate dashboard
-            dashboard -> dashboard_cont:Hitung data responden
+            dashboard -> dashboard_cont:hitungDataResponden()
         activate dashboard_cont
-            dashboard -> dashboard_cont:Hitung data kuesioner
-            dashboard -> dashboard_cont:Tampil data admin
-            dashboard -> dashboard_cont:Hitung data jawaban
-        dashboard_cont -> respondent:Hitung data responden
+            dashboard -> dashboard_cont:hitungDataQuestionnaire()
+            dashboard -> dashboard_cont:tampilDataAdmin()
+            dashboard -> dashboard_cont:hitungDataJawaban()
+        dashboard_cont -> respondent:countRespondent()
         activate respondent
-            dashboard_cont -> questioner:Hitung data kuesioner
+            dashboard_cont -> questioner:countQuestionnaire()
             activate questioner
-                dashboard_cont -> admin:getData()
+                dashboard_cont -> admin:getAdmin()
                 activate admin
-                    dashboard_cont -> answer:Hitung data jawaban
+                    dashboard_cont -> answer:countAnswer()
                     activate answer
-                    respondent --> dashboard_cont:Hasil responden
+                    respondent --> dashboard_cont:tampilHasilRespondent()
         deactivate respondent
-                    questioner --> dashboard_cont:Hasil questioner
+                    questioner --> dashboard_cont:tampilHasilQuestionnaire()
             deactivate questioner
-                admin --> dashboard_cont:Tampil data admin
+                admin --> dashboard_cont:tampilDataAdmin()
                 deactivate admin
-                    answer --> dashboard_cont:Hasil Jawaban
+                    answer --> dashboard_cont:tampilHasilJawaban()
                     deactivate answer
         dashboard_cont --> dashboard:Tampilkan Data
         deactivate dashboard_cont

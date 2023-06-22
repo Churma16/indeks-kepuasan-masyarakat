@@ -2,12 +2,12 @@
 autonumber
 
 actor "Guest" as A
-boundary "Daftar_Kuesioner" as daftar
-' boundary "Detail_Kuesioner" as detail    
-control "PostController" as pcontrol
-control "CaptchaController" as ccontrol
-entity "Questionnaire" as q
-' entity "Question" as qn
+participant "<<boundary>>\nDaftar_Kuesioner" as daftar
+' participant "<<boundary>>\nDetail_Kuesioner" as detail    
+participant "<<control>>\nPostController" as pcontrol
+participant "<<control>>\nCaptchaController" as ccontrol
+participant "<<entity>>\nQuestionnaire" as q
+' participant "<<entity>>\nQuestion" as qn
 
 group Mengisi Kuesioner
     group Seq Melihat Daftar Kuesioner

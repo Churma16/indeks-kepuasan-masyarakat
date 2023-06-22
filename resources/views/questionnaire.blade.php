@@ -141,7 +141,7 @@
                                     </div>
                                 </div>
                             @endforeach
-                            <button type="submit" class="btn btn-info">Selesai</button>
+                            <button type="submit" class="btn btn-info">Kirim Jawaban</button>
                         </form>
                     </div>
                 </div>
