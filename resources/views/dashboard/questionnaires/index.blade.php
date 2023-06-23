@@ -23,13 +23,13 @@
 @section('main')
     <div class="container-fluid py-4">
         <div class="row justify-content-center">
-            <div class="col-5">
+            {{-- <div class="col-5">
                 @if (session()->has('success'))
                     <div id="alertSuccess" class="alert alert-success alert-dismissible" role="alert">
                         <strong>{{ session('success') }}</strong>
                     </div>
                 @endif
-            </div>
+            </div> --}}
         </div>
         <div class="row">
             <div class="col-12">
@@ -190,5 +190,16 @@
                 }
             });
         }
+    </script>
+    <script>
+        @if (session()->has('success'))
+            Swal.fire({
+                title: 'Success',
+                text: "{{ session('success') }}",
+                icon: 'success',
+                timer: 3000, // Change the duration as per your needs
+                showConfirmButton: false
+            });
+        @endif
     </script>
 @endsection
