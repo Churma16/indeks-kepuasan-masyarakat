@@ -76,6 +76,10 @@
                                     <input id="{{ $question->id }}" type="hidden" name="{{ $question->id }}"
                                         value="{{ old($question->id, $question->isi) }}">
                                     <trix-editor input="{{ $question->id }}"></trix-editor>
+                                    @error($question->id)
+                                        <div class="text-danger"><i class="bi bi-exclamation-circle"></i> {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                             @endforeach
                         </div>
@@ -93,19 +97,19 @@
     <script>
         $('trix-editor').attr('readonly', true);
     </script>
-    
+
     <script>
-        document.addEventListener('trix-file-accept', function (event) {
+        document.addEventListener('trix-file-accept', function(event) {
             event.preventDefault();
         });
-    
-        document.addEventListener('submit', function (event) {
+
+        document.addEventListener('submit', function(event) {
             var editors = document.querySelectorAll('trix-editor');
             for (var i = 0; i < editors.length; i++) {
                 var editor = editors[i];
                 var inputId = editor.getAttribute('input');
                 var inputField = document.getElementById(inputId);
-    
+
                 if (editor.value.trim() === '') {
                     inputField.setCustomValidity('This field is required.');
                 } else {
@@ -114,5 +118,4 @@
             }
         });
     </script>
-    
 @endsection

@@ -4,9 +4,7 @@
     <main class="main-content mt-0">
         <section class="min-vh-100 mb-8">
             <div class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg"
-                style="
-                        background-image: url('/img/kota-lama.jpg');
-                    ">
+                style="background-image: url('/img/kota-lama.jpg');">
                 <span class="mask bg-gradient-dark opacity-6"></span>
             </div>
             <div class="container">
@@ -20,12 +18,18 @@
                                 <h5>Admin Login</h5>
                             </div>
                             <div class="card-body">
+                                @if (session('loginError'))
+                                    <div class="alert alert-danger text-white text-center" role="alert">
+                                        {{ session('loginError') }}
+                                    </div>
+                                @endif
                                 <form role="form text-left" action="/login" method="POST">
                                     @csrf
                                     <div class="mb-3">
                                         <input type="email" class="form-control @error('email') is-invalid @enderror"
                                             placeholder="SuratmanMuda@gmail.com" aria-label="Email"
-                                            aria-describedby="email-addon" name="email" id="email" value="{{ old('email') }}" required autofocus/>
+                                            aria-describedby="email-addon" name="email" id="email"
+                                            value="{{ old('email') }}" required autofocus />
                                         @error('email')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -35,7 +39,8 @@
 
                                     <div class="mb-3">
                                         <input type="password" class="form-control" placeholder="Password"
-                                            aria-label="Password" aria-describedby="password-addon" name="password" id="password" required/>
+                                            aria-label="Password" aria-describedby="password-addon" name="password"
+                                            id="password" required />
 
                                     </div>
                                     <div class="text-center">

@@ -317,11 +317,18 @@ class DashboardQuizController extends Controller
 
         foreach ($questionnaire->question as $question) {
             $questionId = $question->id;
-            $isi = $request->input($questionId);
+            $rules = [
+                $questionId => 'required',
+            ];
+
+            $validatedData = $request->validate($rules);
+
+            $isi = $validatedData[$questionId];
             $question->update([
                 'isi' => $isi,
             ]);
         }
+
 
         return redirect('dashboard/questionnaires')->with('success', 'Post has been updated!');
     }
