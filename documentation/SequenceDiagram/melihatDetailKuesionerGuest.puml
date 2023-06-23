@@ -1,14 +1,13 @@
 @startuml Interaction Mengisi Kuesioner
 autonumber
-skinparam SequenceMessageAlignment center
+' skinparam SequenceMessageAlignment center
 
 actor "Guest" as A
-participant "Detail_Kuesioner" as detail
-participant "Halaman_Kuesioner" as halaman    
-participant "PostController" as pcontrol
-participant "Questionnaire" as q
-participant "Question" as qn      
-        group Seq Melihat Detail Kuesioner
+participant "<<boundary>>\nDetail_Kuesioner" as detail
+participant "<<control>>\nPostController" as pcontrol
+participant "<<entity>>\nQuestionnaire" as q
+participant "<<entity>>\nQuestion" as qn      
+        group Seq Melihat Detail Kuesioner Guest
             A -> detail: Menekan tombol Pilih Kuesioner
             activate detail
                 detail -> pcontrol: tampilQuestionnaire()
@@ -18,12 +17,12 @@ participant "Question" as qn
                 activate q
                 pcontrol -> qn: getQuestion()
                 activate qn
-                q --> pcontrol: Tampil Data Kuesioner
+                q --> pcontrol: tampilDataKuesioner()
                 deactivate q
-                qn --> pcontrol: Tampil Data Pertanyaan
+                qn --> pcontrol: tampilDataPertanyaan()
                 deactivate qn
                 pcontrol--> detail: Tampil Detail Kuesioner
                 deactivate pcontrol
-                deactivate detail
+            deactivate detail
         end
 @enduml

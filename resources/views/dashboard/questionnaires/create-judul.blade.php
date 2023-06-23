@@ -99,4 +99,23 @@
             charCount.textContent = filteredValue.length;
         });
     </script>
+
+    <script>
+        var textInput = document.getElementById('jumlah_soal');
+
+        textInput.addEventListener('input', function(event) {
+            var inputValue = event.target.value;
+            var filteredValue = inputValue.replace(/\D/g, ''); // Remove non-digit characters
+            if (filteredValue < 1 || filteredValue > 50) {
+                filteredValue = ''; // Clear the input if the value is outside the range
+                showErrorPopup();
+            }
+            event.target.value = filteredValue;
+        });
+
+        function showErrorPopup() {
+            // Show your error popup implementation here
+            alert('Please enter a value between 1 and 50.');
+        }
+    </script>
 @endsection

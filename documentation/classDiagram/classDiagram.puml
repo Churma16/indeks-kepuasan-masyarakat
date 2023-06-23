@@ -26,8 +26,6 @@ class answer {
     column(updated_at): timestamp
     --
     column(create())
-    column(edit())
-    column(delete())
 }
 
 class question {
@@ -90,10 +88,10 @@ class user {
 
 ' Relationship
 admin --left-- user
-admin --right|{ questionnaire
-questionnaire --|{ question
-questionnaire --|{ respondent
-respondent --|{ answer
-question --|{ answer
+admin --rightquestionnaire
+questionnaire -- question
+questionnaire -- respondent
+respondent -- answer
+question -- answer
 
 @enduml

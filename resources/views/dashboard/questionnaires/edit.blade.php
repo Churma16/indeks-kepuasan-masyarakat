@@ -21,17 +21,19 @@
 
                             <div class="mb-3">
                                 <label for="kategori" class="form-label">Kategori</label>
-                                    <select class="form-control" id="kategori" name="kategori" onchange="toggleInput()">
-                                        <option value="{{ $questionnaire->kategori }}" selected>{{ $questionnaire->kategori }}</option>
-                                        <option value="text">---- Masukan Kategori Baru ----</option>
-                                        @foreach ($cat as $c)
-                                            <option value="{{ $c }}">{{ $c }}</option>
-                                        @endforeach
-                                    </select>
+                                <select class="form-control" id="kategori" name="kategori" onchange="toggleInput()">
+                                    <option value="{{ $questionnaire->kategori }}" selected>{{ $questionnaire->kategori }}
+                                    </option>
+                                    <option value="text">---- Masukan Kategori Baru ----</option>
+                                    @foreach ($cat as $c)
+                                        <option value="{{ $c }}">{{ $c }}</option>
+                                    @endforeach
+                                </select>
 
                                 <div class="mt-1" id="textInputContainer" style="display: none;">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="kategori" name="kategori" placeholder="Masukan Kategori Baru">
+                                        <input type="text" class="form-control" id="kategori" name="kategori"
+                                            placeholder="Masukan Kategori Baru">
                                     </div>
                                 </div>
                             </div>
@@ -41,7 +43,11 @@
                                 <input type="text" class="form-control" id="deskripsi_singkat" name="deskripsi_singkat"
                                     placeholder="Deksripsi Singkat Kuesioner"
                                     value="{{ old('deskripsi-singkat', $questionnaire->deskripsi_singkat) }}" required>
+                                @error('deskripsi-singkat')
+                                    <div class="text-danger"><i class="bi bi-exclamation-circle"></i> {{ $message }}</div>
+                                @enderror
                             </div>
+
                             <div class="mb-3">
                                 <label for="deskripsi" class="form-label">Deskripsi</label>
                                 <input id="deskripsi" type="hidden" name="deskripsi"
@@ -49,6 +55,9 @@
                                 <trix-editor input="deskripsi"
                                     data-trix-placeholder="Menjelaskan tentang apa kuesioner ini">
                                 </trix-editor>
+                                @error('deskripsi')
+                                    <div class="text-danger"><i class="bi bi-exclamation-circle"></i> {{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="mb-3">
                                 <label for="date" class="form-label">Waktu Ekspirasi</label>
@@ -84,4 +93,26 @@
     <script>
         $('trix-editor').attr('readonly', true);
     </script>
+    
+    <script>
+        document.addEventListener('trix-file-accept', function (event) {
+            event.preventDefault();
+        });
+    
+        document.addEventListener('submit', function (event) {
+            var editors = document.querySelectorAll('trix-editor');
+            for (var i = 0; i < editors.length; i++) {
+                var editor = editors[i];
+                var inputId = editor.getAttribute('input');
+                var inputField = document.getElementById(inputId);
+    
+                if (editor.value.trim() === '') {
+                    inputField.setCustomValidity('This field is required.');
+                } else {
+                    inputField.setCustomValidity('');
+                }
+            }
+        });
+    </script>
+    
 @endsection
