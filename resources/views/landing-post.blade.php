@@ -17,7 +17,7 @@
         <div class="section section-basic mt-5" id="basic-elements">
             <div class="container">
                 <h3 class="title">Detail Kuesioner</h3>
-                @if (session()->has('success'))
+                {{-- @if (session()->has('success'))
                     <div class="alert alert-success" role="alert">
                         <div class="container">
                             <div class="alert-icon">
@@ -31,13 +31,15 @@
                             </button>
                         </div>
                     </div>
-                @endif
+                @endif --}}
+
                 <div class="card text-center">
                     <div class="card-body">
                         <h4 class="card-title"><b>{{ $questionnaire->judul }}</b></h4>
                         <div class="row justify-content-center">
                             <div class="col-lg-5 col-md-9">
-                                <p class="card-text" style="text-align: justify; font-size: 1em; font-weight">{!! $questionnaire->deskripsi !!}</p>
+                                <p class="card-text" style="text-align: justify; font-size: 1em; font-weight">
+                                    {!! $questionnaire->deskripsi !!}</p>
                                 <div>
                                     <i class="bi bi-card-list"></i> Banyak Pertanyaan:
                                     {{ $questionnaire->jumlah_pertanyaan }} Soal
@@ -94,5 +96,16 @@
                 }
             });
         })
+    </script>
+    <script>
+        @if (session()->has('success'))
+            Swal.fire({
+                title: 'Success',
+                text: "{{ session('success') }}",
+                icon: 'success',
+                timer: 3000, // Change the duration as per your needs
+                showConfirmButton: false
+            });
+        @endif
     </script>
 @endsection

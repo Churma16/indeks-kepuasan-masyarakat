@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class LoginController extends Controller
 {
@@ -40,7 +41,7 @@ class LoginController extends Controller
         }
 
         // If authentication fails, redirect back to the login form with an error message.
-        return back()->with('loginError', 'Email atau password yang dimasukan salah!');
+        return back()->withInput()->withErrors(['loginError' => 'Email atau password yang dimasukkan salah!']);
     }
 
     /**

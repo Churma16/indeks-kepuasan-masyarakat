@@ -18,10 +18,21 @@
                                 <h5>Admin Login</h5>
                             </div>
                             <div class="card-body">
-                                @if (session('loginError'))
+                                {{-- @if (session('loginError'))
                                     <div class="alert alert-danger text-white text-center" role="alert">
                                         {{ session('loginError') }}
                                     </div>
+                                @endif --}}
+                                @if ($errors->has('loginError'))
+                                    <script>
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: 'Error',
+                                            text: '{{ $errors->first('loginError') }}',
+                                            timer: 3000, // Optional timer value in milliseconds
+                                            showConfirmButton: false
+                                        });
+                                    </script>
                                 @endif
                                 <form role="form text-left" action="/login" method="POST">
                                     @csrf
@@ -56,4 +67,7 @@
             </div>
         </section>
     </main>
+@endsection
+
+@section('script')
 @endsection

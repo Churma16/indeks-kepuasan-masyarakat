@@ -144,9 +144,9 @@
                                                     method="post" class="d-inline">
                                                     @method('delete')
                                                     @csrf
-                                                    <button class="badge bg-danger border-0"
-                                                        onclick="return confirm('Are You Sure?')"><i
-                                                            class="bi bi-trash"></i></button>
+                                                    <button class="badge bg-danger border-0" onclick="confirmDelete(event)">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -169,5 +169,26 @@
         setTimeout(function() {
             $('#alertSuccess').alert('close');
         }, 5000);
+    </script>
+    <script>
+        function confirmDelete(event) {
+            event.preventDefault();
+
+            Swal.fire({
+                title: 'Hapus Kuesioner?',
+                text: "Kuesioner yang dihapus tidak dapat dikembalikan!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Ya, Hapus!',
+                cancelButtonText: 'Batalkan'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Proceed with the form submission
+                    event.target.closest('form').submit();
+                }
+            });
+        }
     </script>
 @endsection

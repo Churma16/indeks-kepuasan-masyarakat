@@ -83,6 +83,5 @@ class PostController extends Controller
         }
 
         return redirect('posts/'.$questionnaire->link)->with('success', 'Terima Kasih Sudah Mengisi Kuesioner!');
-
     }
 }

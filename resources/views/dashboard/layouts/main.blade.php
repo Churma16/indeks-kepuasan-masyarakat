@@ -29,6 +29,9 @@
         }
     </style>
 
+    <!-- sweet alert -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body class="g-sidenav-show bg-gray-100">

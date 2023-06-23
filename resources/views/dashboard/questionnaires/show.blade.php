@@ -216,7 +216,7 @@
                                 class="d-inline">
                                 @method('delete')
                                 @csrf
-                                <button class="btn btn-danger border-0" onclick="return confirm('Are You Sure?')"><i
+                                <button class="btn btn-danger border-0" onclick="confirmDelete(event)"><i
                                         class="bi bi-trash"></i> Hapus Kuesioner</button>
                             </form>
                             <a href="/dashboard/print/{{ $questionnaire->link }}"><button type="button" class="btn btn-dark"><i class="bi bi-printer"></i> Cetak Kuesioner</button></a>
@@ -743,4 +743,25 @@
                 },
             });
         </script>
+            <script>
+                function confirmDelete(event) {
+                    event.preventDefault();
+        
+                    Swal.fire({
+                        title: 'Hapus Kuesioner?',
+                        text: "Kuesioner yang dihapus tidak dapat dikembalikan!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'Ya, Hapus!',
+                        cancelButtonText: 'Batalkan'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Proceed with the form submission
+                            event.target.closest('form').submit();
+                        }
+                    });
+                }
+            </script>
     @endsection
