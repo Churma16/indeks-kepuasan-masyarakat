@@ -298,11 +298,21 @@ class DashboardQuizController extends Controller
      */
     public function update(Request $request, Questionnaire $questionnaire)
     {
+        // Validate the form data
+        $validatedData = $request->validate([
+            'judul' => 'required',
+            'deskripsi_singkat' => 'required',
+            'deskripsi' => 'required',
+            'waktu_ekspirasi' => 'required',
+            // Add any additional validation rules for other form inputs
+        ]);
+
+        // Update the questionnaire with the validated data
         $questionnaire->update([
-            'judul' => $request->input('judul'),
-            'deskripsi_singkat' => $request->input('deskripsi_singkat'),
-            'deskripsi' => $request->input('deskripsi'),
-            'waktu_ekspirasi' => $request->input('waktu_ekspirasi'),
+            'judul' => $validatedData['judul'],
+            'deskripsi_singkat' => $validatedData['deskripsi_singkat'],
+            'deskripsi' => $validatedData['deskripsi'],
+            'waktu_ekspirasi' => $validatedData['waktu_ekspirasi'],
         ]);
 
         foreach ($questionnaire->question as $question) {
@@ -315,6 +325,7 @@ class DashboardQuizController extends Controller
 
         return redirect('dashboard/questionnaires')->with('success', 'Post has been updated!');
     }
+
 
     /**
      * Remove the specified resource from storage.
