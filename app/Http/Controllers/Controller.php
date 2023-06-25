@@ -7,6 +7,9 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
+
+
+use App\Models\Respondent;
 use Carbon\Carbon;
 
 
@@ -102,6 +105,17 @@ class Controller extends BaseController
             ];
         }
 
+        $genderWanita = Respondent::where('questionnaire_id', $questionnaire->id)->where('gender', 'wanita')->count();
+        $genderPria = Respondent::where('questionnaire_id', $questionnaire->id)->where('gender', 'pria')->count();
+
+
+        // Get All the Respondent's Age
+        $umur = [];
+        $umur['umurKelas'] = Respondent::where('questionnaire_id', $questionnaire->id)->selectRaw('umur, count(*) as count')
+            ->groupBy('umur')
+            ->pluck('count', 'umur')
+            ->toArray();
+
         // Get All the Respondent's IKM
         $idSoal = $questionnaire->question->pluck('id')->toArray();
         $ikm = [];
@@ -111,19 +125,26 @@ class Controller extends BaseController
             ->pluck('count', 'jawaban')
             ->toArray();
 
+        $kelasUmur= ['0','18-24', '25-34', '35-44', '45-54', '55-64', '65+'];
         // Sort the questions by number
         $questionnaire->question = $questionnaire->question->sortBy('nomor');
 
-        // foreach ($answerCount as $questionId => $answers) {
-        //     $uniqueMostChosenAnswers = array_unique($answers[6]);
-        //     $answerCount[$questionId][6] = $uniqueMostChosenAnswers;
-        // }
-
+        // memasuukkan jawaban yang paling banyak dipilih ke dalam array sehingga terlihat mana jawaban tertinggi yang sama
+        foreach ($answerCount as $questionId => $answers) {
+            $uniqueMostChosenAnswers = array_unique($answers[6]);
+            $answerCount[$questionId][6] = $uniqueMostChosenAnswers;
+        }
+        // @dd($answerCount);
+        // dd($uniqueMostChosenAnswers);
         return view('dashboard.questionnaires.print', [
             "questionnaire" => $questionnaire,
             "title" => "Hai",
             "answerCount" => $answerCount,
             "ikm" => $ikm,
+            "umur" => $umur,
+            "genderWanita" => $genderWanita,
+            "genderPria" => $genderPria,
+            "kelasUmur" => $kelasUmur,
         ]);
     }
 }

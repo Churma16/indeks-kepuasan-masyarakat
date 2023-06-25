@@ -47,9 +47,7 @@ class Questionnaire extends Model
      */
     public function getWaktuEkspirasiBaruAttribute()
     {
-        $dateold = $this->waktu_ekspirasi;
-        $datenew = date('d M y', strtotime($dateold));
-        return $datenew;
+        return Carbon::parse($this->waktu_ekspirasi)->format('d M Y');
     }
     
 
@@ -73,9 +71,6 @@ class Questionnaire extends Model
         return Carbon::parse($this->created_at)->format('d M Y');
     }
 
-    // public function getKategoriAttribute(){
-    //     return $$this->pluck('kategori')->unique();
-    // }
 
     // ACCESSOR
     /**
