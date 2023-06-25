@@ -306,7 +306,8 @@ class DashboardQuizController extends Controller
             'deskripsi_singkat' => 'required',
             'deskripsi' => 'required',
             'waktu_ekspirasi' => 'required',
-            // Add any additional validation rules for other form inputs
+        ], [
+            'deskripsi.after' => 'Tanggal yang dimasukkan harus setelah hari ini.',
         ]);
 
         // Update the questionnaire with the validated data
@@ -322,28 +323,28 @@ class DashboardQuizController extends Controller
         foreach ($questionnaire->question as $question) {
             $questionId = $question->id;
             $isi = $request->input($questionId);
-        
+
             $questionData[$questionId] = $isi;
         }
-        
+
         $validator = Validator::make($questionData, [
             'required' => Rule::in(['required']),
         ]);
-        
+
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
-        
+
         foreach ($questionnaire->question as $question) {
             $questionId = $question->id;
             $isi = $questionData[$questionId];
-        
+
             $question->update([
                 'isi' => $isi,
             ]);
         }
 
-        return redirect('/dashboard/questionnaires/'.$questionnaire->link)->with('success', 'Post Berhasil Diupdate!');
+        return redirect('/dashboard/questionnaires/' . $questionnaire->link)->with('success', 'Post Berhasil Diupdate!');
     }
 
 

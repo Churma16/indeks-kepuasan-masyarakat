@@ -44,7 +44,8 @@
                                     placeholder="Deksripsi Singkat Kuesioner"
                                     value="{{ old('deskripsi-singkat', $questionnaire->deskripsi_singkat) }}" required>
                                 @error('deskripsi-singkat')
-                                    <div class="text-danger"><i class="bi bi-exclamation-circle"></i> {{ $message }}</div>
+                                    <small class="text-danger"><i class="bi bi-exclamation-circle"></i>
+                                        {{ $message }}</small>
                                 @enderror
                             </div>
 
@@ -56,13 +57,18 @@
                                     data-trix-placeholder="Menjelaskan tentang apa kuesioner ini">
                                 </trix-editor>
                                 @error('deskripsi')
-                                    <div class="text-danger"><i class="bi bi-exclamation-circle"></i> {{ $message }}</div>
+                                    <small class="text-danger"><i class="bi bi-exclamation-circle"></i>
+                                        {{ $message }}</small>
                                 @enderror
                             </div>
                             <div class="mb-3">
                                 <label for="date" class="form-label">Waktu Ekspirasi</label>
                                 <input type="date" class="form-control" id="waktu_ekspirasi" name="waktu_ekspirasi"
                                     value="{{ $questionnaire->waktu_ekspirasi }}" required>
+                                @error('waktu_ekspirasi')
+                                    <small class="text-danger"><i class="bi bi-exclamation-circle"></i>
+                                        {{ $message }}</small>
+                                @enderror
                             </div>
                         </div>
 
@@ -100,40 +106,56 @@
             event.preventDefault();
         });
 
-        document.addEventListener('submit', function(event) {
-            var editors = document.querySelectorAll('trix-editor');
-            for (var i = 0; i < editors.length; i++) {
-                var editor = editors[i];
-                var inputId = editor.getAttribute('input');
-                var inputField = document.getElementById(inputId);
+        // document.addEventListener('submit', function(event) {
+        //     var editors = document.querySelectorAll('trix-editor');
+        //     for (var i = 0; i < editors.length; i++) {
+        //         var editor = editors[i];
+        //         var inputId = editor.getAttribute('input');
+        //         var inputField = document.getElementById(inputId);
 
-                if (editor.value.trim() === '') {
-                    inputField.setCustomValidity('This field is required.');
-                } else {
-                    inputField.setCustomValidity('');
-                }
-            }
-        });
+        //         if (editor.value.trim() === '') {
+        //             inputField.setCustomValidity('This field is required.');
+        //         } else {
+        //             inputField.setCustomValidity('');
+        //         }
+        //     }
+        // });
     </script>
+
     <script>
         // Add event listener to the form submit button
         document.querySelector('form').addEventListener('submit', function(event) {
             // Get all Trix editor inputs
             var trixEditors = document.querySelectorAll('trix-editor');
 
-            // Check if any Trix editor is empty
+            // Check if any Trix editor is empty or contains only whitespace
             var hasEmptyEditor = false;
             trixEditors.forEach(function(editor) {
-                if (editor.value.trim() === '') {
+                // Get the original value of the Trix editor content
+                var originalValue = editor.editor.getDocument().toString();
+
+                // Get the trimmed value of the Trix editor content
+                var trimmedValue = editor.editor.getDocument().toString().trim();
+
+                // Check if the Trix editor is empty
+                if (trimmedValue === '') {
                     hasEmptyEditor = true;
                     var inputId = editor.getAttribute('input');
                     var errorElement = document.getElementById(inputId + '_error');
                     errorElement.innerHTML =
-                        '<i class="bi bi-exclamation-circle"></i> field ini harus diisi.';
+                        '<i class="bi bi-exclamation-circle"></i> Field ini harus diisi.';
+                }
+                // Check if the Trix editor contains only whitespace
+                else if (trimmedValue === originalValue) {
+                    hasEmptyEditor = true;
+                    var inputId = editor.getAttribute('input');
+                    var errorElement = document.getElementById(inputId + '_error');
+                    errorElement.innerHTML =
+                        '<i class="bi bi-exclamation-circle"></i> Field ini tidak boleh hanya berisi spasi atau enter.';
                 }
             });
 
-            // Prevent form submission if any Trix editor is empty
+            // Prevent form submission if any Trix editor is empty or contains only whitespace
             if (hasEmptyEditor) {
                 event.preventDefault();
             }
