@@ -46,7 +46,7 @@
                         <div class="col-lg-4 col-md-6">
 
                         </div>
-                        <div class="col-lg-2 col-md-2 ms-6 me-md-4" style="">
+                        <div class="col-lg-2 col-md-2 ms-6 me-md-6 me-lg-1" style="">
                             <form action="/dashboard/questionnaires" id="kategoriSelector">
                                 <select class="form-control" id="kategoriSelector" name="kategoriSelector"
                                     onchange="document.getElementById('kategoriSelector').submit();">

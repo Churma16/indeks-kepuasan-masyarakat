@@ -170,7 +170,7 @@ class DashboardQuizController extends Controller
         if ($ansCount == 0) {
             $percentCount = 0;
         } else {
-            $percentCount = ($ansCount / $totalRespondent) * 100;
+            $percentCount = number_format(($ansCount / $totalRespondent) * 100, 2);
         }
 
 
