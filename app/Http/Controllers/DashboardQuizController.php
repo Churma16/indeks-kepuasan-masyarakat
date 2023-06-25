@@ -312,12 +312,14 @@ class DashboardQuizController extends Controller
      */
     public function update(Request $request, Questionnaire $questionnaire)
     {
+        // dd(request()->all());
         // Validate the form data
         $validatedData = $request->validate([
             'judul' => 'required',
             'deskripsi_singkat' => 'required',
             'deskripsi' => 'required',
             'waktu_ekspirasi' => 'required',
+            'kategoriSelect' => 'required',
         ], [
             'deskripsi.after' => 'Tanggal yang dimasukkan harus setelah hari ini.',
         ]);
@@ -328,6 +330,7 @@ class DashboardQuizController extends Controller
             'deskripsi_singkat' => $validatedData['deskripsi_singkat'],
             'deskripsi' => $validatedData['deskripsi'],
             'waktu_ekspirasi' => $validatedData['waktu_ekspirasi'],
+            'kategori' => $validatedData['kategoriSelect'],
         ]);
 
         $questionData = [];

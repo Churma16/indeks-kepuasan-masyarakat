@@ -54,7 +54,7 @@
                                     <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-3">
                                         <a href="/posts"><button type="button" class="btn btn-warning px-4 gap-3">
                                                 Kembali </button></a>
-                                        @if ($questionnaire->status_aktif == 'Tidak Aktif')
+                                        @if ($questionnaire->status_aktif == 'Aktif')
                                             <button type="submit" class="btn btn-info px-4 gap-3">Mulai</button>
                                         @else
                                             <button type="button" class="btn btn-info px-4 gap-3" onclick="kadaluarsa(event)">Mulai</button>
