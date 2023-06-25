@@ -116,7 +116,7 @@
                                         Pengisi Terbanyak
                                     </p>
                                     <h5 class="font-weight-bolder mb-0">
-                                        {{ $literalHighestAge}}
+                                        {{ $literalHighestAge }}
                                         {{-- <span class="text-success text-sm font-weight-bolder">+55%</span> --}}
                                     </h5>
                                 </div>
@@ -141,7 +141,7 @@
                                         Presentase Umur {{ $literalHighestAge }}
                                     </p>
                                     <h5 class="font-weight-bolder mb-0">
-                                        {{ $percentCount}}
+                                        {{ $percentCount }}
                                         {{-- <span class="text-success text-sm font-weight-bolder">+3%</span> --}}
                                     </h5>
                                 </div>
@@ -210,8 +210,9 @@
                 <div class="card col-lg-12 mb-4">
                     <div class="card-header pb-0">
                         <div class="">
-                            <a href="/dashboard/questionnaires/{{ $questionnaire->link }}/edit"><button type="button" class="btn btn-warning"><i
-                                class="bi bi-pencil-square"></i> Edit Kuesioner</button></a>
+                            <a href="/dashboard/questionnaires/{{ $questionnaire->link }}/edit"><button type="button"
+                                    class="btn btn-warning"><i class="bi bi-pencil-square"></i> Edit
+                                    Kuesioner</button></a>
                             <form action="/dashboard/questionnaires/{{ $questionnaire->link }}" method="post"
                                 class="d-inline">
                                 @method('delete')
@@ -219,7 +220,8 @@
                                 <button class="btn btn-danger border-0" onclick="confirmDelete(event)"><i
                                         class="bi bi-trash"></i> Hapus Kuesioner</button>
                             </form>
-                            <a href="/dashboard/print/{{ $questionnaire->link }}"><button type="button" class="btn btn-dark"><i class="bi bi-printer"></i> Cetak Kuesioner</button></a>
+                            <a href="/dashboard/print/{{ $questionnaire->link }}"><button type="button"
+                                    class="btn btn-dark"><i class="bi bi-printer"></i> Cetak Kuesioner</button></a>
                         </div>
 
                         <h4>{{ $questionnaire->judul }}</h4>
@@ -292,7 +294,8 @@
                                     <div class="overflow-hidden position-relative border-radius-lg bg-cover h-100">
                                         <div class="card-body ">
                                             <div class="chart">
-                                                <canvas id="pie-chart-gender" class="chart-canvas" height="200px"></canvas>
+                                                <canvas id="pie-chart-gender" class="chart-canvas"
+                                                    height="200px"></canvas>
                                             </div>
                                             <div>
                                                 <div class="pb-1"
@@ -441,8 +444,7 @@
                     </div>
                 </div>
             </div>
-        
-            @endsection
+        @endsection
     </div>
 
 
@@ -743,25 +745,37 @@
                 },
             });
         </script>
-            <script>
-                function confirmDelete(event) {
-                    event.preventDefault();
-        
-                    Swal.fire({
-                        title: 'Hapus Kuesioner?',
-                        text: "Kuesioner yang dihapus tidak dapat dikembalikan!",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#d33',
-                        cancelButtonColor: '#3085d6',
-                        confirmButtonText: 'Ya, Hapus!',
-                        cancelButtonText: 'Batalkan'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            // Proceed with the form submission
-                            event.target.closest('form').submit();
-                        }
-                    });
-                }
-            </script>
+        <script>
+            function confirmDelete(event) {
+                event.preventDefault();
+
+                Swal.fire({
+                    title: 'Hapus Kuesioner?',
+                    text: "Kuesioner yang dihapus tidak dapat dikembalikan!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Ya, Hapus!',
+                    cancelButtonText: 'Batalkan'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Proceed with the form submission
+                        event.target.closest('form').submit();
+                    }
+                });
+            }
+        </script>
+        <script>
+            @if (session()->has('success'))
+                Swal.fire({
+                    title: 'Success',
+                    text: "{{ session('success') }}",
+                    icon: 'success',
+                    timer: 3000, // Change the duration as per your needs
+                    showConfirmButton: false
+                });
+            @endif
+        </script>
+
     @endsection

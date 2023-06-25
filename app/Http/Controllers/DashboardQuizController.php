@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\Answer;
 use App\Models\Respondent;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class DashboardQuizController extends Controller
 {
@@ -72,7 +74,7 @@ class DashboardQuizController extends Controller
             $questionnaire->question()->save($question);
         }
         session()->forget('form_data');
-        return redirect('dashboard/questionnaires')->with('success', 'New post has been added!');
+        return redirect('dashboard/questionnaires/')->with('success', 'Kuesioner Berhasil Ditambahkan!');
     }
 
     /**
@@ -315,22 +317,33 @@ class DashboardQuizController extends Controller
             'waktu_ekspirasi' => $validatedData['waktu_ekspirasi'],
         ]);
 
+        $questionData = [];
+
         foreach ($questionnaire->question as $question) {
             $questionId = $question->id;
-            $rules = [
-                $questionId => 'required',
-            ];
-
-            $validatedData = $request->validate($rules);
-
-            $isi = $validatedData[$questionId];
+            $isi = $request->input($questionId);
+        
+            $questionData[$questionId] = $isi;
+        }
+        
+        $validator = Validator::make($questionData, [
+            'required' => Rule::in(['required']),
+        ]);
+        
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+        
+        foreach ($questionnaire->question as $question) {
+            $questionId = $question->id;
+            $isi = $questionData[$questionId];
+        
             $question->update([
                 'isi' => $isi,
             ]);
         }
 
-
-        return redirect('dashboard/questionnaires')->with('success', 'Post has been updated!');
+        return redirect('/dashboard/questionnaires/'.$questionnaire->link)->with('success', 'Post Berhasil Diupdate!');
     }
 
 
@@ -345,6 +358,6 @@ class DashboardQuizController extends Controller
         Questionnaire::destroy($questionnaire->id);
         Question::destroy($questionnaire->question);
 
-        return redirect('/dashboard/questionnaires')->with('success', 'Kuesioner berhasil dihapus!');
+        return redirect('/dashboard/questionnaires')->with('success', 'Kuesioner Berhasil Dihapus!');
     }
 }

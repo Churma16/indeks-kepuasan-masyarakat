@@ -76,10 +76,7 @@
                                     <input id="{{ $question->id }}" type="hidden" name="{{ $question->id }}"
                                         value="{{ old($question->id, $question->isi) }}">
                                     <trix-editor input="{{ $question->id }}"></trix-editor>
-                                    @error($question->id)
-                                        <div class="text-danger"><i class="bi bi-exclamation-circle"></i> {{ $message }}
-                                        </div>
-                                    @enderror
+                                    <div class="text-danger validation-error" id="{{ $question->id }}_error"></div>
                                 </div>
                             @endforeach
                         </div>
@@ -115,6 +112,30 @@
                 } else {
                     inputField.setCustomValidity('');
                 }
+            }
+        });
+    </script>
+    <script>
+        // Add event listener to the form submit button
+        document.querySelector('form').addEventListener('submit', function(event) {
+            // Get all Trix editor inputs
+            var trixEditors = document.querySelectorAll('trix-editor');
+
+            // Check if any Trix editor is empty
+            var hasEmptyEditor = false;
+            trixEditors.forEach(function(editor) {
+                if (editor.value.trim() === '') {
+                    hasEmptyEditor = true;
+                    var inputId = editor.getAttribute('input');
+                    var errorElement = document.getElementById(inputId + '_error');
+                    errorElement.innerHTML =
+                        '<i class="bi bi-exclamation-circle"></i> field ini harus diisi.';
+                }
+            });
+
+            // Prevent form submission if any Trix editor is empty
+            if (hasEmptyEditor) {
+                event.preventDefault();
             }
         });
     </script>
