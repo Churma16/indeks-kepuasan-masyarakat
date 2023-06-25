@@ -1,5 +1,6 @@
 {{-- @dd($ikm['ikmKelas']) --}}
 {{-- @dd($testcoba) --}}
+
 @extends('dashboard.layouts.main')
 
 @section('main')
@@ -697,7 +698,7 @@
                         borderRadius: 4,
                         backgroundColor: '#3A416F',
                         data: [
-                            @for ($i = 1; $i <= count($ikm['ikmKelas']); $i++)
+                            @for ($i = 1; $i <= count($ikm['ikmKelas'])+1; $i++)
                                 '{{ $ikm['ikmKelas'][$i] ?? 0 }}',
                             @endfor
                         ],
