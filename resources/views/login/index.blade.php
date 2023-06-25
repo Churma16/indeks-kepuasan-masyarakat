@@ -42,9 +42,9 @@
                                             aria-describedby="email-addon" name="email" id="email"
                                             value="{{ old('email') }}" required autofocus />
                                         @error('email')
-                                            <div class="invalid-feedback">
+                                            <small class="invalid-feedback">
                                                 {{ $message }}
-                                            </div>
+                                            </small>
                                         @enderror
                                     </div>
 

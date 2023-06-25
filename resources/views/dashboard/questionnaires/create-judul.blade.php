@@ -15,6 +15,7 @@
                                 <label for="judul" class="form-label">Judul</label>
                                 <input type="text" class="form-control" id="judul" name="judul" value=""
                                     placeholder="Judul Kuesioner" required>
+
                             </div>
 
                             <div class="mb-3">
@@ -63,6 +64,9 @@
                                 <label for="date" class="form-label">Waktu Ekspirasi</label>
                                 <input type="date" class="form-control" id="waktu_ekspirasi" name="waktu_ekspirasi"
                                     value="" required>
+                                @error('waktu_ekspirasi')
+                                    <small class="text-danger"><i class="bi bi-exclamation-circle"></i> {{ $message }}</small>
+                                @enderror
                             </div>
                             <button type="submit" class="btn btn-info">Simpan Detail</button>
                         </form>

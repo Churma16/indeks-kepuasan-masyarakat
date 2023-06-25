@@ -20,7 +20,7 @@ rectangle Sistem-Informasi-Indeks-Kepuasan-Masyarakat{
     (Melihat List Kuesioner)--(Mengedit Kuesioner)
     (Melihat List Kuesioner)--(Menghapus Kuesioner)
     (Melihat List Kuesioner)--(Mencetak Hasil Kuesioner)
-    (Login)-down->(Logout)
+    (Login)<-down-(Logout): <<includes>>
 
     Guest << Warga >>
     Guest -- (Melihat Daftar Kuesioner)

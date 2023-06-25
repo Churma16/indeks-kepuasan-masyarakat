@@ -7,6 +7,9 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+
+
 use App\Models\Questionnaire;
 use App\Models\Answer;
 
@@ -26,31 +29,35 @@ class Controller extends BaseController
      */
     public function redirectToCreate(Request $request)
     {
-        // Store the form data in a session variable
-        session(['form_data' => $request->all()]);
-
+        // Validate the form data
+        $validatedData = $request->validate([
+            'waktu_ekspirasi' => 'required|date|after:today',
+        ], [
+            'waktu_ekspirasi.after' => 'Tanggal yang dimasukkan harus setelah hari ini.',
+        ]);
+    
+        // Store the validated form data in a session variable
+        session(['form_data' => $validatedData]);
+    
         // Extract the description from the form data and encode it for displaying
         $text = session('form_data.deskripsi');
         $text = html_entity_decode($text);
         $text = htmlspecialchars($text);
-
+    
         // Store the encoded description in a session variable
         $session = session();
         $session->put('form_data.deskripsi_literal', $text);
-
-
-        //taking only one category
-        if(session('form_data.kategoriSelect') == 'text'){
+    
+        // Taking only one category
+        if (session('form_data.kategoriSelect') == 'text') {
             $session->forget('form_data.kategoriSelect');
-        }
-        elseif(session('form_data.kategoriSelect')){
+        } elseif (session('form_data.kategoriSelect')) {
             $session->put('form_data.kategori', session('form_data.kategoriSelect'));
             $session->forget('form_data.kategoriSelect');
         }
-
-
+    
         // Redirect the user to the create questionnaire page
-        return redirect('/dashboard/questionnaires/create',);
+        return redirect('/dashboard/questionnaires/create');
     }
 
     /**
