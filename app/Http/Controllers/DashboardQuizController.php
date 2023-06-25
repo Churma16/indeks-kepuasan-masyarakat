@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
+
 class DashboardQuizController extends Controller
 {
     /**
@@ -20,10 +21,17 @@ class DashboardQuizController extends Controller
      */
     public function index()
     {
-        $questionnaire = Questionnaire::all();
+        $questionnaires = Questionnaire::latest();
+
+        if(request('search')){
+            $questionnaires->where('judul', 'like', '%' . request('search') . '%');
+        }
+        
+        $questionnairespag = $questionnaires->paginate(10)->withQueryString();
+
         return view('dashboard.questionnaires.index', [
             'title' => ' ',
-            'questionnaires' => $questionnaire,
+            'questionnaires' => $questionnairespag,
             // 'cat'=> $cat,
         ]);
     }

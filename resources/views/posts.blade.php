@@ -11,7 +11,7 @@
                         <form action="/posts" id="search">
                             <div class="input-group">
                                 <input type="text" value="{{ request('search') }}" class="form-control" name="search"
-                                    placeholder="Search...">
+                                    placeholder="Cari Kuesioner...">
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <a href="#" onclick="document.getElementById('search').submit()">

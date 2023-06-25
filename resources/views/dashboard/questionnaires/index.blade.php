@@ -42,6 +42,23 @@
                                         class="ni ni-fat-add"></i> Buat Kuesioner</button></a>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-3 ms-auto me-4">
+                            <form action="/dashboard/questionnaires" id="search">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-text">
+                                            <a href="#" onclick="document.getElementById('search').submit()">
+                                                <i class="bi bi-search bi-lg"></i>
+                                            </a>
+                                        </span>
+                                        <input type="text" value="{{ request('search') }}" class="form-control ps-2"
+                                            name="search" placeholder="Cari Kuesioner...">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
                             <table class="table align-items-center mb-0">
@@ -82,77 +99,87 @@
                                     </tr>
                                 </thead>
                                 <tbody class="ps-5">
-                                    @foreach ($questionnaires as $questionnaire)
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex ps-3 py-1">
-                                                    <div class="d-flex flex-column justify-content-center">
-                                                        <h6 class="mb-0 text-sm">
-                                                            {{ $loop->iteration }}
-                                                        </h6>
+                                    @if ($questionnaires->count() > 0)
+                                        @foreach ($questionnaires as $questionnaire)
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex ps-3 py-1">
+                                                        <div class="d-flex flex-column justify-content-center">
+                                                            <h6 class="mb-0 text-sm">
+                                                                {{ $loop->iteration }}
+                                                            </h6>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex ps-3 py-1">
-                                                    <div class="d-flex flex-column justify-content-center">
-                                                        <h6 class="mb-0 text-sm">
-                                                            {{ $questionnaire->judul }}
-                                                        </h6>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex ps-3 py-1">
+                                                        <div class="d-flex flex-column justify-content-center">
+                                                            <h6 class="mb-0 text-sm">
+                                                                {{ $questionnaire->judul }}
+                                                            </h6>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <p class="text-xs font-weight-bold mb-0 ">
-                                                    {{ $questionnaire->kategori }}
-                                                </p>
-                                            </td>
-                                            <td>
-                                                <p class="text-xs font-weight-bold mb-0 text-center">
-                                                    {{ $questionnaire->jumlah_responden }}
-                                                </p>
-                                            </td>
-                                            <td>
-                                                <p class="text-xs font-weight-bold mb-0 text-center">
-                                                    {{ $questionnaire->jumlah_pertanyaan }}
-                                                </p>
-                                            </td>
-                                            <td class="align-middle text-center text-sm">
-                                                @if ($questionnaire->status_aktif == 'Aktif')
-                                                    <span class="badge badge-sm bg-gradient-success">Aktif</span>
-                                                @else
-                                                    <span class="badge badge-sm bg-gradient-secondary">Tidak
-                                                        Aktif</span>
-                                                @endif
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <span
-                                                    class="text-secondary text-xs font-weight-bold">{{ $questionnaire->waktu_ekspirasi_baru }}</span>
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <a href="/dashboard/questionnaires/{{ $questionnaire->link }}"
-                                                    class="badge bg-info"><i class="bi bi-eye-fill"></i>
-                                                </a>
-                                                <a href="/dashboard/print/{{ $questionnaire->link }}"
-                                                    class="badge bg-dark"><i class="bi bi-printer"></i>
-                                                </a>
-                                                <a href="/dashboard/questionnaires/{{ $questionnaire->link }}/edit"
-                                                    class="badge bg-warning"><i class="bi bi-pencil-square"></i>
-                                                </a>
+                                                </td>
+                                                <td>
+                                                    <p class="text-xs font-weight-bold mb-0 ">
+                                                        {{ $questionnaire->kategori }}
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-xs font-weight-bold mb-0 text-center">
+                                                        {{ $questionnaire->jumlah_responden }}
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-xs font-weight-bold mb-0 text-center">
+                                                        {{ $questionnaire->jumlah_pertanyaan }}
+                                                    </p>
+                                                </td>
+                                                <td class="align-middle text-center text-sm">
+                                                    @if ($questionnaire->status_aktif == 'Aktif')
+                                                        <span class="badge badge-sm bg-gradient-success">Aktif</span>
+                                                    @else
+                                                        <span class="badge badge-sm bg-gradient-secondary">Tidak
+                                                            Aktif</span>
+                                                    @endif
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <span
+                                                        class="text-secondary text-xs font-weight-bold">{{ $questionnaire->waktu_ekspirasi_baru }}</span>
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <a href="/dashboard/questionnaires/{{ $questionnaire->link }}"
+                                                        class="badge bg-info"><i class="bi bi-eye-fill"></i>
+                                                    </a>
+                                                    <a href="/dashboard/questionnaires/{{ $questionnaire->link }}/edit"
+                                                        class="badge bg-warning"><i class="bi bi-pencil-square"></i>
+                                                    </a>
 
-                                                <form action="/dashboard/questionnaires/{{ $questionnaire->link }}"
-                                                    method="post" class="d-inline">
-                                                    @method('delete')
-                                                    @csrf
-                                                    <button class="badge bg-danger border-0" onclick="confirmDelete(event)">
-                                                        <i class="bi bi-trash"></i>
-                                                    </button>
-                                                </form>
-                                            </td>
+                                                    <form action="/dashboard/questionnaires/{{ $questionnaire->link }}"
+                                                        method="post" class="d-inline">
+                                                        @method('delete')
+                                                        @csrf
+                                                        <button class="badge bg-danger border-0"
+                                                            onclick="confirmDelete(event)">
+                                                            <i class="bi bi-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                    <a href="/dashboard/print/{{ $questionnaire->link }}"
+                                                        class="badge bg-dark"><i class="bi bi-printer"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @else
+                                        <tr>
+                                            <td class="text-center" colspan="8">Tidak ada Kuesioner Ditemukan</td>
                                         </tr>
-                                    @endforeach
+                                    @endif
                                 </tbody>
                             </table>
+                            <div class="d-flex justify-content-center" style="color">
+                                {{ $questionnaires->links() }}
+                            </div>
                         </div>
                     </div>
                 </div>
