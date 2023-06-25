@@ -44,7 +44,7 @@
                                             <div class="form-check form-check-radio">
                                                 <label class="form-check-label">
                                                     <input class="form-check-input" type="radio" name="jeniskelamin"
-                                                        id="jeniskelamin" value="Pria" required/>
+                                                        id="jeniskelamin" value="Pria" required />
                                                     <span class="form-check-sign"></span>
                                                     Pria
                                                 </label>
@@ -52,7 +52,7 @@
                                             <div class="form-check form-check-radio">
                                                 <label class="form-check-label">
                                                     <input class="form-check-input" type="radio" name="jeniskelamin"
-                                                        id="jeniskelamin" value="Wanita" required/>
+                                                        id="jeniskelamin" value="Wanita" required />
                                                     <span class="form-check-sign"></span>
                                                     Wanita
                                                 </label>
@@ -67,7 +67,7 @@
                                             <div class="form-check form-check-radio">
                                                 <label class="form-check-label">
                                                     <input class="form-check-input" type="radio" name="umur"
-                                                        id="umur" value="1" required/>
+                                                        id="umur" value="1" required />
                                                     <span class="form-check-sign"></span>
                                                     18-24 Tahun
                                                 </label>
@@ -75,7 +75,7 @@
                                             <div class="form-check form-check-radio">
                                                 <label class="form-check-label">
                                                     <input class="form-check-input" type="radio" name="umur"
-                                                        id="umur" value="2"  required/>
+                                                        id="umur" value="2" required />
                                                     <span class="form-check-sign"></span>
                                                     25-34 Tahun
                                                 </label>
@@ -83,7 +83,7 @@
                                             <div class="form-check form-check-radio">
                                                 <label class="form-check-label">
                                                     <input class="form-check-input" type="radio" name="umur"
-                                                        id="umur" value="3" required/>
+                                                        id="umur" value="3" required />
                                                     <span class="form-check-sign"></span>
                                                     35-44 Tahun
                                                 </label>
@@ -91,7 +91,7 @@
                                             <div class="form-check form-check-radio">
                                                 <label class="form-check-label">
                                                     <input class="form-check-input" type="radio" name="umur"
-                                                        id="umur" value="4"  required/>
+                                                        id="umur" value="4" required />
                                                     <span class="form-check-sign"></span>
                                                     45-54 Tahun
                                                 </label>
@@ -99,7 +99,7 @@
                                             <div class="form-check form-check-radio">
                                                 <label class="form-check-label">
                                                     <input class="form-check-input" type="radio" name="umur"
-                                                        id="umur" value="5" required/>
+                                                        id="umur" value="5" required />
                                                     <span class="form-check-sign"></span>
                                                     55-64 Tahun
                                                 </label>
@@ -107,7 +107,7 @@
                                             <div class="form-check form-check-radio">
                                                 <label class="form-check-label">
                                                     <input class="form-check-input" type="radio" name="umur"
-                                                        id="umur" value="6" required/>
+                                                        id="umur" value="6" required />
                                                     <span class="form-check-sign"></span>
                                                     65 Tahun Keatas
                                                 </label>
@@ -125,22 +125,49 @@
                                         </div>
 
                                         <div>
-                                            
-                                            <label for="slider">Tingkat Kepuasan:</label>
-                                            <br>
-                                            <input type="range" id="slider" name="jawaban{{ $question->id }}"
-                                                min="1" max="5" step="1" list="labels">
-                                            <datalist id="labels">
-                                                <option value="1">Sangat Tidak Puas</option>
-                                                <option value="2">Tidak Puas</option>
-                                                <option value="3">Cukup Puas</option>
-                                                <option value="4">Puas</option>
-                                                <option value="5">Sangat Puas</option>
-                                            </datalist>
+                                            <div class="form-check form-check-radio">
+                                                <label class="form-check-label"">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="jawaban{{ $question->id }}" id="jawaban{{ $question->id }}radio5" value="5"
+                                                        required>
+                                                    <span class="form-check-sign"></span>
+                                                    Sangat Puas</label>
+                                            </div>
+                                            <div class="form-check form-check-radio">
+                                                <label class="form-check-label" for="jawaban{{ $question->id }}radio4">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="jawaban{{ $question->id }}" id="jawaban{{ $question->id }}radio4" value="4"
+                                                        required>
+                                                    <span class="form-check-sign"></span>Puas</label>
+                                            </div>
+                                            <div class="form-check form-check-radio">
+                                                <label class="form-check-label" for="jawaban{{ $question->id }}radio3">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="jawaban{{ $question->id }}" id="jawaban{{ $question->id }}radio3" value="3"
+                                                        required>
+                                                    <span class="form-check-sign"></span>Cukup Puas</label>
+                                            </div>
+                                            <div class="form-check form-check-radio">
+                                                <label class="form-check-label" for="jawaban{{ $question->id }}radio2">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="jawaban{{ $question->id }}" id="jawaban{{ $question->id }}radio2" value="2"
+                                                        required>
+                                                    <span class="form-check-sign"></span>Tidak Puas</label>
+                                            </div>
+                                            <div class="form-check form-check-radio">
+                                                <label class="form-check-label" for="jawaban{{ $question->id }}radio1">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="jawaban{{ $question->id }}" id="jawaban{{ $question->id }}radio1" value="1"
+                                                        required>
+                                                    <span class="form-check-sign"></span>Sangat Tidak Puas</label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
+
+
+
                             <button type="submit" class="btn btn-info">Kirim Jawaban</button>
                         </form>
                     </div>
