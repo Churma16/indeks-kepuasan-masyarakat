@@ -3,6 +3,11 @@
 
 <head>
     <title>Print {{ $questionnaire->judul }}</title>
+    <script type="text/javascript">
+        window.onload = function() {
+            window.print();
+        };
+    </script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -76,27 +81,39 @@
         </thead>
         <tbody>
             @foreach ($questionnaire->question as $q)
-                <tr>
-                    <td>{{ $q->nomor }}</td>
-                    <td>{!! $q->isi !!}</td>
-                    @for ($i = 1; $i < 6; $i++)
-                        <td>{{ $answerCount[$q->id][$i] }}</td>
-                    @endfor
-                    @if ($answerCount[$q->id][6] == 1)
-                        <td>Sangat Tidak Puas</td>
-                    @elseif($answerCount[$q->id][6] == 2)
-                        <td>Tidak Puas</td>
-                    @elseif($answerCount[$q->id][6] == 3)
-                        <td>Cukup Puas</td>
-                    @elseif($answerCount[$q->id][6] == 4)
-                        <td>Puas</td>
-                    @elseif($answerCount[$q->id][6] == 5)
-                        <td>Sangat Puas</td>
-                    @endif
-
-                </tr>
-            @endforeach
-
+            <tr>
+                <td>{{ $q->nomor }}</td>
+                <td>{!! $q->isi !!}</td>
+                @for ($i = 1; $i < 6; $i++)
+                    <td>{{ $answerCount[$q->id][$i] }}</td>
+                @endfor
+                <td>
+                    @foreach ($answerCount[$q->id][6] as $equalAnswer)
+                        @if ($equalAnswer == 1)
+                            Sangat Tidak Puas
+                        @elseif ($equalAnswer == 2)
+                            Tidak Puas
+                        @elseif ($equalAnswer == 3)
+                            Cukup Puas
+                        @elseif ($equalAnswer == 4)
+                            Puas
+                        @elseif ($equalAnswer == 5)
+                            Sangat Puas
+                        @endif
+                        @if (!$loop->last)
+                            dan
+                        @endif
+                    @endforeach
+                </td>
+            </tr>
+        @endforeach
+        
+            <tr style="font-weight: bold">
+                <td colspan="2" >Total</td>
+                @for ($i = 1; $i <= count($ikm['ikmKelas']); $i++)
+                    <td>{{ $ikm['ikmKelas'][$i] ?? 0 }}</td>
+                @endfor
+            </tr>
         </tbody>
     </table>
 

@@ -96,17 +96,34 @@ class Controller extends BaseController
                 6 => Answer::where('question_id', $q->id)
                     ->select('jawaban')
                     ->groupBy('jawaban', 'respondent_id')
-                    ->orderByRaw('COUNT(*) ASC')
-                    ->first()->jawaban,
+                    ->orderByRaw('COUNT(*) DESC')
+                    ->pluck('jawaban')
+                    ->toArray(),
             ];
         }
 
+        // Get All the Respondent's IKM
+        $idSoal = $questionnaire->question->pluck('id')->toArray();
+        $ikm = [];
+        $ikm['ikmKelas'] = Answer::whereIn('question_id', $idSoal)
+            ->selectRaw('jawaban, count(*) as count')
+            ->groupBy('jawaban')
+            ->pluck('count', 'jawaban')
+            ->toArray();
+
         // Sort the questions by number
         $questionnaire->question = $questionnaire->question->sortBy('nomor');
+
+        // foreach ($answerCount as $questionId => $answers) {
+        //     $uniqueMostChosenAnswers = array_unique($answers[6]);
+        //     $answerCount[$questionId][6] = $uniqueMostChosenAnswers;
+        // }
+
         return view('dashboard.questionnaires.print', [
             "questionnaire" => $questionnaire,
             "title" => "Hai",
             "answerCount" => $answerCount,
+            "ikm" => $ikm,
         ]);
     }
 }
