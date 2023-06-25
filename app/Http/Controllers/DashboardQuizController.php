@@ -22,17 +22,21 @@ class DashboardQuizController extends Controller
     public function index()
     {
         $questionnaires = Questionnaire::latest();
-
+        // dd(request('kategoriSelector'));
         if(request('search')){
             $questionnaires->where('judul', 'like', '%' . request('search') . '%');
         }
+        if(request('kategoriSelector')){
+            $questionnaires->where('kategori', 'like', '%' . request('kategoriSelector') . '%');
+        }
         
-        $questionnairespag = $questionnaires->paginate(10)->withQueryString();
+        $questionnairesPag = $questionnaires->paginate(10)->withQueryString();
+        $cat = Questionnaire::distinct()->orderBy('kategori')->pluck('kategori');
 
         return view('dashboard.questionnaires.index', [
             'title' => ' ',
-            'questionnaires' => $questionnairespag,
-            // 'cat'=> $cat,
+            'questionnaires' => $questionnairesPag,
+            'cat'=> $cat,
         ]);
     }
 

@@ -37,13 +37,27 @@
 
                     <div class="card-header pb-0">
                         <h4>Daftar Kuesioner</h4>
-                        <div class="col-lg-2">
+                    </div>
+                    <div class="row justify-content-between">
+                        <div class="col-lg-2 ms-4">
                             <a href="/dashboard/create-judul"><button type="button" class="btn btn-info"><i
                                         class="ni ni-fat-add"></i> Buat Kuesioner</button></a>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3 ms-auto me-4">
+                        <div class="col-lg-4 col-md-6">
+
+                        </div>
+                        <div class="col-lg-2 col-md-2 ms-6" style="">
+                            <form action="/dashboard/questionnaires" id="kategoriSelector">
+                                <select class="form-control" id="kategoriSelector" name="kategoriSelector"
+                                    onchange="document.getElementById('kategoriSelector').submit();">
+                                    <option value="">---- Pilih Kategori ----</option>
+                                    @foreach ($cat as $c)
+                                        <option value="{{ $c }}">{{ $c }}</option>
+                                    @endforeach
+                                </select>
+                            </form>
+                        </div>
+                        <div class="col-lg-3 col-md-3 ms-auto me-4">
                             <form action="/dashboard/questionnaires" id="search">
                                 <div class="form-group">
                                     <div class="input-group">
@@ -58,6 +72,7 @@
                                 </div>
                             </form>
                         </div>
+
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
@@ -229,4 +244,9 @@
             });
         @endif
     </script>
+    {{-- <script>
+        function submitForm() {
+            document.getElementById("kategoriSelector").submit();
+        }
+    </script> --}}
 @endsection

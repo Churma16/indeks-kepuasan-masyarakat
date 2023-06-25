@@ -31,7 +31,8 @@
                                     <div class="card-body">
                                         <h4 class="card-title" style="font-weight:bold;margin-top:2%">{{ $post->judul }}
                                         </h4>
-                                        <h6 class="card-text" style="position:absolute; top:0; margin-top: 150px;">
+                                        <h6 class="card-text"
+                                            style="position:absolute; top:0; margin-top: 150px; padding-right: 10px;">
                                             {{ $post->deskripsi_singkat }}</h6>
                                         <small style="position:absolute; bottom:0; margin-bottom: 70px;">Waktu Ekspirasi:
                                             {{ $post->waktu_ekspirasi_baru }}</small>

@@ -17,22 +17,6 @@
         <div class="section section-basic mt-5" id="basic-elements">
             <div class="container">
                 <h3 class="title">Detail Kuesioner</h3>
-                {{-- @if (session()->has('success'))
-                    <div class="alert alert-success" role="alert">
-                        <div class="container">
-                            <div class="alert-icon">
-                                <i class="now-ui-icons ui-2_like"></i>
-                            </div>
-                            {{ session('success') }}
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">
-                                    <i class="now-ui-icons ui-1_simple-remove"></i>
-                                </span>
-                            </button>
-                        </div>
-                    </div>
-                @endif --}}
-
                 <div class="card text-center">
                     <div class="card-body">
                         <h4 class="card-title"><b>{{ $questionnaire->judul }}</b></h4>
@@ -70,7 +54,11 @@
                                     <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-3">
                                         <a href="/posts"><button type="button" class="btn btn-warning px-4 gap-3">
                                                 Kembali </button></a>
-                                        <button type="submit" class="btn btn-info px-4 gap-3">Mulai</button>
+                                        @if ($questionnaire->status_aktif == 'Tidak Aktif')
+                                            <button type="submit" class="btn btn-info px-4 gap-3">Mulai</button>
+                                        @else
+                                            <button type="button" class="btn btn-info px-4 gap-3" onclick="kadaluarsa(event)">Mulai</button>
+                                        @endif
                                     </div>
                                 </form>
                             </div>
@@ -108,4 +96,18 @@
             });
         @endif
     </script>
+<script>
+    function kadaluarsa(event) {
+        event.preventDefault();
+        setTimeout(function() {
+            Swal.fire({
+                title: 'Gagal',
+                text: "Kuesioner Sudah Kadaluwarsa",
+                icon: 'error',
+                showConfirmButton: false
+            });
+        }, 500); // Delay execution by 500 milliseconds (adjust as needed)
+    }
+</script>
+
 @endsection
