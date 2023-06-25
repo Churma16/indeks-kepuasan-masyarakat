@@ -128,37 +128,37 @@
                                             <div class="form-check form-check-radio">
                                                 <label class="form-check-label"">
                                                     <input class="form-check-input" type="radio"
-                                                        name="jawaban{{ $question->id }}" id="jawaban{{ $question->id }}radio5" value="5"
-                                                        required>
+                                                        name="jawaban{{ $question->id }}"
+                                                        id="jawaban{{ $question->id }}radio5" value="5" required>
                                                     <span class="form-check-sign"></span>
                                                     Sangat Puas</label>
                                             </div>
                                             <div class="form-check form-check-radio">
                                                 <label class="form-check-label" for="jawaban{{ $question->id }}radio4">
                                                     <input class="form-check-input" type="radio"
-                                                        name="jawaban{{ $question->id }}" id="jawaban{{ $question->id }}radio4" value="4"
-                                                        required>
+                                                        name="jawaban{{ $question->id }}"
+                                                        id="jawaban{{ $question->id }}radio4" value="4" required>
                                                     <span class="form-check-sign"></span>Puas</label>
                                             </div>
                                             <div class="form-check form-check-radio">
                                                 <label class="form-check-label" for="jawaban{{ $question->id }}radio3">
                                                     <input class="form-check-input" type="radio"
-                                                        name="jawaban{{ $question->id }}" id="jawaban{{ $question->id }}radio3" value="3"
-                                                        required>
+                                                        name="jawaban{{ $question->id }}"
+                                                        id="jawaban{{ $question->id }}radio3" value="3" required>
                                                     <span class="form-check-sign"></span>Cukup Puas</label>
                                             </div>
                                             <div class="form-check form-check-radio">
                                                 <label class="form-check-label" for="jawaban{{ $question->id }}radio2">
                                                     <input class="form-check-input" type="radio"
-                                                        name="jawaban{{ $question->id }}" id="jawaban{{ $question->id }}radio2" value="2"
-                                                        required>
+                                                        name="jawaban{{ $question->id }}"
+                                                        id="jawaban{{ $question->id }}radio2" value="2" required>
                                                     <span class="form-check-sign"></span>Tidak Puas</label>
                                             </div>
                                             <div class="form-check form-check-radio">
                                                 <label class="form-check-label" for="jawaban{{ $question->id }}radio1">
                                                     <input class="form-check-input" type="radio"
-                                                        name="jawaban{{ $question->id }}" id="jawaban{{ $question->id }}radio1" value="1"
-                                                        required>
+                                                        name="jawaban{{ $question->id }}"
+                                                        id="jawaban{{ $question->id }}radio1" value="1" required>
                                                     <span class="form-check-sign"></span>Sangat Tidak Puas</label>
                                             </div>
                                         </div>
