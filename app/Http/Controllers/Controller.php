@@ -35,19 +35,19 @@ class Controller extends BaseController
         ], [
             'waktu_ekspirasi.after' => 'Tanggal yang dimasukkan harus setelah hari ini.',
         ]);
-    
-        // Store the validated form data in a session variable
-        session(['form_data' => $validatedData]);
-    
+
+        // Store the form data in a session variable
+        session(['form_data' => $request->all()]);
+
         // Extract the description from the form data and encode it for displaying
         $text = session('form_data.deskripsi');
         $text = html_entity_decode($text);
         $text = htmlspecialchars($text);
-    
+
         // Store the encoded description in a session variable
         $session = session();
         $session->put('form_data.deskripsi_literal', $text);
-    
+
         // Taking only one category
         if (session('form_data.kategoriSelect') == 'text') {
             $session->forget('form_data.kategoriSelect');
@@ -55,10 +55,11 @@ class Controller extends BaseController
             $session->put('form_data.kategori', session('form_data.kategoriSelect'));
             $session->forget('form_data.kategoriSelect');
         }
-    
+
         // Redirect the user to the create questionnaire page
         return redirect('/dashboard/questionnaires/create');
     }
+
 
     /**
      * Display the questionnaire.
@@ -93,7 +94,7 @@ class Controller extends BaseController
                 5 => Answer::where('question_id', $q->id)->where('jawaban', 5)->count(),
                 // choose which answer is the most chosen
                 6 => Answer::where('question_id', $q->id)
-                    ->select('jawaban') 
+                    ->select('jawaban')
                     ->groupBy('jawaban', 'respondent_id')
                     ->orderByRaw('COUNT(*) ASC')
                     ->first()->jawaban,
@@ -109,4 +110,3 @@ class Controller extends BaseController
         ]);
     }
 }
-
