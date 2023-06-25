@@ -698,7 +698,7 @@
                         borderRadius: 4,
                         backgroundColor: '#3A416F',
                         data: [
-                            @for ($i = 1; $i <= count($ikm['ikmKelas'])+1; $i++)
+                            @for ($i = 1; $i <= count($ikm['ikmKelas']); $i++)
                                 '{{ $ikm['ikmKelas'][$i] ?? 0 }}',
                             @endfor
                         ],
