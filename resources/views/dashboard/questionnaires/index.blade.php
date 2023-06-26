@@ -1,4 +1,4 @@
-{{-- @dd($cat) --}}
+{{-- @dd($questionnaires) --}}
 @extends('dashboard.layouts.main')
 
 @section('style')
@@ -53,7 +53,7 @@
                                     <option value="">---- Pilih Kategori ----</option>
                                     @foreach ($cat as $c)
                                         <option value="{{ $c }}"
-                                            @if (request('kategoriSelector')) ? selected : @endif>{{ $c }}
+                                            @if (request('kategoriSelector')== $c) ? selected : @endif>{{ $c }}
                                         </option>
                                     @endforeach
                                 </select>

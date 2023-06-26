@@ -26,7 +26,7 @@
                                     </option>
                                     @foreach ($cat as $c)
                                         <option value="{{ $c }}"
-                                            @if (old('kategori', $questionnaire->kaetgori)) ? selected : @endif>{{ $c }}
+                                            @if (old('kategori', $questionnaire->kategori)==$c) ? selected : @endif>{{ $c }}
                                         </option>
                                     @endforeach
                                 </select>

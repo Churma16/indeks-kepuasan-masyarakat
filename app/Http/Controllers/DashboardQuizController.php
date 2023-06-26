@@ -24,20 +24,22 @@ class DashboardQuizController extends Controller
     {
         $questionnaires = Questionnaire::latest();
         // dd(request('kategoriSelector'));
-        if(request('search')){
+        if (request('search')) {
             $questionnaires->where('judul', 'like', '%' . request('search') . '%');
         }
-        if(request('kategoriSelector')){
+        if (request('kategoriSelector')) {
             $questionnaires->where('kategori', 'like', '%' . request('kategoriSelector') . '%');
         }
-        
+        // Order the results based on the status_aktif column
+        $questionnaires = $questionnaires->get()->sortBy('status_aktif')->toQuery(); // Convert collection to query builder
+
         $questionnairesPag = $questionnaires->paginate(10)->withQueryString();
         $cat = Questionnaire::distinct()->orderBy('kategori')->pluck('kategori');
 
         return view('dashboard.questionnaires.index', [
             'title' => ' ',
             'questionnaires' => $questionnairesPag,
-            'cat'=> $cat,
+            'cat' => $cat,
         ]);
     }
 
@@ -263,7 +265,7 @@ class DashboardQuizController extends Controller
         // Sisa hari
         $ekspirasi = Carbon::parse($questionnaire->waktu_ekspirasi_baru);
         $endDate = Carbon::now();
-    
+
         $daysDifference = $ekspirasi->diffInDays($endDate);
 
         return view('dashboard.questionnaires.show', [
@@ -334,8 +336,8 @@ class DashboardQuizController extends Controller
         ]);
         $currentDate = Carbon::now()->format('Y-m-d');
         $ekspirasi = $validatedData['waktu_ekspirasi'];
-    
-        if ( $ekspirasi < $currentDate) {
+
+        if ($ekspirasi < $currentDate) {
             $validatedData['status_aktif'] = 'Tidak Aktif';
         } else {
             $validatedData['status_aktif'] = 'Aktif';

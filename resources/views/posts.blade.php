@@ -26,6 +26,9 @@
                 <div class="row justify-content-center">
                     @if ($questionnaires->count() > 0)
                         @foreach ($questionnaires as $post)
+                            @if ($post->status_aktif == 'Tidak Aktif')
+                                @continue
+                            @endif
                             <div class="col-lg-4 col-md-6">
                                 <div class="card" style="height: 17rem;">
                                     <div class="card-body">

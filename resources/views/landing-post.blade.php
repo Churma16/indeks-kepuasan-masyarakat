@@ -28,6 +28,10 @@
                                 </div>
                                 <div class="col-8 text-left mx-auto">
                                     <div>
+                                        <i class="bi bi-info-circle"></i> <strong>Status Kuesioner:</strong>
+                                        {{ $questionnaire->status_aktif }}
+                                    </div>
+                                    <div>
                                         <i class="bi bi-book"></i> <strong>Kategori:</strong>
                                         {{ $questionnaire->kategori }}
                                     </div>
