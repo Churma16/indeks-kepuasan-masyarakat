@@ -24,14 +24,21 @@
                             <div class="col-lg-6 col-md-9 ">
                                 <div class="card-text mb-4" id="dynamicContent"
                                     style="text-align: justify; font-size: 1em; font-weight:normal;">
-                                    {!! $questionnaire->deskripsi !!}</div>
-                                <div>
-                                    <i class="bi bi-card-list"></i> <strong>Banyak Pertanyaan:</strong>
-                                    {{ $questionnaire->jumlah_pertanyaan }} Soal
+                                    {!! $questionnaire->deskripsi !!}
                                 </div>
-                                <div class="fw-bold mt-1 mb-4">
-                                    <i class="bi bi-calendar2-week"></i> <strong>Waktu Ekspirasi:</strong>
-                                    {{ $questionnaire->waktu_ekspirasi }}
+                                <div class="col-8 text-left mx-auto">
+                                    <div>
+                                        <i class="bi bi-book"></i> <strong>Kategori:</strong>
+                                        {{ $questionnaire->kategori }}
+                                    </div>
+                                    <div>
+                                        <i class="bi bi-card-list"></i> <strong>Banyak Pertanyaan:</strong>
+                                        {{ $questionnaire->jumlah_pertanyaan }} Soal
+                                    </div>
+                                    <div class="fw-bold mt-1 mb-4">
+                                        <i class="bi bi-calendar2-week"></i> <strong>Waktu Ekspirasi:</strong>
+                                        {{ $questionnaire->waktu_ekspirasi }}
+                                    </div>
                                 </div>
                                 <form class="mt-2" action="/check-captcha/{{ $questionnaire->link }}" method="POST">
                                     @csrf
