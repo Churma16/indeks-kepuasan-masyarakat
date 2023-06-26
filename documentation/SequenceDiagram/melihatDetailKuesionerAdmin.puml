@@ -1,4 +1,4 @@
-@startuml Interaction Kelola Data
+@startuml Interaction Kelola Data 2
 autonumber
 ' skinparam style strictuml
 ' skinparam SequenceMessageAlignment center
@@ -13,34 +13,35 @@ autonumber
     group Interaction Melihat Detail Kuesioner
         Admin-> dlist: Membuka halaman detail list kuesioner\n dengan menekan salah satu kuesioner
         activate dlist
-            dlist-> dqcontrol: tampilQuestionnaire()
+            dlist-> dqcontrol: Kirim perintah ambil data questionnaire,\nquestion admin, respondent, answer
                 activate dqcontrol
-                dlist-> dqcontrol: tampilQuestion()
-                dlist-> dqcontrol: hitungRespondent()
-                dlist-> dqcontrol: hitungAnswer()
-                dlist-> dqcontrol: tampilDataAdmin()
-                
                 dqcontrol-> questioner: getQuestionnaire()
                 activate questioner
                 dqcontrol-> question: getQuestion()
                 activate question
-                dqcontrol-> respondent: countRespondent()
+                dqcontrol-> respondent: getRespondent()
                 activate respondent
                 dqcontrol-> admin: getAdmin()
                 activate admin
-                dqcontrol-> answer: countAnswer()
+                dqcontrol-> answer: getAnswer()
                 activate answer
-
-                questioner--> dqcontrol: tampilQuestionnaire()
+                
+                questioner--> dqcontrol: Terima data questionnaire
                 deactivate questioner
-                question--> dqcontrol: tampilQuestion()
+                question--> dqcontrol: Terima data question
                 deactivate question
-                respondent--> dqcontrol: tampilHasilRespondent()
+                respondent--> dqcontrol: Terima data respondent
                 deactivate respondent
-                admin--> dqcontrol: tampilAdmin()
+                activate dqcontrol
+                dqcontrol ->dqcontrol: Hitung jumlah respondent
+                deactivate dqcontrol
+                admin--> dqcontrol: Terima data admin
                 deactivate admin
-                answer--> dqcontrol: tampilHasilAnswer()
+                answer--> dqcontrol: Terima data answer
                 deactivate answer
+                activate dqcontrol
+                dqcontrol ->dqcontrol: Hitung jumlah answer
+                deactivate dqcontrol
 
                 dqcontrol--> dlist: Tampilkan Detail Kuesioner
                 deactivate dqcontrol

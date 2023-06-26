@@ -1,4 +1,4 @@
-@startuml Interaction Kelola Data
+@startuml Interaction Kelola Data 2
 autonumber
 ' skinparam style strictuml
 skinparam SequenceMessageAlignment center
@@ -37,10 +37,10 @@ group Interaction Kelola Kuesioner
             deactivate control
             tquestion-> dqcontrol: tambahQuestion()
             activate dqcontrol
-            tquestion-> dqcontrol: tambahQuestionnaire()
-        deactivate tquestion
         dqcontrol-> questioner: create()
         activate questioner
+            tquestion-> dqcontrol: tambahQuestionnaire()
+        deactivate tquestion
         dqcontrol-> question: input()
         activate question
         questioner--> dqcontrol: Berhasil ditambah
@@ -65,10 +65,10 @@ group Interaction Kelola Kuesioner
             deactivate dqcontrol
         equestionnaire-> dqcontrol: editQuestionnaire()
         activate dqcontrol
-        equestionnaire-> dqcontrol: editQuestion()
-        deactivate equestionnaire
         dqcontrol-> questioner: update()
         activate questioner
+        equestionnaire-> dqcontrol: editQuestion()
+        deactivate equestionnaire
         dqcontrol-> question: update()
         activate question
         questioner--> dqcontrol: Berhasil diupdate
@@ -109,28 +109,31 @@ group Interaction Kelola Kuesioner
             dlist-> cetak: Mengklik tombol Cetak Kuesioner
         deactivate dlist
         activate cetak
-            cetak-> control: tampilQuestionnaire()
-            cetak-> control: tampilQuestion()
-            cetak-> control: hitungRespondent()
-            cetak-> control: hitungAnswer()
+            cetak-> control: Kirim perintah ambil data questionnaire,\nquestion, respondent, answer
             activate control
                 control -> questioner: getQuestionnaire()
                 activate questioner
                 control -> question: getQuestion()
                 activate question
-                control -> respondent: countRespondent()
+                control -> respondent: getRespondent()
                 activate respondent
-                control -> answer: countAnswer()
+                control -> answer: getAnswer()
                 activate answer
 
-                questioner--> control: tampilQuestionnaire()
+                questioner--> control: Terima data Questionnaire
                 deactivate questioner
-                question--> control: tampilQuestion()
+                question--> control: Terima data Question
                 deactivate question
-                respondent--> control: tampilHasilRespondent()
+                respondent--> control: Terima data Respondent
                 deactivate respondent
-                answer--> control: tampilHasilAnswer()
+                activate control
+                control -> control: Hitung jumlah Respondent
+                deactivate control
+                answer--> control: Terima data Answer
                 deactivate answer
+                activate control
+                control -> control: Hitung jumlah Answer
+                deactivate control
 
 
                 control--> cetak: Tampilkan tampilan cetak kuesioner

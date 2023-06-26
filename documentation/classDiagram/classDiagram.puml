@@ -1,4 +1,4 @@
-@startuml "ERD"
+@startuml "ERD 2"
 
 skinparam linetype ortho
 
@@ -14,6 +14,8 @@ class admin {
     column(image): string
     column(created_at): timestamp
     column(updated_at): timestamp
+    --
+    column(get())
 }
 
 
@@ -25,6 +27,7 @@ class answer {
     column(created_at): timestamp
     column(updated_at): timestamp
     --
+    column(get())
     column(create())
 }
 
@@ -36,8 +39,9 @@ class question {
     column(created_at): timestamp
     column(updated_at): timestamp
     --
-    column(create())
-    column(edit())
+    column(get())
+    column(input())
+    column(update())
     column(delete())
 
 }
@@ -55,8 +59,9 @@ class questionnaire {
     column(created_at): timestamp
     column(updated_at): timestamp
     --
+    column(get())
     column(create())
-    column(edit())
+    column(update())
     column(delete())
 }
 
@@ -70,6 +75,7 @@ class respondent {
     column(created_at): timestamp
     column(updated_at): timestamp
     --
+    column(get())
     column(create())
     column(delete())
 }
@@ -82,6 +88,7 @@ class user {
     column(email):string
     column(password):string
     --
+    column(get())
     column(login())
     column(logout())
 }

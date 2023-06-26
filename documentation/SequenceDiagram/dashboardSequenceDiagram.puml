@@ -1,4 +1,4 @@
-@startuml Interaction Dashboard
+@startuml Interaction Dashboard 2
 autonumber
 group Interaction Dashboard
 
@@ -12,27 +12,30 @@ group Interaction Dashboard
 
     Admin -> dashboard:Berhasil login
     activate dashboard
-            dashboard -> dashboard_cont:hitungDataResponden()
+            dashboard -> dashboard_cont: Kirim perintah ambil data admin, \nquestionnaire, answer, respondent
         activate dashboard_cont
-            dashboard -> dashboard_cont:hitungDataQuestionnaire()
-            dashboard -> dashboard_cont:tampilDataAdmin()
-            dashboard -> dashboard_cont:hitungDataJawaban()
-        dashboard_cont -> respondent:countRespondent()
+        dashboard_cont -> respondent:getRespondent()
         activate respondent
-            dashboard_cont -> questioner:countQuestionnaire()
+            dashboard_cont -> questioner:getQuestionnaire()
             activate questioner
                 dashboard_cont -> admin:getAdmin()
                 activate admin
-                    dashboard_cont -> answer:countAnswer()
+                    dashboard_cont -> answer:getAnswer()
                     activate answer
-                    respondent --> dashboard_cont:tampilHasilRespondent()
+                    respondent --> dashboard_cont:Terima data respondent
+                    activate dashboard_cont
+                        dashboard_cont->dashboard_cont:Hitung jumlah respondent
+                    deactivate dashboard_cont
         deactivate respondent
-                    questioner --> dashboard_cont:tampilHasilQuestionnaire()
+                    questioner --> dashboard_cont:Terima data questionnaire
             deactivate questioner
-                admin --> dashboard_cont:tampilDataAdmin()
+                admin --> dashboard_cont:Terima data admin
                 deactivate admin
-                    answer --> dashboard_cont:tampilHasilJawaban()
+                    answer --> dashboard_cont:Terima data answer
                     deactivate answer
+                    activate dashboard_cont
+                        dashboard_cont->dashboard_cont:Hitung jumlah answer
+                    deactivate dashboard_cont
         dashboard_cont --> dashboard:Tampilkan Data
         deactivate dashboard_cont
     deactivate dashboard

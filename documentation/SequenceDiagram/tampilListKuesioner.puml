@@ -1,4 +1,4 @@
-@startuml tampilListKuesioner
+@startuml tampilListKuesioner 2
 autonumber
     actor Admin 
     participant "<<boundary>>\nList_Kuesioner" as list
@@ -11,24 +11,26 @@ autonumber
     group Seq Menampilkan List Kuesioner
         Admin->list:Membuka halaman list kuesioner
         activate list
-            list-> dqcontrol: tampilQuestionnaire()
+            list-> dqcontrol: Kirim perintah ambil data \nQuestionnaire, Question, Respondent
             activate dqcontrol
-                list-> dqcontrol: hitungRespondent()
-                list-> dqcontrol: hitungQuestion()
-
                 dqcontrol-> questioner: getQuestionnaire()
                 activate questioner
-                    dqcontrol-> question:   countQuestion()
+                    dqcontrol-> question:  getQuestion()
                 activate question
-                    dqcontrol-> respondent: countRespondent()
+                    dqcontrol-> respondent: getRespondent()
                 activate respondent
-
-                    questioner--> dqcontrol: tampilListQuestionnaire()
+                    questioner--> dqcontrol: Terima data Questionnaire
                 deactivate questioner
-                    question--> dqcontrol: tampilHasilQuestion() 
+                    question--> dqcontrol: Terima data Question
                 deactivate question
-                    respondent--> dqcontrol: tampilHasilRespondent() 
+                activate dqcontrol
+                    dqcontrol ->dqcontrol: Hitung jumlah question
+                deactivate dqcontrol
+                    respondent--> dqcontrol: Terima data Respondent 
                 deactivate respondent
+                activate dqcontrol
+                    dqcontrol ->dqcontrol: Hitung jumlah question
+                deactivate dqcontrol
                 dqcontrol--> list: Tampilkan List Kuesioner
             deactivate dqcontrol
         deactivate list
