@@ -1,4 +1,4 @@
-<footer class="footer" data-background-color="black">
+<footer class="footer sticky-footer" data-background-color="black">
     <div class="container">
         <nav>
             <ul>
@@ -12,11 +12,11 @@
                         Diskominfo Kota Semarang
                     </a>
                 </li>
-                <li>
+                {{-- <li>
                     <a href="http://blog.creative-tim.com">
                         Blog
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </nav>
         <div class="copyright" id="copyright">

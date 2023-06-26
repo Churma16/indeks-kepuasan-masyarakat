@@ -31,11 +31,11 @@
                     List Kuesioner
                 </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="javascript:void(0)"> <i class="feather-16" data-feather="info"></i>
                     About
                 </a>
-            </li>
+            </li> --}}
         </ul>
     </div>
     <div class="collapse navbar-collapse justify-content-end" id="navigation"
@@ -49,7 +49,7 @@
                 @else
                 <li class="nav-item">
                     <a class="nav-link " href="/login"> <i class="feather-16" data-feather="log-in"></i>
-                        Login
+                        Admin Login
                     </a>
                 @endauth
             </li>

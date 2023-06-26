@@ -18,18 +18,19 @@
             <div class="container">
                 <h3 class="title">Detail Kuesioner</h3>
                 <div class="card text-center">
-                    <div class="card-body">
+                    <div class="card-body p-5">
                         <h4 class="card-title"><b>{{ $questionnaire->judul }}</b></h4>
                         <div class="row justify-content-center">
-                            <div class="col-lg-5 col-md-9">
-                                <p class="card-text" style="text-align: justify; font-size: 1em; font-weight">
-                                    {!! $questionnaire->deskripsi !!}</p>
+                            <div class="col-lg-6 col-md-9 ">
+                                <div class="card-text mb-4" id="dynamicContent"
+                                    style="text-align: justify; font-size: 1em; font-weight:normal;">
+                                    {!! $questionnaire->deskripsi !!}</div>
                                 <div>
-                                    <i class="bi bi-card-list"></i> Banyak Pertanyaan:
+                                    <i class="bi bi-card-list"></i> <strong>Banyak Pertanyaan:</strong>
                                     {{ $questionnaire->jumlah_pertanyaan }} Soal
                                 </div>
-                                <div class="fw-bold mt-1">
-                                    <i class="bi bi-calendar2-week"></i> Waktu Ekspirasi:
+                                <div class="fw-bold mt-1 mb-4">
+                                    <i class="bi bi-calendar2-week"></i> <strong>Waktu Ekspirasi:</strong>
                                     {{ $questionnaire->waktu_ekspirasi }}
                                 </div>
                                 <form class="mt-2" action="/check-captcha/{{ $questionnaire->link }}" method="POST">
@@ -57,7 +58,8 @@
                                         @if ($questionnaire->status_aktif == 'Aktif')
                                             <button type="submit" class="btn btn-info px-4 gap-3">Mulai</button>
                                         @else
-                                            <button type="button" class="btn btn-info px-4 gap-3" onclick="kadaluarsa(event)">Mulai</button>
+                                            <button type="button" class="btn btn-info px-4 gap-3"
+                                                onclick="kadaluarsa(event)">Mulai</button>
                                         @endif
                                     </div>
                                 </form>
@@ -96,18 +98,33 @@
             });
         @endif
     </script>
-<script>
-    function kadaluarsa(event) {
-        event.preventDefault();
-        setTimeout(function() {
-            Swal.fire({
-                title: 'Gagal',
-                text: "Kuesioner Sudah Kadaluwarsa",
-                icon: 'error',
-                showConfirmButton: false
-            });
-        }, 500); // Delay execution by 500 milliseconds (adjust as needed)
-    }
-</script>
+    <script>
+        function kadaluarsa(event) {
+            event.preventDefault();
+            setTimeout(function() {
+                Swal.fire({
+                    title: 'Gagal',
+                    text: "Kuesioner Sudah Kadaluwarsa",
+                    icon: 'error',
+                    showConfirmButton: false
+                });
+            }, 500); // Delay execution by 500 milliseconds (adjust as needed)
+        }
+    </script>
+    <script>
+        function applyStylesToDynamicContent() {
+            var dynamicContentElement = document.getElementById("dynamicContent");
+            if (dynamicContentElement) {
+                var divElement = dynamicContentElement.querySelector("div");
+                if (divElement) {
+                    divElement.style.textAlign = "justify";
+                    divElement.style.fontSize = "1em";
+                    divElement.style.fontWeight = "normal";
+                }
+            }
+        }
 
+
+        applyStylesToDynamicContent();
+    </script>
 @endsection
