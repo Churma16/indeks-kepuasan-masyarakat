@@ -13,8 +13,9 @@
     <link href="/assets/css/nucleo-svg.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/feather-icons"></script>
+    <!-- choose one -->
 
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <!-- Trix Editor -->
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.0/dist/trix.css">
     <script type="text/javascript" src="https://unpkg.com/trix@2.0.0/dist/trix.umd.min.js"></script>
@@ -27,6 +28,11 @@
     <style>
         .trix-button-group.trix-button-group--file-tools {
             display: none;
+        }
+
+        .feather {
+            margin-top: 11px; 
+            stroke: white;
         }
     </style>
 
@@ -88,3 +94,5 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
+        feather.replace()
+    </script>

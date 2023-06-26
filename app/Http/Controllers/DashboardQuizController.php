@@ -10,6 +10,7 @@ use App\Models\Respondent;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Carbon\Carbon;
 
 
 class DashboardQuizController extends Controller
@@ -101,6 +102,7 @@ class DashboardQuizController extends Controller
 
         $genderWanita = Respondent::where('questionnaire_id', $questionnaire->id)->where('gender', 'wanita')->count();
         $genderPria = Respondent::where('questionnaire_id', $questionnaire->id)->where('gender', 'pria')->count();
+        $lastEdit = Carbon::parse($questionnaire->update_at)->isoFormat('DD MMM YYYY');
 
 
         // Get All the Respondent's Age
@@ -258,6 +260,11 @@ class DashboardQuizController extends Controller
         //
         $questions = $questionnaire->question()->orderBy('nomor')->get();
 
+        // Sisa hari
+        $ekspirasi = Carbon::parse($questionnaire->waktu_ekspirasi_baru);
+        $endDate = Carbon::now();
+    
+        $daysDifference = $ekspirasi->diffInDays($endDate);
 
         return view('dashboard.questionnaires.show', [
             'title' => 'Detail Kuesioner',
@@ -276,6 +283,8 @@ class DashboardQuizController extends Controller
             'literalHighestAge' => $literalHighestAge,
             'score' => $score,
             'pengisiTerbanyak' => $highestAgeCount,
+            'lastEdit' => $lastEdit,
+            'daysDifference' => $daysDifference,
         ]);
     }
 
@@ -323,6 +332,14 @@ class DashboardQuizController extends Controller
         ], [
             'deskripsi.after' => 'Tanggal yang dimasukkan harus setelah hari ini.',
         ]);
+        $currentDate = Carbon::now()->format('Y-m-d');
+        $ekspirasi = $validatedData['waktu_ekspirasi'];
+    
+        if ( $ekspirasi < $currentDate) {
+            $validatedData['status_aktif'] = 'Tidak Aktif';
+        } else {
+            $validatedData['status_aktif'] = 'Aktif';
+        }
 
         // Update the questionnaire with the validated data
         $questionnaire->update([
@@ -331,6 +348,8 @@ class DashboardQuizController extends Controller
             'deskripsi' => $validatedData['deskripsi'],
             'waktu_ekspirasi' => $validatedData['waktu_ekspirasi'],
             'kategori' => $validatedData['kategoriSelect'],
+            'status_aktif' => $validatedData['status_aktif'],
+
         ]);
 
         $questionData = [];

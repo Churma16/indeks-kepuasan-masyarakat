@@ -52,7 +52,9 @@
                                     onchange="document.getElementById('kategoriSelector').submit();">
                                     <option value="">---- Pilih Kategori ----</option>
                                     @foreach ($cat as $c)
-                                        <option value="{{ $c }}">{{ $c }}</option>
+                                        <option value="{{ $c }}"
+                                            @if (request('kategoriSelector')) ? selected : @endif>{{ $c }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </form>

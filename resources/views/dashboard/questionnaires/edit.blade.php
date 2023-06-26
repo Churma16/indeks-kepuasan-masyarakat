@@ -22,10 +22,12 @@
                             <div class="mb-3">
                                 <label for="kategori" class="form-label">Kategori</label>
                                 <select class="form-control" id="kategoriSelect" name="kategoriSelect">
-                                    <option value="{{ $questionnaire->kategori }}" selected>{{ $questionnaire->kategori }}
+                                    {{-- <option value="{{ $questionnaire->kategori }}" selected>{{ $questionnaire->kategori }} --}}
                                     </option>
                                     @foreach ($cat as $c)
-                                        <option value="{{ $c }}">{{ $c }}</option>
+                                        <option value="{{ $c }}"
+                                            @if (old('kategori', $questionnaire->kaetgori)) ? selected : @endif>{{ $c }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>

@@ -1,5 +1,5 @@
 {{-- @dd($ikm['ikmKelas']) --}}
-{{-- @dd($testcoba) --}}
+{{-- @dd($lastEdit) --}}
 
 @extends('dashboard.layouts.main')
 
@@ -24,8 +24,7 @@
                             </div>
                             <div class="col-4 text-end">
                                 <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                    <i class="ni ni-folder-17 text-lg opacity-10" data-feather="files"
-                                        aria-hidden="true"></i>
+                                    <i data-feather="file-plus"></i>
                                 </div>
                             </div>
                         </div>
@@ -49,7 +48,109 @@
                             </div>
                             <div class="col-4 text-end">
                                 <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                    <i class="ni ni-check-bold text-lg opacity-10" aria-hidden="true"></i>
+                                    <i data-feather="clock"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">
+                                        Update Terakhir
+                                    </p>
+                                    <h5 class="font-weight-bolder mb-0">
+                                        {{ $lastEdit }}
+                                        {{-- <span class="text-danger text-sm font-weight-bolder">-2%</span> --}}
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                    <i data-feather="edit"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">
+                                        @if ($questionnaire->status_aktif == 'Aktif')
+                                            Sisa Hari
+                                        @else
+                                            Telah Berlalu
+                                        @endif
+                                    </p>
+                                    <h5 class="font-weight-bolder mb-0">
+                                        {{ $daysDifference }} Hari
+                                        {{-- <span class="text-success text-sm font-weight-bolder">+5%</span> --}}
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                    <i data-feather="calendar"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">
+                                        Status Aktif
+                                    </p>
+                                    <h5 class="font-weight-bolder mb-0">
+                                        {{ $questionnaire->status_aktif }}
+                                        {{-- <span class="text-success text-sm font-weight-bolder">+55%</span> --}}
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                    <i data-feather="info"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">
+                                        Kategori
+                                    </p>
+                                    <h5 class="font-weight-bolder mb-0">
+                                        {{ $questionnaire->kategori }}
+                                        {{-- <span class="text-success text-sm font-weight-bolder">+3%</span> --}}
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                    <i data-feather="list"></i>
                                 </div>
                             </div>
                         </div>
@@ -73,7 +174,7 @@
                             </div>
                             <div class="col-4 text-end">
                                 <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                    <i class="ni ni-time-alarm text-lg opacity-10" aria-hidden="true"></i>
+                                    <i data-feather="book"></i>
                                 </div>
                             </div>
                         </div>
@@ -87,7 +188,7 @@
                             <div class="col-8">
                                 <div class="numbers">
                                     <p class="text-sm mb-0 text-capitalize font-weight-bold">
-                                        Total Responden
+                                        Total Respondent
                                     </p>
                                     <h5 class="font-weight-bolder mb-0">
                                         {{ $totalRespondent }}
@@ -97,7 +198,7 @@
                             </div>
                             <div class="col-4 text-end">
                                 <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                    <i class="ni ni-single-02 text-lg opacity-10" aria-hidden="true"></i>
+                                    <i data-feather="users"></i>
                                 </div>
                             </div>
                         </div>
@@ -778,5 +879,4 @@
                 });
             @endif
         </script>
-
     @endsection
