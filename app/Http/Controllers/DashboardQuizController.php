@@ -2,19 +2,35 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Answer;
 use App\Models\Question;
 use App\Models\Questionnaire;
-use Illuminate\Http\Request;
-use App\Models\Answer;
 use App\Models\Respondent;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
+use App\Services\QuestionnaireStatsService;
 use Carbon\Carbon;
-
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class DashboardQuizController extends Controller
 {
+    /**
+     * The code snippet defines a PHP class constructor that injects an instance of the
+     * QuestionnaireStatsService class into the class.
+     *
+     * @param QuestionnaireStatsService service The parameter "service" in the constructor is an instance
+     * of the class "QuestionnaireStatsService". It is being injected into the class through dependency
+     * injection, allowing the class to use the functionality provided by the "QuestionnaireStatsService"
+     * class.
+     */
+    protected $service;
+
+    public function __construct(QuestionnaireStatsService $service)
+    {
+        $this->service = $service;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,10 +41,10 @@ class DashboardQuizController extends Controller
         $questionnaires = Questionnaire::latest();
         // dd(request('kategoriSelector'));
         if (request('search')) {
-            $questionnaires->where('judul', 'like', '%' . request('search') . '%');
+            $questionnaires->where('judul', 'like', '%'.request('search').'%');
         }
         if (request('kategoriSelector')) {
-            $questionnaires->where('kategori', 'like', '%' . request('kategoriSelector') . '%');
+            $questionnaires->where('kategori', 'like', '%'.request('kategoriSelector').'%');
         }
         // Order the results based on the status_aktif column
         $questionnaires = $questionnaires->get()->sortBy('status_aktif')->toQuery(); // Convert collection to query builder
@@ -58,7 +74,6 @@ class DashboardQuizController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -71,7 +86,7 @@ class DashboardQuizController extends Controller
             'link' => Str::random(7),
             'kategori' => ucfirst(strtolower(session('form_data.kategori'))),
             'waktu_ekspirasi' => session('form_data.waktu_ekspirasi'),
-            'status_aktif' => 'Aktif'
+            'status_aktif' => 'Aktif',
         ]);
 
         // menginput question
@@ -79,7 +94,7 @@ class DashboardQuizController extends Controller
         for ($i = 1; $i <= session('form_data.jumlah_soal'); $i++) {
             $question = [
                 'nomor' => $i,
-                'isi' => $request->input('question' . $i),
+                'isi' => $request->input('question'.$i),
             ];
             $questions[] = $question;
         }
@@ -89,216 +104,178 @@ class DashboardQuizController extends Controller
             $questionnaire->question()->save($question);
         }
         session()->forget('form_data');
+
         return redirect('dashboard/questionnaires/')->with('success', 'Kuesioner Berhasil Ditambahkan!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Questionnaire  $questionnaire
      * @return \Illuminate\Http\Response
      */
-    public function show(Questionnaire $questionnaire)
-    {
-        $totalRespondent = Respondent::where('questionnaire_id', $questionnaire->id)->count();
+    // public function show(Questionnaire $questionnaire)
+    // {
+    //     $totalRespondent = Respondent::where('questionnaire_id', $questionnaire->id)->count();
 
-        $genderWanita = Respondent::where('questionnaire_id', $questionnaire->id)->where('gender', 'wanita')->count();
-        $genderPria = Respondent::where('questionnaire_id', $questionnaire->id)->where('gender', 'pria')->count();
-        $lastEdit = Carbon::parse($questionnaire->update_at)->isoFormat('DD MMM YYYY');
+    //     $genderWanita = Respondent::where('questionnaire_id', $questionnaire->id)->where('gender', 'wanita')->count();
+    //     $genderPria = Respondent::where('questionnaire_id', $questionnaire->id)->where('gender', 'pria')->count();
+    //     $lastEdit = Carbon::parse($questionnaire->update_at)->isoFormat('DD MMM YYYY');
 
+    //     // Get All the Respondent's Age
+    //     $umur = [];
+    //     $umur['umurKelas'] = Respondent::where('questionnaire_id', $questionnaire->id)->selectRaw('umur, count(*) as count')
+    //         ->groupBy('umur')
+    //         ->pluck('count', 'umur')
+    //         ->toArray();
 
-        // Get All the Respondent's Age
-        $umur = [];
-        $umur['umurKelas'] = Respondent::where('questionnaire_id', $questionnaire->id)->selectRaw('umur, count(*) as count')
-            ->groupBy('umur')
-            ->pluck('count', 'umur')
-            ->toArray();
+    //     // Get All the Respondent's IKM
+    //     $idSoal = $questionnaire->question->pluck('id')->toArray();
+    //     $ikm = [];
+    //     $ikm['ikmKelas'] = Answer::whereIn('question_id', $idSoal)
+    //         ->selectRaw('jawaban, count(*) as count')
+    //         ->groupBy('jawaban')
+    //         ->pluck('count', 'jawaban')
+    //         ->toArray();
 
+    //     //get the date of the last 14 day
+    //     $date = [];
+    //     for ($i = 0; $i < 14; $i++) {
+    //         $date[] = date('d/m', strtotime('-' . $i . ' days'));
+    //     }
+    //     $date = array_reverse($date);
 
-        // Get All the Respondent's IKM
-        $idSoal = $questionnaire->question->pluck('id')->toArray();
-        $ikm = [];
-        $ikm['ikmKelas'] = Answer::whereIn('question_id', $idSoal)
-            ->selectRaw('jawaban, count(*) as count')
-            ->groupBy('jawaban')
-            ->pluck('count', 'jawaban')
-            ->toArray();
+    //     //get the respondent for the last 14 day
+    //     $respondentCount = [];
+    //     for ($i = 0; $i < 14; $i++) {
+    //         $respondentCount[] = Respondent::where('questionnaire_id', $questionnaire->id)
+    //             ->whereDate('created_at', date('Y-m-d', strtotime('-' . $i . ' days')))
+    //             ->count();
+    //     }
+    //     $respondentCount = array_reverse($respondentCount);
 
+    //     //Persen Pemilih
+    //     $ansCountAll = [];
+    //     for ($i = 1; $i < 6; $i++) {
+    //         $ansCountAll[$i] = Respondent::where('questionnaire_id', $questionnaire->id)->where('umur', $i)->count();
+    //     }
 
-        //get the date of the last 14 day
-        $date = [];
-        for ($i = 0; $i < 14; $i++) {
-            $date[] = date('d/m', strtotime('-' . $i . ' days'));
-        }
-        $date = array_reverse($date);
+    //     $highestAgeCount = max($ansCountAll);
+    //     $highestAgeArray = array_keys($ansCountAll, $highestAgeCount);
+    //     $highestAgeArray = reset($highestAgeArray);
 
+    //     $umurMapping = [
+    //         1 => '18-24',
+    //         2 => '25-34',
+    //         3 => '35-44',
+    //         4 => '45-54',
+    //         5 => '55-64',
+    //         6 => '65++'
+    //     ];
 
-        //get the respondent for the last 14 day
-        $respondentCount = [];
-        for ($i = 0; $i < 14; $i++) {
-            $respondentCount[] = Respondent::where('questionnaire_id', $questionnaire->id)
-                ->whereDate('created_at', date('Y-m-d', strtotime('-' . $i . ' days')))
-                ->count();
-        }
-        $respondentCount = array_reverse($respondentCount);
+    //     //menampilkan literal tertinggi
+    //     if ($totalRespondent == 0) {
+    //         $literalHighestAge = "-";
+    //     } else {
+    //         $literalHighestAge = $umurMapping[$highestAgeArray] ?? null;
+    //     }
 
+    //     $ansCount = Respondent::where('questionnaire_id', $questionnaire->id)->where('umur', $highestAgeArray)->count();
+    //     if ($ansCount == 0) {
+    //         $percentCount = 0;
+    //     } else {
+    //         $percentCount = number_format(($ansCount / $totalRespondent) * 100, 2);
+    //     }
 
-        //Persen Pemilih
-        $ansCountAll = [];
-        for ($i = 1; $i < 6; $i++) {
-            $ansCountAll[$i] = Respondent::where('questionnaire_id', $questionnaire->id)->where('umur', $i)->count();
-        }
+    //     //Mengambil Nilai Bobot Hasil Keppuasan pada Respondent Kategori Terbanyak
+    //     // Mengambil ID responden dari database berdasarkan kuesioner dan umur
+    //     $respondentIds = Respondent::where('questionnaire_id', $questionnaire->id)
+    //         ->where('umur', $highestAgeArray)
+    //         ->pluck('id')
+    //         ->toArray();
 
+    //     // Pemetaan nilai jawaban ke bobot yang sesuai
+    //     $answerMapping = [
+    //         1 => -1,
+    //         2 => -0.5,
+    //         3 => 0,
+    //         4 => 0.5,
+    //         5 => 1
+    //     ];
 
-        $highestAgeCount = max($ansCountAll);
-        $highestAgeArray = array_keys($ansCountAll, $highestAgeCount);
-        $highestAgeArray = reset($highestAgeArray);
+    //     // Mengambil jawaban dari database dan melakukan transformasi menggunakan pemetaan bobot
+    //     $transformedAnswers = Answer::whereIn('respondent_id', $respondentIds)
+    //         ->pluck('jawaban')
+    //         ->map(function ($value) use ($answerMapping) {
+    //             return $answerMapping[$value] ?? $value;
+    //         });
 
-        $umurMapping = [
-            1 => '18-24',
-            2 => '25-34',
-            3 => '35-44',
-            4 => '45-54',
-            5 => '55-64',
-            6 => '65++'
-        ];
+    //     // Menghitung nilai rata-rata dari jawaban yang telah diubah
+    //     $averageScore = $transformedAnswers->average();
 
-        //menampilkan literal tertinggi
-        if ($totalRespondent == 0) {
-            $literalHighestAge = "-";
-        } else {
-            $literalHighestAge = $umurMapping[$highestAgeArray] ?? null;
-        }
+    //     // Mencari Kemanakah nilai tersebut lebih dekat
+    //     $scoreMapping = [
+    //         [-1, "Sangat Tidak Puas"],
+    //         [-0.5, "Tidak Puas"],
+    //         [0, "Cukup Puas"],
+    //         [0.5, "Puas"],
+    //         [1, "Sangat Puas"],
+    //     ];
 
-        $ansCount = Respondent::where('questionnaire_id', $questionnaire->id)->where('umur', $highestAgeArray)->count();
-        if ($ansCount == 0) {
-            $percentCount = 0;
-        } else {
-            $percentCount = number_format(($ansCount / $totalRespondent) * 100, 2);
-        }
+    //     usort($scoreMapping, function ($a, $b) use ($averageScore) {
+    //         return abs($a[0] - $averageScore) <=> abs($b[0] - $averageScore);
+    //     });
 
+    //     if ($totalRespondent == 0) {
+    //         $score = "-";
+    //     } else {
+    //         $score = $scoreMapping[0][1];
+    //     }
 
-        //Jawaban Tertinggi
-        // $respondentsIds = [];
-        // $respondentsIds = Respondent::where('questionnaire_id', $questionnaire->id)
-        //     ->where('umur', $highestAgeArray)
-        //     ->pluck('id')
-        //     ->toArray();
+    //     //
+    //     $questions = $questionnaire->question()->orderBy('nomor')->get();
 
-        // $mapping = [
-        //     1 => -1,
-        //     2 => -0.5,
-        //     3 => 0,
-        //     4 => 0.5,
-        //     5 => 1
-        // ];
+    //     // Sisa hari
+    //     $ekspirasi = Carbon::parse($questionnaire->waktu_ekspirasi_baru);
+    //     $endDate = Carbon::now();
 
-        // $jumlahPertanyaan = $questionnaire->getJumlahPertanyaanAttribute();
-        // $jwbindvi = [];
-        // foreach ($respondentsIds as $k) {
-        //     $jwbindvi[] = Answer::where('respondent_id', $k)
-        //         ->pluck('jawaban')
-        //         ->map(function ($value) use ($mapping) {
-        //             return $mapping[$value] ?? $value;
-        //         })
-        //         ->toArray();
+    //     $daysDifference = $ekspirasi->diffInDays($endDate);
 
-        //     $fullArray = $jwbindvi;
-        //     // Transform each subarray by dividing the sum by $jumlahPertanyaan
-        //     foreach ($fullArray as &$subArray) {
-        //         $subArray = array_sum($subArray) / $jumlahPertanyaan;
-        //         unset($subArray);
-        //     }
-        // }
+    //     return view('dashboard.questionnaires.show', [
+    //         'title' => 'Detail Kuesioner',
+    //         'questionnaire' => $questionnaire,
+    //         'questions' => $questions,
+    //         "genderWanita" => $genderWanita,
+    //         "genderPria" => $genderPria,
+    //         // access with $umur['umurKelas'][array_key]
+    //         'umur' => $umur,
+    //         'ikm' => $ikm,
+    //         'date' => $date,
+    //         'respondentCount' => $respondentCount,
+    //         "totalRespondent" => $totalRespondent,
+    //         'percentCount' => $percentCount . '%',
+    //         'averageScore' => $averageScore,
+    //         'literalHighestAge' => $literalHighestAge,
+    //         'score' => $score,
+    //         'pengisiTerbanyak' => $highestAgeCount,
+    //         'lastEdit' => $lastEdit,
+    //         'daysDifference' => $daysDifference,
+    //     ]);
+    // }
 
-        // $avgScore= array_sum($fullArray) / count($fullArray);
-
-        //Mengambil Nilai Bobot Hasil Keppuasan pada Respondent Kategori Terbanyak
-        // Mengambil ID responden dari database berdasarkan kuesioner dan umur
-        $respondentIds = Respondent::where('questionnaire_id', $questionnaire->id)
-            ->where('umur', $highestAgeArray)
-            ->pluck('id')
-            ->toArray();
-
-        // Pemetaan nilai jawaban ke bobot yang sesuai
-        $answerMapping = [
-            1 => -1,
-            2 => -0.5,
-            3 => 0,
-            4 => 0.5,
-            5 => 1
-        ];
-
-        // Mengambil jawaban dari database dan melakukan transformasi menggunakan pemetaan bobot
-        $transformedAnswers = Answer::whereIn('respondent_id', $respondentIds)
-            ->pluck('jawaban')
-            ->map(function ($value) use ($answerMapping) {
-                return $answerMapping[$value] ?? $value;
-            });
-
-        // Menghitung nilai rata-rata dari jawaban yang telah diubah
-        $averageScore = $transformedAnswers->average();
-
-        // Mencari Kemanakah nilai tersebut lebih dekat
-        $scoreMapping = [
-            [-1, "Sangat Tidak Puas"],
-            [-0.5, "Tidak Puas"],
-            [0, "Cukup Puas"],
-            [0.5, "Puas"],
-            [1, "Sangat Puas"],
-        ];
-
-        usort($scoreMapping, function ($a, $b) use ($averageScore) {
-            return abs($a[0] - $averageScore) <=> abs($b[0] - $averageScore);
-        });
-
-        if ($totalRespondent == 0) {
-            $score = "-";
-        } else {
-            $score = $scoreMapping[0][1];
-        }
-
-
-        //
-        $questions = $questionnaire->question()->orderBy('nomor')->get();
-
-        // Sisa hari
-        $ekspirasi = Carbon::parse($questionnaire->waktu_ekspirasi_baru);
-        $endDate = Carbon::now();
-
-        $daysDifference = $ekspirasi->diffInDays($endDate);
-
-        return view('dashboard.questionnaires.show', [
-            'title' => 'Detail Kuesioner',
-            'questionnaire' => $questionnaire,
-            'questions' => $questions,
-            "genderWanita" => $genderWanita,
-            "genderPria" => $genderPria,
-            // access with $umur['umurKelas'][array_key]
-            'umur' => $umur,
-            'ikm' => $ikm,
-            'date' => $date,
-            'respondentCount' => $respondentCount,
-            "totalRespondent" => $totalRespondent,
-            'percentCount' => $percentCount . '%',
-            'averageScore' => $averageScore,
-            'literalHighestAge' => $literalHighestAge,
-            'score' => $score,
-            'pengisiTerbanyak' => $highestAgeCount,
-            'lastEdit' => $lastEdit,
-            'daysDifference' => $daysDifference,
-        ]);
+    public function show(Questionnaire $questionnaire)    {
+        $data = $this->service->calculateStats($questionnaire);
+        
+        return view('dashboard.questionnaires.show', $data);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Questionnaire  $questionnaire
      * @return \Illuminate\Http\Response
      */
     public function edit(Questionnaire $questionnaire)
     {
-        // kode dibawah ini untuk mengurutkan nomor soal secara ascending 
+        // kode dibawah ini untuk mengurutkan nomor soal secara ascending
         // dengan cara mengambil data dari relasi question pada model Questionnaire
         // load() adalah method dari laravel untuk eager loading yang berfungsi untuk mengambil data dari relasi
         $questionnaire->load(['question' => function ($query) {
@@ -317,8 +294,6 @@ class DashboardQuizController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Questionnaire  $questionnaire
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Questionnaire $questionnaire)
@@ -380,14 +355,12 @@ class DashboardQuizController extends Controller
             ]);
         }
 
-        return redirect('/dashboard/questionnaires/' . $questionnaire->link)->with('success', 'Post Berhasil Diupdate!');
+        return redirect('/dashboard/questionnaires/'.$questionnaire->link)->with('success', 'Post Berhasil Diupdate!');
     }
-
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Questionnaire  $questionnaire
      * @return \Illuminate\Http\Response
      */
     public function destroy(Questionnaire $questionnaire)
