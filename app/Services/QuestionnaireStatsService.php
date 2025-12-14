@@ -2,45 +2,55 @@
 
 namespace App\Services;
 
-use App\Models\Answer;
-use App\Models\Questionnaire;
-use App\Models\Respondent;
 use Carbon\Carbon;
+use App\Models\Answer;
+use App\Models\Respondent;
+use App\Models\Questionnaire;
+use App\Observers\RespondentObserver;
+use Illuminate\Support\Facades\Cache;
 
 class QuestionnaireStatsService
 {
+    public function boot()
+    {
+        Respondent::observe(RespondentObserver::class);
+    }
+
     public function calculateStats(Questionnaire $questionnaire)
     {
         $questionnaire_id = $questionnaire->id;
+        $cacheKey = 'stats_questionnaire_'.$questionnaire_id;
 
-        $highestAgeArray = $this->getHighestAgeArray($questionnaire_id);
-        $totalRespondent = $this->getTotalRespondent($questionnaire_id);
-        $averageScore = $this->getAverageScore($questionnaire_id, $highestAgeArray);
+        return Cache::remember($cacheKey, 60 * 60, function () use ($questionnaire, $questionnaire_id) {
+            $highestAgeArray = $this->getHighestAgeArray($questionnaire_id);
+            $totalRespondent = $this->getTotalRespondent($questionnaire_id);
+            $averageScore = $this->getAverageScore($questionnaire_id, $highestAgeArray);
 
-        $questions = $questionnaire->question()->orderBy('nomor')->get();
-        $genderWanita = Respondent::where('questionnaire_id', $questionnaire_id)->where('gender', 'wanita')->count();
-        $genderPria = Respondent::where('questionnaire_id', $questionnaire_id)->where('gender', 'pria')->count();
-        $lastEdit = Carbon::parse($questionnaire->update_at)->isoFormat('DD MMM YYYY');
+            $questions = $questionnaire->question()->orderBy('nomor')->get();
+            $genderWanita = Respondent::where('questionnaire_id', $questionnaire_id)->where('gender', 'wanita')->count();
+            $genderPria = Respondent::where('questionnaire_id', $questionnaire_id)->where('gender', 'pria')->count();
+            $lastEdit = Carbon::parse($questionnaire->update_at)->isoFormat('DD MMM YYYY');
 
-        return[
-            'title' => 'Detail Kuesioner',
-            'questionnaire' => $questionnaire,
-            'questions' => $questions,
-            'genderWanita' => $genderWanita,
-            'genderPria' => $genderPria,
-            'totalRespondent' => $totalRespondent,
-            'averageScore' => $averageScore,
-            'lastEdit' => $lastEdit,
-            'umur' => $this->getRespondentAge($questionnaire_id),
-            'ikm' => $this->getRespondentSatifaction($questionnaire->question->pluck('id')->toArray()),
-            'date' => $this->getLast14Day(),
-            'respondentCount' => $this->getLast14DayRespondent($questionnaire_id),
-            'percentCount' => $this->getCountinPercent($questionnaire_id, $highestAgeArray),
-            'literalHighestAge' => $this->getLiteralHighestAge($highestAgeArray, $totalRespondent),
-            'score' => $this->getSatisfactionScore($averageScore, $totalRespondent),
-            'pengisiTerbanyak' => $this->getHighestFiller($questionnaire_id),
-            'daysDifference' => $this->getDaysDifference($questionnaire->waktu_ekspirasi_baru),
-        ];
+            return[
+                'title' => 'Detail Kuesioner',
+                'questionnaire' => $questionnaire,
+                'questions' => $questions,
+                'genderWanita' => $genderWanita,
+                'genderPria' => $genderPria,
+                'totalRespondent' => $totalRespondent,
+                'averageScore' => $averageScore,
+                'lastEdit' => $lastEdit,
+                'umur' => $this->getRespondentAge($questionnaire_id),
+                'ikm' => $this->getRespondentSatifaction($questionnaire->question->pluck('id')->toArray()),
+                'date' => $this->getLast14Day(),
+                'respondentCount' => $this->getLast14DayRespondent($questionnaire_id),
+                'percentCount' => $this->getCountinPercent($questionnaire_id, $highestAgeArray),
+                'literalHighestAge' => $this->getLiteralHighestAge($highestAgeArray, $totalRespondent),
+                'score' => $this->getSatisfactionScore($averageScore, $totalRespondent),
+                'pengisiTerbanyak' => $this->getHighestFiller($questionnaire_id),
+                'daysDifference' => $this->getDaysDifference($questionnaire->waktu_ekspirasi_baru),
+            ];
+        });
     }
 
     public function getRespondentAge($questionaire_id)
