@@ -15,14 +15,14 @@ Here are the main functionalities of the project:
 ### 👥 Public / User Side
 - **Survey Submission:** Easy-to-use form for citizens to rate services.
 - **Responsive Design:** Optimized for mobile and desktop viewing.
-- **Anti-Spam Protection:** Integrated **Captcha** validation to prevent automated bot submissions before starting the questionnaire.
+- **Anti-Spam Protection:** Integrated Captcha validation to prevent automated bot submissions before starting the questionnaire.
 - **Real-time Validation:** Ensures data integrity during input.
 
 ### 🛡️ Admin Dashboard
 - **Authentication:** Secure login system for administrators.
 - **Data Visualization:** Charts and graphs showing satisfaction trends.
 - **Survey Management:** CRUD (Create, Read, Update, Delete) functionality for survey questions.
-- **Report Generation:** Export data to **PDF**  for official reporting.
+- **Report Generation:** Export data to PDF  for official reporting.
 - **Service Management:** Manage list of services/departments being rated.
 
 ## 🛠️ Built With
@@ -40,7 +40,7 @@ Follow these steps to run the project locally:
 
 1. **Clone the repository**
    ```bash
-   git clone [https://github.com/username/repo-name.git](https://github.com/username/repo-name.git)
+   git clone https://github.com/Churma16/indeks-kepuasan-masyarakat
    cd repo-name
 2. **Install dependencies**
    ```bash
