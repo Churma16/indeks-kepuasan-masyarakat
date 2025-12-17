@@ -65,8 +65,8 @@ Access the app at http://localhost:8000.
 
 ## 👤 Author
 Fathan Muhammad Faqih
-- LinkedIn
-- GitHub
+- [LinkedIn](https://www.linkedin.com/in/fathan-muhammad-faqih)
+- [GitHub](https://github.com/Churma16/)
 
 ## 🙏 Acknowledgments
 Special thanks to Sandhika Galih (Web Programming Unpas) for the comprehensive Laravel tutorials that helped build the foundation of this project.
