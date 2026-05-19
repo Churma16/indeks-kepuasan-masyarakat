@@ -8,7 +8,7 @@ This is a web-based Information System designed to track, manage, and analyze th
 
 ![Dashboard Screenshot](public/img/Homepage-final.png)
 
-## ✨ Key Features
+## Key Features
 
 Here are the main functionalities of the project:
 
@@ -18,14 +18,14 @@ Here are the main functionalities of the project:
 - **Anti-Spam Protection:** Integrated Captcha validation to prevent automated bot submissions before starting the questionnaire.
 - **Real-time Validation:** Ensures data integrity during input.
 
-### 🛡️ Admin Dashboard
+### Admin Dashboard
 - **Authentication:** Secure login system for administrators.
 - **Data Visualization:** Charts and graphs showing satisfaction trends.
 - **Survey Management:** CRUD (Create, Read, Update, Delete) functionality for survey questions.
 - **Report Generation:** Export data to PDF  for official reporting.
 - **Service Management:** Manage list of services/departments being rated.
 
-## 🛠️ Built With
+## Built With
 
 - **Framework:** [Laravel](https://laravel.com/)
 - **Security:** [Mews Captcha](https://github.com/mewebstudio/captcha)
@@ -34,7 +34,7 @@ Here are the main functionalities of the project:
 - **Database:** MySQL
 - **Charts:** Chart.js
 
-## 💻 Installation & Setup
+## Installation & Setup
 
 Follow these steps to run the project locally:
 
@@ -63,10 +63,10 @@ Follow these steps to run the project locally:
    
 Access the app at http://localhost:8000.
 
-## 👤 Author
+## Author
 Fathan Muhammad Faqih
 - [LinkedIn](https://www.linkedin.com/in/fathan-muhammad-faqih)
 - [GitHub](https://github.com/Churma16/)
 
-## 🙏 Acknowledgments
+## Acknowledgments
 Special thanks to Sandhika Galih (Web Programming Unpas) for the comprehensive Laravel tutorials that helped build the foundation of this project.
